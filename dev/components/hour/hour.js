@@ -1,8 +1,3 @@
-'use strict';
-
-// import React from 'react'; // DEV
-// import ReactDOM from 'react-dom'; // DEV
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11,25 +6,45 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var App = function (_React$Component) {
-    _inherits(App, _React$Component);
+var Hour = function (_React$Component) {
+    _inherits(Hour, _React$Component);
 
-    function App() {
-        _classCallCheck(this, App);
+    function Hour() {
+        _classCallCheck(this, Hour);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (Hour.__proto__ || Object.getPrototypeOf(Hour)).apply(this, arguments));
     }
 
-    _createClass(App, [{
-        key: "render",
+    _createClass(Hour, [{
+        key: 'render',
         value: function render() {
-            return React.createElement("div", { "class": "page" });
+            return React.createElement(
+                'div',
+                { className: 'hour__time' },
+                (this.props.hour < 10 ? '0' : '') + this.props.hour,
+                ':00'
+            );
         }
     }]);
 
-    return App;
+    return Hour;
 }(React.Component);
 
-var dom = document.querySelector("#root");
-var root = ReactDOM.createRoot(dom);
-root.render(React.createElement(App, null));
+var HourClass = function (_React$Component2) {
+    _inherits(HourClass, _React$Component2);
+
+    function HourClass() {
+        _classCallCheck(this, HourClass);
+
+        return _possibleConstructorReturn(this, (HourClass.__proto__ || Object.getPrototypeOf(HourClass)).apply(this, arguments));
+    }
+
+    _createClass(HourClass, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement('div', { className: 'hour__class' });
+        }
+    }]);
+
+    return HourClass;
+}(React.Component);

@@ -23,7 +23,15 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: "render",
         value: function render() {
-            return React.createElement("div", { "class": "page" });
+            return React.createElement(
+                "div",
+                { className: "page" },
+                React.createElement(
+                    "div",
+                    { className: "page__content" },
+                    React.createElement(Calendar, null)
+                )
+            );
         }
     }]);
 

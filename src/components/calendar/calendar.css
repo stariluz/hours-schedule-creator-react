@@ -1,0 +1,18 @@
+.calendar{
+    border: 2px solid black;
+
+}
+.week{
+    display: grid;
+    grid-template-columns: repeat(8,5rem);
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+.day,
+.hours__time{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(24, 2rem);
+    /* justify-content: center; */
+    /* align-items: center; */
+}
