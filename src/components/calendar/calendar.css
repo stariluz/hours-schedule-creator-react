@@ -12,7 +12,19 @@
 .hours__time{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(24, 2rem);
+    grid-template-rows: repeat(19, 2rem);
     /* justify-content: center; */
     /* align-items: center; */
+}
+.hour__space{
+    background-color: rgb(235, 235, 235);
+    border: 1px solid black;
+    border-bottom: none;
+    border-right: none;
+
+}
+.hour__selected{
+    background-color: rgb(212, 212, 195);
+    border: 1px solid red;
+    border-radius: 2px;
 }

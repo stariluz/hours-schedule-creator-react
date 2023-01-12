@@ -30,21 +30,30 @@ var Hour = function (_React$Component) {
     return Hour;
 }(React.Component);
 
-var HourClass = function (_React$Component2) {
-    _inherits(HourClass, _React$Component2);
+var HourSpace = function (_React$Component2) {
+    _inherits(HourSpace, _React$Component2);
 
-    function HourClass() {
-        _classCallCheck(this, HourClass);
+    function HourSpace() {
+        _classCallCheck(this, HourSpace);
 
-        return _possibleConstructorReturn(this, (HourClass.__proto__ || Object.getPrototypeOf(HourClass)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (HourSpace.__proto__ || Object.getPrototypeOf(HourSpace)).apply(this, arguments));
     }
 
-    _createClass(HourClass, [{
+    _createClass(HourSpace, [{
         key: 'render',
         value: function render() {
-            return React.createElement('div', { className: 'hour__class' });
+            var _this3 = this;
+
+            return React.createElement(
+                'div',
+                { className: 'hour__space',
+                    onClick: function onClick() {
+                        return _this3.props.onClick();
+                    } },
+                this.props.contentValue
+            );
         }
     }]);
 
-    return HourClass;
+    return HourSpace;
 }(React.Component);

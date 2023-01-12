@@ -7,11 +7,14 @@ class Hour extends React.Component{
         );
     }
 }
-class HourClass extends React.Component{
+class HourSpace extends React.Component{
     render(){
         return(
-            <div className="hour__class">
-
+            <div className="hour__space"
+            onClick={
+                ()=>this.props.onClick()
+            }>
+                { this.props.contentValue }
             </div>
         );
     }
