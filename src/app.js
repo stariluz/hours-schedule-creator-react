@@ -3,6 +3,8 @@
 // import React from 'react'; // DEV
 // import ReactDOM from 'react-dom'; // DEV
 
+// enableMapSet(); // Immer
+
 class App extends React.Component {
     render(){
         return(

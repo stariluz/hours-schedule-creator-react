@@ -40,9 +40,10 @@ var Calendar = function (_React$Component) {
     _createClass(Calendar, [{
         key: 'handleClickOnHour',
         value: function handleClickOnHour(day, hour) {
-            var currentHoursMap = this.state.history[this.state.currentTime].hoursMap.slice();
-            currentHoursMap[day][hour]++;
-            currentHoursMap[day][hour] %= amountOfClasses;
+            var currentHoursMap = produce(this.state.history[this.state.currentTime].hoursMap, function (hoursMap) {
+                hoursMap[day][hour]++;
+                hoursMap[day][hour] %= amountOfClasses;
+            });
 
             // this.setState({
             //     history: [...this.state.history, currentHoursMap],

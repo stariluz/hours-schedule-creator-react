@@ -26,9 +26,13 @@ class Calendar extends React.Component{
         // console.log("DEV: Constructor",currentHoursMap);
     }
     handleClickOnHour(day,hour){
-        const currentHoursMap=this.state.history[this.state.currentTime].hoursMap.slice();
-        currentHoursMap[day][hour]++;
-        currentHoursMap[day][hour]%=amountOfClasses;
+        const currentHoursMap= produce(
+            this.state.history[this.state.currentTime].hoursMap,
+            (hoursMap) => {
+                hoursMap[day][hour]++;
+                hoursMap[day][hour]%=amountOfClasses;
+            }
+        );
 
         // this.setState({
         //     history: [...this.state.history, currentHoursMap],
