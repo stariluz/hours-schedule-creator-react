@@ -1,6 +1,6 @@
 import React from 'react'; // DEV
 
-import "./hour.css";
+import "./Hour.css";
 
 export class Hour extends React.Component{
     render(){

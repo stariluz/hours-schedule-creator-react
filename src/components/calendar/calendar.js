@@ -1,7 +1,7 @@
 import React from 'react';
-import { Hour, HourSpace } from '../hour/hour';
+import { Hour, HourSpace } from '../Hour/Hour';
 import { produce } from 'immer';
-import "./calendar.css";
+import "./Calendar.css";
 
 const FIRST_HOUR=6;
 let amountOfClasses=5;

@@ -1,7 +1,7 @@
 import React from 'react';
-import Calendar from './calendar/calendar'
+import Calendar from './Calendar/Calendar'
 
-import './app.css'
+import './App.css'
 
 // enableMapSet(); // Immer
 
