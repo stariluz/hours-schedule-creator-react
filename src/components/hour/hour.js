@@ -1,4 +1,8 @@
-class Hour extends React.Component{
+import React from 'react'; // DEV
+
+import "./hour.css";
+
+export class Hour extends React.Component{
     render(){
         return(
             <div className="hour__time">
@@ -7,7 +11,7 @@ class Hour extends React.Component{
         );
     }
 }
-class HourSpace extends React.Component{
+export class HourSpace extends React.Component{
     render(){
         return(
             <div className="hour__space"

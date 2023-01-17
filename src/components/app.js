@@ -1,11 +1,11 @@
-'use strict';
+import React from 'react';
+import Calendar from './calendar/calendar'
 
-// import React from 'react'; // DEV
-// import ReactDOM from 'react-dom'; // DEV
+import './app.css'
 
 // enableMapSet(); // Immer
 
-class App extends React.Component {
+export default class App extends React.Component {
     render(){
         return(
             <div className="page">
@@ -16,7 +16,3 @@ class App extends React.Component {
         );
     }
 }
-
-const dom=document.querySelector("#root");
-const root=ReactDOM.createRoot(dom);
-root.render(<App/>);

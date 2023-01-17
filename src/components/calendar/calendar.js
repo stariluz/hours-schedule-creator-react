@@ -1,3 +1,8 @@
+import React from 'react';
+import { Hour, HourSpace } from '../hour/hour';
+
+import "./calendar.css";
+
 const FIRST_HOUR=6;
 let amountOfClasses=5;
 const days=['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado','Domingo'];
@@ -26,19 +31,19 @@ class Calendar extends React.Component{
         // console.log("DEV: Constructor",currentHoursMap);
     }
     handleClickOnHour(day,hour){
-        const currentHoursMap= produce(
-            this.state.history[this.state.currentTime].hoursMap,
-            (hoursMap) => {
-                hoursMap[day][hour]++;
-                hoursMap[day][hour]%=amountOfClasses;
-            }
-        );
+        // const currentHoursMap= produce(
+        //     this.state.history[this.state.currentTime].hoursMap,
+        //     (hoursMap) => {
+        //         hoursMap[day][hour]++;
+        //         hoursMap[day][hour]%=amountOfClasses;
+        //     }
+        // );
 
         // this.setState({
         //     history: [...this.state.history, currentHoursMap],
         //     currentTime: this.state.currentTime+1,
         // });
-        console.log("DEV: HANDLE CLICK ON HOUR ",hour," AT ",daysMap[day], currentHoursMap);
+        // console.log("DEV: HANDLE CLICK ON HOUR ",hour," AT ",daysMap[day], currentHoursMap);
     }
     renderHourSpace(day, hour, contentValue){
         // console.log(hoursMap);
@@ -100,3 +105,4 @@ class Calendar extends React.Component{
         );
     }
 }
+export default Calendar;
