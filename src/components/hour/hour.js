@@ -14,12 +14,12 @@ export class Hour extends React.Component{
 export class HourSpace extends React.Component{
     render(){
         return(
-            <div className="hour__space"
+            <button className="hour__space"
             onClick={
                 ()=>this.props.onClick()
             }>
                 { this.props.contentValue }
-            </div>
+            </button>
         );
     }
 }
