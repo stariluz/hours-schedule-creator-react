@@ -1,10 +1,8 @@
 import React from 'react';
 import { Hour, HourSpace } from '../Hour/Hour';
-import { produce } from 'immer';
 import "./Calendar.css";
 
 const FIRST_HOUR=6;
-let amountOfClasses=5;
 const days=['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado','Domingo'];
 const daysMap={
     0: days[0],
@@ -15,62 +13,28 @@ const daysMap={
     5: days[5],
     6: days[6],
 }
-
+/**
+ * 
+ */
 class Calendar extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            history: [
-                {
-                    hoursMap: Array(7).fill(Array(24).fill(0)),
-                }
-            ],
-            currentTime: 0,
-        }
-        // const currentHoursMap=this.state.history[this.state.currentTime].hoursMap.slice();
-        // console.log("DEV: Constructor",currentHoursMap);
-    }
-    handleClickOnHour(day,hour){
-        const currentTime = this.state.currentTime;
-        const history = this.state.history.slice(0,currentTime+1);
-        console.log(this.state.history);
-        const nextHistory = {
-            hoursMap:
-                produce(
-                    history[currentTime].hoursMap,
-                    (hoursMapDraft) => {
-                        hoursMapDraft[day][hour]++;
-                        hoursMapDraft[day][hour]%=amountOfClasses;
-                    }
-                )
-        };
-        
-        this.setState({
-            history: [...history, nextHistory],
-            currentTime: currentTime+1,
-        });
-        // console.log("DEV: HANDLE CLICK ON HOUR ",hour," AT ",daysMap[day], nextHistory);
-    }
+
     renderHourSpace(day, hour, contentValue){
-        // console.log(hoursMap);
         const hourComponent=
         <HourSpace
             hour={hour}
             contentValue={contentValue}
             key={day+"_"+hour}
-            onClick={()=>this.handleClickOnHour(day,hour)}
+            onClick={()=>this.props.onClickOnHour(day,hour)}
         />;
-        // console.log(hourComponent);
         return hourComponent;
     }
     renderHourTime(hour){
         const hourComponent=<Hour hour={hour} key={'hour-'+hour}/>;
-        // console.log(hourComponent);
         return hourComponent;
     }
     renderDay(day){
         
-        const hoursMap=this.state.history[this.state.currentTime].hoursMap;
+        const hoursMap=this.props.hoursMap;
         const hours=Array(24-FIRST_HOUR).fill(null).map((value,index)=>{
             const hour= index+FIRST_HOUR;
             return this.renderHourSpace(day, hour, hoursMap[day][hour]);
