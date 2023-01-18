@@ -2,6 +2,7 @@ import React from "react";
 import Calendar from "../calendar/calendar";
 import HistoryNavigation from "../HistoryNavigation/HistoryNavigation";
 import { produce } from 'immer';
+import CoursesManagement from "../CoursesManagement/CoursesManagement";
 
 let amountOfClasses=5;
 
@@ -63,6 +64,7 @@ export default class ScheduleCreator extends React.Component{
     render(){
         return(
             <div>
+                <CoursesManagement/>
                 <HistoryNavigation
                     onClickOnPreviousStep={()=>this.handlePreviousStep()}
                     onClickOnNextStep={()=>this.handleNextStep()}
