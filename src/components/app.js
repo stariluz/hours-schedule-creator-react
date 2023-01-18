@@ -1,7 +1,7 @@
 import React from 'react';
-import Calendar from './Calendar/Calendar'
 
 import './App.css'
+import ScheduleCreator from './ScheduleCreator/ScheduleCreator';
 
 // enableMapSet(); // Immer
 
@@ -10,7 +10,7 @@ export default class App extends React.Component {
         return(
             <div className="page">
                 <div className="page__content">
-                    <Calendar/>
+                    <ScheduleCreator/>
                 </div>
             </div>
         );
