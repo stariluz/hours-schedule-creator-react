@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hour, HourSpace } from '../Hour/Hour';
+import { Hour, HourSpace } from './Hour/Hour';
 import "./Calendar.css";
 
 const FIRST_HOUR=6;
@@ -18,11 +18,11 @@ const daysMap={
  */
 class Calendar extends React.Component{
 
-    renderHourSpace(day, hour, contentValue){
+    renderHourSpace(day, hour, content){
         const hourComponent=
         <HourSpace
             hour={hour}
-            contentValue={contentValue}
+            content={content}
             key={day+"_"+hour}
             onClick={()=>this.props.onClickOnHour(day,hour)}
         />;
@@ -33,13 +33,18 @@ class Calendar extends React.Component{
         return hourComponent;
     }
     renderDay(day){
-        
         const hoursMap=this.props.hoursMap;
         const hours=Array(24-FIRST_HOUR).fill(null).map((value,index)=>{
-            const hour= index+FIRST_HOUR;
-            return this.renderHourSpace(day, hour, hoursMap[day][hour]);
+            const hour = index+FIRST_HOUR;
+            let course=null;
+            // console.log("DEV:",this.props.courses);
+            if(hoursMap[day][hour]>0){
+                console.log("YEEEEY");
+                console.log("DEV:",this.props.courses[hoursMap[day][hour]-1]);
+                course = this.props.courses[hoursMap[day][hour]-1];
+            }
+            return this.renderHourSpace(day, hour, course);
         });
-        // console.log(hours,day);
         let dayComponent=
         <div className="day" key={"row_"+day}>
             <div className="day__name">
@@ -57,7 +62,7 @@ class Calendar extends React.Component{
         <div className="week">
             <div className="hours__time">
                 <div>Hora</div>
-                {hoursTime}
+                { hoursTime }
             </div>
             {
                 Object.keys(daysMap).map((day)=>{
