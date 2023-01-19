@@ -119,7 +119,6 @@ export default class ScheduleCreator extends React.Component{
             },
             currentTime: currentTime+1,
         });
-        // console.log(coursesHistoryMap);
     }
     handleAddCourse(){
         const currentTime=this.state.currentTime;
@@ -188,7 +187,7 @@ export default class ScheduleCreator extends React.Component{
             currentTime: currentTime+1,
         });
     }
-
+    
     render(){
         const currentTime=this.state.currentTime;
         const current=this.state.history[currentTime];
