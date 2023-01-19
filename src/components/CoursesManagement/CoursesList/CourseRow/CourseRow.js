@@ -73,6 +73,14 @@ export default class CourseRow extends React.Component{
                 <div className="course-row__hours">
                     N.of.H: { this.props.numberOfHours }
                 </div>
+                
+                <button
+                    onClick={()=>{
+                        this.props.onRemoveCourse()
+                    }}
+                >
+                    x
+                </button>
             </div>
         );
     }

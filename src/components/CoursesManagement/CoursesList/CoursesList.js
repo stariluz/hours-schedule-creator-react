@@ -100,6 +100,15 @@ export default class CoursesList extends React.Component{
             courses: updatedCourses,
         });
     }
+    handleRemoveCourse(index){
+        const updatedCourses=produce(this.state.courses,(coursesDraft)=>{
+            coursesDraft.splice(index,1);
+        });
+        this.setState({
+            courses: updatedCourses,
+        });
+
+    }
     renderRows(){
 
         const rows=this.state.courses.map((row,index)=>{
@@ -112,6 +121,7 @@ export default class CoursesList extends React.Component{
                 onChangeName={(value)=>this.handleChangeName(index, value)}
                 onChangeAbbreviation={(value)=>this.handleChangeAbbreviation(index, value)}
                 onChangeProfessor={(value)=>this.handleChangeProfessor(index, value)}
+                onRemoveCourse={()=>this.handleRemoveCourse(index)}
             />
         })
         return rows;
