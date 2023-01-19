@@ -3,18 +3,19 @@ import "./CourseRow.css";
 
 export default class CourseRow extends React.Component{
     handleInputText(type,event){
-        if(type==="color"){
-            this.props.onChangeColor(event.target.value);
-        }
-        else if(type==="name"){
-            this.props.onChangeName(event.target.value);
-        }
-        else if(type==="abbreviation"){
-            this.props.onChangeAbbreviation(event.target.value);
-        }
-        else if(type==="professor"){
-            this.props.onChangeProfessor(event.target.value);
-        }
+        this.props.onChangeCourse(type,event.target.value);
+        // if(type==="color"){
+        //     this.props.onChangeColor(event.target.value);
+        // }
+        // else if(type==="name"){
+        //     this.props.onChangeName(event.target.value);
+        // }
+        // else if(type==="abbreviation"){
+        //     this.props.onChangeAbbreviation(event.target.value);
+        // }
+        // else if(type==="professor"){
+        //     this.props.onChangeProfessor(event.target.value);
+        // }
         // else if(type==="abbreviation"){
             
         // }

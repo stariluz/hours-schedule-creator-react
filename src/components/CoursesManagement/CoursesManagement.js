@@ -4,7 +4,11 @@ import CoursesList from "./CoursesList/CoursesList";
 export default class CoursesManagement extends React.Component{
     render(){
         return(
-            <CoursesList/>
+            <CoursesList
+                courses={this.props.courses}
+                onCourseChange={(index,type,value)=>this.props.onCourseChange(index,type,value)}
+                onRemoveCourse={(index)=>this.props.onRemoveCourse(index)}
+            />
         );
     }
 }
