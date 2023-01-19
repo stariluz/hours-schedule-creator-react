@@ -36,39 +36,6 @@ export default class ScheduleCreator extends React.Component{
         }
     }
     
-    handleClickOnHour(day,hour){
-        const nextState = produce(this.state,(stateDraft)=>{
-            const currentTime=stateDraft.currentTime;
-            const history=stateDraft.history.slice(0,currentTime+1);
-            const currentIndexCourses=history[currentTime].currentIndexCourses;
-            const coursesHistoryMap=stateDraft.historyMap.courses.slice(0,currentIndexCourses+1);
-            const currentIndexHoursMap=history[currentTime].currentIndexHoursMap;
-            const hoursMapHistoryMap=stateDraft.historyMap.hoursMap.slice(0,currentIndexHoursMap+1);
-
-            const newHoursMap=produce(hoursMapHistoryMap[currentIndexHoursMap],(hoursMapDraft)=>{
-                console.log(coursesHistoryMap[currentIndexCourses].length);
-                hoursMapDraft[day][hour]++;
-                hoursMapDraft[day][hour]%=coursesHistoryMap[currentIndexCourses].length+1;
-            });
-            
-            history.push({
-                change: "Updated hours",
-                currentIndexHoursMap: currentIndexHoursMap+1,
-                currentIndexCourses: history[currentTime].currentIndexCourses,
-            });
-            stateDraft.history=history;
-
-            hoursMapHistoryMap.push(newHoursMap);
-            stateDraft.historyMap={
-                courses: coursesHistoryMap,
-                hoursMap: hoursMapHistoryMap,
-            }
-
-            stateDraft.currentTime++;
-        });
-        console.log(this.state, nextState);
-        this.setState({...nextState});
-    }
     handlePreviousStep(){
         let newTime=this.state.currentTime-1;
         if(newTime<0){
@@ -89,9 +56,42 @@ export default class ScheduleCreator extends React.Component{
         });
 
     }
+
+    handleClickOnHour(day,hour){
+        const nextState = produce(this.state,(stateDraft)=>{
+            const currentTime=stateDraft.currentTime;
+            const history=stateDraft.history.slice(0,currentTime+1);
+            const currentIndexCourses=history[currentTime].currentIndexCourses;
+            const coursesHistoryMap=stateDraft.historyMap.courses.slice(0,currentIndexCourses+1);
+            const currentIndexHoursMap=history[currentTime].currentIndexHoursMap;
+            const hoursMapHistoryMap=stateDraft.historyMap.hoursMap.slice(0,currentIndexHoursMap+1);
+
+            const newHoursMap=produce(hoursMapHistoryMap[currentIndexHoursMap],(hoursMapDraft)=>{
+                // console.log(coursesHistoryMap[currentIndexCourses].length);
+                hoursMapDraft[day][hour]++;
+                hoursMapDraft[day][hour]%=coursesHistoryMap[currentIndexCourses].length+1;
+            });
+
+            history.push({
+                change: "Updated hours",
+                currentIndexHoursMap: currentIndexHoursMap+1,
+                currentIndexCourses: history[currentTime].currentIndexCourses,
+            });
+            stateDraft.history=history;
+
+            hoursMapHistoryMap.push(newHoursMap);
+            stateDraft.historyMap={
+                courses: coursesHistoryMap,
+                hoursMap: hoursMapHistoryMap,
+            }
+
+            stateDraft.currentTime++;
+        });
+        this.setState({...nextState});
+    }
     
     handleCourseChange(index, field, value){
-        console.log(index,field,value);
+        // console.log(index,field,value);
         const currentTime=this.state.currentTime;
         const history=this.state.history.slice(0,currentTime+1);
         
@@ -119,7 +119,6 @@ export default class ScheduleCreator extends React.Component{
             },
             currentTime: currentTime+1,
         });
-        console.log(coursesHistoryMap);
     }
     handleAddCourse(){
         const currentTime=this.state.currentTime;
@@ -188,6 +187,7 @@ export default class ScheduleCreator extends React.Component{
             currentTime: currentTime+1,
         });
     }
+    
     render(){
         const currentTime=this.state.currentTime;
         const current=this.state.history[currentTime];
@@ -200,17 +200,18 @@ export default class ScheduleCreator extends React.Component{
         const currentHoursMap=currentMap.hoursMap[currentIndexHoursMap];
         return(
             <div>
+                <HistoryNavigation
+                    onClickOnPreviousStep={()=>this.handlePreviousStep()}
+                    onClickOnNextStep={()=>this.handleNextStep()}
+                />
                 <CoursesManagement
                     courses={currentCourses}
                     onCourseChange={(index,type,value)=>this.handleCourseChange(index,type,value)}
                     onAddCourse={()=>this.handleAddCourse()}
                     onRemoveCourse={(index)=>this.handleRemoveCourse(index)}
                 />
-                <HistoryNavigation
-                    onClickOnPreviousStep={()=>this.handlePreviousStep()}
-                    onClickOnNextStep={()=>this.handleNextStep()}
-                />
                 <Calendar
+                    courses={currentCourses}
                     hoursMap={currentHoursMap}
                     onClickOnHour={(day,hour)=>this.handleClickOnHour(day,hour)}
                 />

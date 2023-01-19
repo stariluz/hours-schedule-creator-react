@@ -13,12 +13,20 @@ export class Hour extends React.Component{
 }
 export class HourSpace extends React.Component{
     render(){
+        // console.log(this.props.content);
+        if(this.props.content===null){
+            return <button className="hour__space"
+            onClick={
+                ()=>this.props.onClick()
+            }>
+            </button>
+        }
         return(
             <button className="hour__space"
             onClick={
                 ()=>this.props.onClick()
             }>
-                { this.props.contentValue }
+                { this.props.content.abbreviation }
             </button>
         );
     }
