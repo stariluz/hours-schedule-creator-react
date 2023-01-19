@@ -34,14 +34,10 @@ export default class ScheduleCreator extends React.Component{
                 ],
             },
         }
-        // const currentHoursMap=this.state.history[this.state.currentTime].hoursMap.slice();
-        // console.log("DEV: Constructor",currentHoursMap);
     }
     
     handleClickOnHour(day,hour){
-        // console.log(this.state.history);
         const nextState = produce(this.state,(stateDraft)=>{
-            // console.log(stateDraft);
             const currentTime=stateDraft.currentTime;
             const history=stateDraft.history.slice(0,currentTime+1);
             const currentIndexCourses=history[currentTime].currentIndexCourses;
@@ -49,26 +45,28 @@ export default class ScheduleCreator extends React.Component{
             const currentIndexHoursMap=history[currentTime].currentIndexHoursMap;
             const hoursMapHistoryMap=stateDraft.historyMap.hoursMap.slice(0,currentIndexHoursMap+1);
 
-            const newHoursMap=hoursMapHistoryMap[currentIndexHoursMap];
-            // console.log(newHoursMap[day][hour]);
-            newHoursMap[day][hour]++;
-            newHoursMap[day][hour]%=currentIndexCourses+2;
+            const newHoursMap=produce(hoursMapHistoryMap[currentIndexHoursMap],(hoursMapDraft)=>{
+                console.log(coursesHistoryMap[currentIndexCourses].length);
+                hoursMapDraft[day][hour]++;
+                hoursMapDraft[day][hour]%=coursesHistoryMap[currentIndexCourses].length+1;
+            });
             
-            stateDraft.history= [
-                ...history,
-                {
-                    change: "Updated hours",
-                    currentIndexHoursMap: currentIndexHoursMap+1,
-                    currentIndexCourses: history[currentTime].currentIndexCourses,
-                }
-            ];
+            history.push({
+                change: "Updated hours",
+                currentIndexHoursMap: currentIndexHoursMap+1,
+                currentIndexCourses: history[currentTime].currentIndexCourses,
+            });
+            stateDraft.history=history;
+
+            hoursMapHistoryMap.push(newHoursMap);
             stateDraft.historyMap={
-                courses: [...coursesHistoryMap],
-                hoursMap: [...hoursMapHistoryMap, newHoursMap],
+                courses: coursesHistoryMap,
+                hoursMap: hoursMapHistoryMap,
             }
+
             stateDraft.currentTime++;
         });
-        
+        console.log(this.state, nextState);
         this.setState({...nextState});
     }
     handlePreviousStep(){
@@ -92,72 +90,8 @@ export default class ScheduleCreator extends React.Component{
 
     }
     
-    // handleClickOnHideProfessor(index){
-    //     const updatedCourses=produce(this.state.courses,(coursesDraft)=>{
-    //         coursesDraft[index]={
-    //             ...coursesDraft[index], hasProfessor: false
-    //         }
-    //     });
-    //     this.setState({
-    //         courses: updatedCourses,
-    //     });
-    // }
-    // handleClickOnShowProfessor(index){
-    //     const updatedCourses=produce(this.state.courses,(coursesDraft)=>{
-    //         coursesDraft[index]={
-    //             ...coursesDraft[index], hasProfessor: true
-    //         }
-    //     });
-    //     this.setState({
-    //         courses: updatedCourses,
-    //     });
-    // }
-    // handleChangeColor(index, value){
-    //     const updatedCourses=produce(this.state.courses,(coursesDraft)=>{
-    //         coursesDraft[index]={
-    //             ...coursesDraft[index], color: value
-    //         }
-    //     });
-    //     this.setState({
-    //         courses: updatedCourses,
-    //     });
-    //     console.log(value);
-    // }
-    // handleChangeName(index, value){
-    //     const updatedCourses=produce(this.state.courses,(coursesDraft)=>{
-    //         coursesDraft[index]={
-    //             ...coursesDraft[index], name: value
-    //         }
-    //     });
-    //     this.setState({
-    //         courses: updatedCourses,
-    //     });
-    //     console.log(value);
-    // }
-    // handleChangeAbbreviation(index, value){
-    //     const updatedCourses=produce(this.state.courses,(coursesDraft)=>{
-    //         coursesDraft[index]={
-    //             ...coursesDraft[index], abbreviation: value
-    //         }
-    //     });
-    //     this.setState({
-    //         courses: updatedCourses,
-    //     });
-    //     console.log(value);
-    // }
-    // handleChangeProfessor(index, value){
-    //     const updatedCourses=produce(this.state.courses,(coursesDraft)=>{
-    //         coursesDraft[index]={
-    //             ...coursesDraft[index], professor: value
-    //         }
-    //     });
-    //     this.setState({
-    //         courses: updatedCourses,
-    //     });
-    //     console.log(value);
-    // }
-    
     handleCourseChange(index, field, value){
+        console.log(index,field,value);
         const currentTime=this.state.currentTime;
         const history=this.state.history.slice(0,currentTime+1);
         
@@ -167,24 +101,25 @@ export default class ScheduleCreator extends React.Component{
         const currentIndexHoursMap=history[currentTime].currentIndexHoursMap;
         const hoursMapHistoryMap=this.state.historyMap.hoursMap.slice(0,currentIndexHoursMap+1);
 
-        const updatedCourses=produce(coursesHistoryMap[currentIndexCourses], (coursesDraft)=>{
+        const updatedCourses=produce(coursesHistoryMap[currentIndexCourses],(coursesDraft)=>{
             coursesDraft[index][field]=value;
+        })
+        coursesHistoryMap.push(updatedCourses);
+        
+        history.push({
+            change: "Edit course",
+            currentIndexHoursMap: currentIndexHoursMap,
+            currentIndexCourses: currentIndexCourses+1,
         });
         this.setState({
-            history: [
-                ...history,
-                {
-                    change: "Edit course",
-                    currentIndexHoursMap: currentIndexHoursMap,
-                    currentIndexCourses: currentIndexCourses+1,
-                }
-            ],
+            history: history,
             historyMap:{
                 hoursMap: hoursMapHistoryMap,
-                courses: updatedCourses,
+                courses: coursesHistoryMap,
             },
             currentTime: currentTime+1,
         });
+        console.log(coursesHistoryMap);
     }
     handleAddCourse(){
         const currentTime=this.state.currentTime;
@@ -208,18 +143,18 @@ export default class ScheduleCreator extends React.Component{
                 }
             );
         });
+        coursesHistoryMap.push(updatedCourses);
+
+        history.push({
+            change: "Add course",
+            currentIndexHoursMap: currentIndexHoursMap,
+            currentIndexCourses: currentIndexCourses+1,
+        });
         this.setState({
-            history: [
-                ...history,
-                {
-                    change: "Add course",
-                    currentIndexHoursMap: currentIndexHoursMap,
-                    currentIndexCourses: currentIndexCourses+1,
-                }
-            ],
-            historyMap:{
+            history: history,
+            historyMap: {
                 hoursMap: hoursMapHistoryMap,
-                courses: updatedCourses,
+                courses: coursesHistoryMap,
             },
             currentTime: currentTime+1,
         });
@@ -237,23 +172,22 @@ export default class ScheduleCreator extends React.Component{
         const updatedCourses=produce(coursesHistoryMap[currentIndexCourses], (coursesDraft)=>{
             coursesDraft.splice(index,1);
         });
+        coursesHistoryMap.push(updatedCourses);
+        
+        history.push({
+            change: "Remove course",
+            currentIndexHoursMap: currentIndexHoursMap,
+            currentIndexCourses: currentIndexCourses+1,
+        });
         this.setState({
-            history: [
-                ...history,
-                {
-                    change: "Add course",
-                    currentIndexHoursMap: currentIndexHoursMap,
-                    currentIndexCourses: currentIndexCourses+1,
-                }
-            ],
-            historyMap:{
+            history: history,
+            historyMap: {
                 hoursMap: hoursMapHistoryMap,
-                courses: updatedCourses,
+                courses: coursesHistoryMap,
             },
             currentTime: currentTime+1,
         });
     }
-
     render(){
         const currentTime=this.state.currentTime;
         const current=this.state.history[currentTime];
@@ -264,12 +198,11 @@ export default class ScheduleCreator extends React.Component{
 
         const currentIndexHoursMap=current.currentIndexHoursMap;
         const currentHoursMap=currentMap.hoursMap[currentIndexHoursMap];
-        console.log(this.state);
         return(
             <div>
                 <CoursesManagement
                     courses={currentCourses}
-                    onCourseChange={(index,type,value)=>this.props.handleCourseChange(index,type,value)}
+                    onCourseChange={(index,type,value)=>this.handleCourseChange(index,type,value)}
                     onAddCourse={()=>this.handleAddCourse()}
                     onRemoveCourse={(index)=>this.handleRemoveCourse(index)}
                 />
