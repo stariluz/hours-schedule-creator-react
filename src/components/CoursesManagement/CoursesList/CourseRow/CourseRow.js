@@ -2,23 +2,8 @@ import React from "react";
 import "./CourseRow.css";
 
 export default class CourseRow extends React.Component{
-    handleInputText(type,event){
-        this.props.onChangeCourse(type,event.target.value);
-        // if(type==="color"){
-        //     this.props.onChangeColor(event.target.value);
-        // }
-        // else if(type==="name"){
-        //     this.props.onChangeName(event.target.value);
-        // }
-        // else if(type==="abbreviation"){
-        //     this.props.onChangeAbbreviation(event.target.value);
-        // }
-        // else if(type==="professor"){
-        //     this.props.onChangeProfessor(event.target.value);
-        // }
-        // else if(type==="abbreviation"){
-            
-        // }
+    handleInput(type,event){
+        this.props.onCourseChange(type,event.target.value);
     }
     render(){
         return(
@@ -26,21 +11,21 @@ export default class CourseRow extends React.Component{
                 <div className="course-row__color">
                     <input type="color"
                         placeholder="Color"
-                        onChange={(event)=>{(this.handleInputText("color",event))}}
+                        onChange={(event)=>{(this.handleInput("color",event))}}
                         value={ this.props.color }
                     />
                 </div>
                 <div className="course-row__name">
                     <input type="text"
                         placeholder="Nombre"
-                        onChange={(event)=>{(this.handleInputText("name",event))}}
+                        onChange={(event)=>{(this.handleInput("name",event))}}
                         value={ this.props.name }
                     />
                 </div>
                 <div className="course-row__abbreviation">
                     <input type="text"
                         placeholder="Abrebviación"
-                        onChange={(event)=>{(this.handleInputText("abbreviation",event))}}
+                        onChange={(event)=>{(this.handleInput("abbreviation",event))}}
                         value={ this.props.abbreviation }
                     />
                 </div>
@@ -48,9 +33,7 @@ export default class CourseRow extends React.Component{
                 this.props.hasProfessor===false?
                     <div className="course-row__professor--button">
                         <button
-                            onClick={()=>{
-                                this.props.onClickOnShowProfessor()
-                            }}
+                            onClick={()=>this.props.onCourseChange("hasProfessor",true)}
                         >
                             Add professor
                         </button>
@@ -59,13 +42,11 @@ export default class CourseRow extends React.Component{
                     <div className="course-row__professor">
                         <input type="text"
                             placeholder="Profesor"
-                            onChange={(event)=>{(this.handleInputText("professor",event))}}
+                            onChange={(event)=>{(this.handleInput("professor",event))}}
                             value={ this.props.professor }
                         />
                         <button
-                            onClick={()=>{
-                                this.props.onClickOnHideProfessor()
-                            }}
+                            onClick={()=>this.props.onCourseChange("hasProfessor",false)}
                         >
                             x
                         </button>

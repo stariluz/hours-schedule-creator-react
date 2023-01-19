@@ -8,6 +8,7 @@ export default class CoursesManagement extends React.Component{
                 courses={this.props.courses}
                 onCourseChange={(index,type,value)=>this.props.onCourseChange(index,type,value)}
                 onRemoveCourse={(index)=>this.props.onRemoveCourse(index)}
+                onAddCourse={()=>this.props.onAddCourse()}
             />
         );
     }
