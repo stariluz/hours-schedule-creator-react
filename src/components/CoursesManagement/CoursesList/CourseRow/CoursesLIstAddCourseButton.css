@@ -1,0 +1,11 @@
+.course-button__add{
+    display: flex;
+    width: 100%;
+}
+.course-button__add>*{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}

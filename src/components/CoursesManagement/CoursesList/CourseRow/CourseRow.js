@@ -24,18 +24,21 @@ export default class CourseRow extends React.Component{
             <div className="course-row">
                 <div className="course-row__color">
                     <input type="color"
+                        placeholder="Color"
                         onChange={(event)=>{(this.handleInputText("color",event))}}
                         value={ this.props.color }
                     />
                 </div>
                 <div className="course-row__name">
                     <input type="text"
+                        placeholder="Nombre"
                         onChange={(event)=>{(this.handleInputText("name",event))}}
                         value={ this.props.name }
                     />
                 </div>
                 <div className="course-row__abbreviation">
                     <input type="text"
+                        placeholder="Abrebviación"
                         onChange={(event)=>{(this.handleInputText("abbreviation",event))}}
                         value={ this.props.abbreviation }
                     />
@@ -54,13 +57,21 @@ export default class CourseRow extends React.Component{
                 :
                     <div className="course-row__professor">
                         <input type="text"
+                            placeholder="Profesor"
                             onChange={(event)=>{(this.handleInputText("professor",event))}}
                             value={ this.props.professor }
                         />
+                        <button
+                            onClick={()=>{
+                                this.props.onClickOnHideProfessor()
+                            }}
+                        >
+                            x
+                        </button>
                     </div>
                 }
                 <div className="course-row__hours">
-                    Number of hours: { this.props.numberOfHours }
+                    N.of.H: { this.props.numberOfHours }
                 </div>
             </div>
         );
