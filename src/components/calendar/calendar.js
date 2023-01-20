@@ -39,8 +39,8 @@ class Calendar extends React.Component{
             let course=null;
             // console.log("DEV:",this.props.courses);
             if(hoursMap[day][hour]>0){
-                console.log("YEEEEY");
-                console.log("DEV:",this.props.courses[hoursMap[day][hour]-1]);
+                // console.log("YEEEEY");
+                // console.log("DEV:",this.props.courses[hoursMap[day][hour]-1]);
                 course = this.props.courses[hoursMap[day][hour]-1];
             }
             return this.renderHourSpace(day, hour, course);

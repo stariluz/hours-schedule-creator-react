@@ -24,7 +24,11 @@ export default class ScheduleCreator extends React.Component{
                 ],
                 courses: [
                     Array(1).fill({
-                        color:"#F5BE29",
+                        color:{
+                            h: 44,
+                            s: 91,
+                            l: 56
+                        },
                         name: "Sin nombre",
                         abbreviation: "S. N.",
                         professor: "",
