@@ -22,10 +22,9 @@
     /* color: hsl(0, 52%, 31%); */
     background: hsl(var(--hour-bg-hue),  var(--hour-bg-saturation), var(--hour-bg-lightness));
     background: linear-gradient(-10deg,
-        hsl(var(--hour-bg-hue), 5%, 45%) -50%,
-        hsl(var(--hour-bg-hue), 40%, 48%) 10%,
+        hsl(var(--hour-bg-hue), 0%, 45%) -70%,
         /* hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 25%, */
-        hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 80%,
-        hsl(var(--hour-bg-hue), 50%, 85%) 110%
+        hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 10%,
+        hsl(var(--hour-bg-hue), 100%, 85%) 150%
     );
 }
