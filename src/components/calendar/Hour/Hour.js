@@ -1,11 +1,12 @@
 import React from 'react'; // DEV
 
 import "./Hour.css";
+import { FIRST_HOUR } from '../calendar';
 
 export class Hour extends React.Component{
     render(){
         return(
-            <div className="hour--time">
+            <div className="hour__time">
                 { (this.props.hour<10? '0' : '') + this.props.hour }:00
             </div>
         );
@@ -13,29 +14,30 @@ export class Hour extends React.Component{
 }
 export class HourSpace extends React.Component{
     render(){
-        // console.log(this.props.content);
-        if(this.props.content===null){
-            return (
-                
-                // <div className='hour__container'>
-                    <button className="hour--space"
-                        onClick={
-                            ()=>this.props.onClick()
-                        }
-                    >
-                    </button>
-                // </div>
-            );
-        }
+        return (
+            <button className={`hour__space ${this.props.thereIsClass?'hour__space--class':''}`}
+                onClick={
+                    ()=>this.props.onClick()
+                }
+            >
+            </button>
+        );
+    }
+}
+export class HourClass extends React.Component{
+    render(){
         return(
             
-            // <div className="hour--space">
-                <button className="hour--space hour--class"
-                    onClick={
-                        ()=>this.props.onClick()
-                    }
+            // <div className="hour__space hour__space--fill"
+            //     onClick={
+            //         ()=>this.props.onClick()
+            //     }
+            // >
+                <button className="hour__space hour__class"
+                    
                     style={{
-                        "--hour-length": `${this.props.length}`,
+                        "--hour-row-start": `${this.props.time.hour-FIRST_HOUR+1}`,
+                        "--hour-row-length": `${this.props.time.length}`,
                         "--hour-bg-hue": `${this.props.content.color.h}`,
                         "--hour-bg-saturation": `${this.props.content.color.s}%`,
                         "--hour-bg-lightness": `${this.props.content.color.l}%`,
