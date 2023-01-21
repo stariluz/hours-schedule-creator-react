@@ -18,12 +18,13 @@ const daysMap={
  */
 class Calendar extends React.Component{
 
-    renderHourSpace(day, hour, content){
+    renderHourSpace(day, hour, content, length){
         const hourComponent=
         <HourSpace
+        key={day+"_"+hour}
             hour={hour}
             content={content}
-            key={day+"_"+hour}
+            length={length}
             onClick={()=>this.props.onClickOnHour(day,hour)}
         />;
         return hourComponent;
@@ -34,16 +35,28 @@ class Calendar extends React.Component{
     }
     renderDay(day){
         const hoursMap=this.props.hoursMap;
-        const hours=Array(24-FIRST_HOUR).fill(null).map((value,index)=>{
+        const numberOfHours=24-FIRST_HOUR;
+        const hours=Array(numberOfHours).fill(null).map((value,index)=>{
             const hour = index+FIRST_HOUR;
-            let course=null;
+            let course=null, courseAux=null;
+            
+            let length=0;
             // console.log("DEV:",this.props.courses);
             if(hoursMap[day][hour]>0){
                 // console.log("YEEEEY");
                 // console.log("DEV:",this.props.courses[hoursMap[day][hour]-1]);
                 course = this.props.courses[hoursMap[day][hour]-1];
+                if(course===this.props.courses[hoursMap[day][hour-1]-1]){
+                    return;
+                }
+                length++;
+                for(let iHour=hour+1; iHour<24; iHour++){
+                    courseAux=this.props.courses[hoursMap[day][iHour]-1];
+                    if(course!=courseAux)break;
+                    length++;
+                }
             }
-            return this.renderHourSpace(day, hour, course);
+            return this.renderHourSpace(day, hour, course, length);
         });
         let dayComponent=
         <div className="day" key={"row_"+day}>

@@ -14,11 +14,17 @@
     box-sizing: border-box;
 }
 .hour--class{
-    width: 100%;
-    height: 100%;
+    --hour-length: 1;
+    box-sizing: border-box;
+    position: relative;
     border: none;
+    width: 100%;
+    grid-row-end: span var(--hour-length);
+    /* height: calc((100% + 2px) * var(--hour-length) - 2px );
+    margin-bottom: calc(100% * var(--hour-length) - 100% ); */
+
+    z-index: 2;
     border-radius: 5px;
-    margin: 1px;
     /* color: hsl(0, 52%, 31%); */
     background: hsl(var(--hour-bg-hue),  var(--hour-bg-saturation), var(--hour-bg-lightness));
     background: linear-gradient(-10deg,
@@ -27,4 +33,5 @@
         hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 10%,
         hsl(var(--hour-bg-hue), 100%, 85%) 150%
     );
+
 }

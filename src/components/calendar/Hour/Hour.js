@@ -28,12 +28,14 @@ export class HourSpace extends React.Component{
             );
         }
         return(
-            // <div className='hour__container'>
+            
+            // <div className="hour--space">
                 <button className="hour--space hour--class"
                     onClick={
                         ()=>this.props.onClick()
                     }
                     style={{
+                        "--hour-length": `${this.props.length}`,
                         "--hour-bg-hue": `${this.props.content.color.h}`,
                         "--hour-bg-saturation": `${this.props.content.color.s}%`,
                         "--hour-bg-lightness": `${this.props.content.color.l}%`,

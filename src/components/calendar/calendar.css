@@ -12,7 +12,8 @@
 .hours__time{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(19, 2rem);
+    grid-auto-rows: 2rem;
+    /* grid-template-rows: repeat(19, 2rem); */
     /* justify-content: center; */
     /* align-items: center; */
 }
