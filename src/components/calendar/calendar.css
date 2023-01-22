@@ -8,23 +8,26 @@
     /* justify-content: center; */
     /* align-items: center; */
 }
-.day,
+.day__content{
+    position: relative;
+}
+.day__hours,
 .hours__time{
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(19, 2rem);
+    grid-auto-rows: 2rem;
+    position: relative;
+    /* grid-template-rows: repeat(19, 2rem); */
     /* justify-content: center; */
     /* align-items: center; */
 }
-.hour__space{
-    background-color: rgb(235, 235, 235);
-    border: 1px solid black;
-    border-bottom: none;
-    border-right: none;
 
-}
-.hour__selected{
-    background-color: rgb(212, 212, 195);
-    border: 1px solid red;
-    border-radius: 2px;
+.day__classes{
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-auto-rows: 2rem;
+    grid-template-rows: repeat(18, 2rem);
+    position: absolute;
+    bottom: 0;
 }
