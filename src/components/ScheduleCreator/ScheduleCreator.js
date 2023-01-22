@@ -24,6 +24,13 @@ export default class ScheduleCreator extends React.Component{
                 ],
                 courses: [
                     Array(1).fill({
+                        save:{
+                            color:{
+                                h: 44,
+                                s: .91,
+                                l: .56
+                            },
+                        },
                         color:{
                             h: 44,
                             s: .91,
@@ -43,20 +50,25 @@ export default class ScheduleCreator extends React.Component{
     handlePreviousStep(){
         let newTime=this.state.currentTime-1;
         if(newTime<0){
-            newTime=0;
+            // newTime=0;
+            return;
         }
         this.setState({
             currentTime: newTime,
+        },()=>{
+            console.log(this.state.history[this.state.currentTime]);
         });
-        console.log(this.state.history[this.state.currentTime]);
     }
     handleNextStep(){
         let newTime=this.state.currentTime+1;
         if(newTime>=this.state.history.length){
-            newTime=this.state.history.length-1;
+            // newTime=this.state.history.length-1;
+            return;
         }
         this.setState({
             currentTime: newTime,
+        },()=>{
+            console.log(this.state.history[this.state.currentTime]);
         });
 
     }
@@ -95,6 +107,7 @@ export default class ScheduleCreator extends React.Component{
     }
     
     handleCourseChange(index, field, value){
+        console.log("BEFORE",this.state, value);
         const currentTime=this.state.currentTime;
         const history=this.state.history.slice(0,currentTime+1);
         
@@ -104,10 +117,19 @@ export default class ScheduleCreator extends React.Component{
         const currentIndexHoursMap=history[currentTime].currentIndexHoursMap;
         const hoursMapHistoryMap=this.state.historyMap.hoursMap.slice(0,currentIndexHoursMap+1);
 
-        const updatedCourses=produce(coursesHistoryMap[currentIndexCourses],(coursesDraft)=>{
-            coursesDraft[index][field]=value;
-        })
-        coursesHistoryMap.push(updatedCourses);
+        coursesHistoryMap.push(
+            produce(coursesHistoryMap[currentIndexCourses],(coursesDraft)=>{
+                coursesDraft[index].save[field]=coursesDraft[index][field];
+                coursesDraft[index][field]=value;
+            })
+        );
+        
+        coursesHistoryMap[currentIndexCourses]=produce(coursesHistoryMap[currentIndexCourses],
+            (coursesDraft)=>{
+                coursesDraft[index][field]=coursesDraft[index].save[field];
+            }
+        );
+
         
         history.push({
             change: "Edit course",
@@ -121,17 +143,19 @@ export default class ScheduleCreator extends React.Component{
                 courses: coursesHistoryMap,
             },
             currentTime: currentTime+1,
+        },()=>{
+            console.log("AFTER",this.state);
         });
-        console.log(this.state);
     }
     handleCourseChangeOutHistory(index, field, value){
-        const currentIndexCourses=this.state.history[curthis.state.currentTime].currentIndexCourses;
-        const coursesHistoryMap=this.state.historyMap.courses.slice(0,currentIndexCourses+1);
+        const currentIndexCourses=this.state.history[this.state.currentTime].currentIndexCourses;
+        const coursesHistoryMap=this.state.historyMap.courses.slice();
 
-        const updatedCourse=produce(coursesHistoryMap[currentIndexCourses],(coursesDraft)=>{
-            coursesDraft[index][field]=value;
-        })
-        coursesHistoryMap[currentIndexCourses]=updatedCourse;
+        coursesHistoryMap[currentIndexCourses]=produce(coursesHistoryMap[currentIndexCourses],
+            (coursesDraft)=>{
+                coursesDraft[index][field]=value;
+            }
+        );
         
         this.setState({
             ...this.state,
