@@ -39,8 +39,8 @@ export class HourClass extends React.Component{
                         "--hour-row-start": `${this.props.time.hour-FIRST_HOUR+1}`,
                         "--hour-row-length": `${this.props.time.length}`,
                         "--hour-bg-hue": `${this.props.content.color.h}`,
-                        "--hour-bg-saturation": `${this.props.content.color.s}%`,
-                        "--hour-bg-lightness": `${this.props.content.color.l}%`,
+                        "--hour-bg-saturation": `${this.props.content.color.s*100}%`,
+                        "--hour-bg-lightness": `${this.props.content.color.l*100}%`,
                     }}
                 >
                     { this.props.content.abbreviation }

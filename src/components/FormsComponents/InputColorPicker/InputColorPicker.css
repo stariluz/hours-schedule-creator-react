@@ -1,0 +1,33 @@
+.input__color__container{
+    position: relative;
+}
+.input__color__box{
+    width: 2rem;
+    height: 2rem;
+    outline: none;
+    border: 1px solid #dfdfdf;
+    background-color: white;
+    padding: 20%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input__color__color{
+    /* background: hsl(var(--color-hue),  var(--color-saturation), var(--color-lightness), var(--color-alpha)); */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.color__picker__popover{
+    top: calc(100% + 0.5rem);
+    position: absolute;
+    z-index: 10;
+}
+.color__picker__out{
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+}

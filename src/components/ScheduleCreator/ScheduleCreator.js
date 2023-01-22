@@ -26,8 +26,8 @@ export default class ScheduleCreator extends React.Component{
                     Array(1).fill({
                         color:{
                             h: 44,
-                            s: 91,
-                            l: 56
+                            s: .91,
+                            l: .56
                         },
                         name: "Sin nombre",
                         abbreviation: "S. N.",
@@ -48,7 +48,7 @@ export default class ScheduleCreator extends React.Component{
         this.setState({
             currentTime: newTime,
         });
-
+        console.log(this.state.history[this.state.currentTime]);
     }
     handleNextStep(){
         let newTime=this.state.currentTime+1;
@@ -122,15 +122,11 @@ export default class ScheduleCreator extends React.Component{
             },
             currentTime: currentTime+1,
         });
+        console.log(this.state);
     }
     handleCourseChangeOutHistory(index, field, value){
-        const currentTime=this.state.currentTime;
-        const history=this.state.history.slice(0,currentTime+1);
-        
-        const currentIndexCourses=history[currentTime].currentIndexCourses;
+        const currentIndexCourses=this.state.history[curthis.state.currentTime].currentIndexCourses;
         const coursesHistoryMap=this.state.historyMap.courses.slice(0,currentIndexCourses+1);
-
-        const currentIndexHoursMap=history[currentTime].currentIndexHoursMap;
 
         const updatedCourse=produce(coursesHistoryMap[currentIndexCourses],(coursesDraft)=>{
             coursesDraft[index][field]=value;
@@ -160,8 +156,8 @@ export default class ScheduleCreator extends React.Component{
                 {
                     color: {
                         h: 0,
-                        s: 50,
-                        l: 100,
+                        s: .50,
+                        l: 1,
                     },
                     name: "",
                     abbreviation: "",
