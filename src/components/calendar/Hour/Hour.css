@@ -42,13 +42,13 @@
 
     z-index: 2;
     border-radius: 5px;
-    /* color: hsl(0, 52%, 31%); */
+    /* color: #ffffff; */
     background: hsl(var(--hour-bg-hue),  var(--hour-bg-saturation), var(--hour-bg-lightness));
     background: linear-gradient(-10deg,
         hsl(var(--hour-bg-hue), 0%, 45%) -70%,
         /* hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 25%, */
         hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 10%,
-        hsl(var(--hour-bg-hue), 100%, 85%) 150%
+        hsl(var(--hour-bg-hue), 0%, 100%) 150%
     );
 
 }

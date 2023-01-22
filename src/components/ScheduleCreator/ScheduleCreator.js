@@ -95,7 +95,6 @@ export default class ScheduleCreator extends React.Component{
     }
     
     handleCourseChange(index, field, value){
-        // console.log(index,field,value);
         const currentTime=this.state.currentTime;
         const history=this.state.history.slice(0,currentTime+1);
         
@@ -124,6 +123,28 @@ export default class ScheduleCreator extends React.Component{
             currentTime: currentTime+1,
         });
     }
+    handleCourseChangeOutHistory(index, field, value){
+        const currentTime=this.state.currentTime;
+        const history=this.state.history.slice(0,currentTime+1);
+        
+        const currentIndexCourses=history[currentTime].currentIndexCourses;
+        const coursesHistoryMap=this.state.historyMap.courses.slice(0,currentIndexCourses+1);
+
+        const currentIndexHoursMap=history[currentTime].currentIndexHoursMap;
+
+        const updatedCourse=produce(coursesHistoryMap[currentIndexCourses],(coursesDraft)=>{
+            coursesDraft[index][field]=value;
+        })
+        coursesHistoryMap[currentIndexCourses]=updatedCourse;
+        
+        this.setState({
+            ...this.state,
+            historyMap:{
+                ...this.state.historyMap,
+                courses: coursesHistoryMap,
+            },
+        });
+    }
     handleAddCourse(){
         const currentTime=this.state.currentTime;
         const history=this.state.history.slice(0,currentTime+1);
@@ -137,7 +158,11 @@ export default class ScheduleCreator extends React.Component{
         const updatedCourses=produce(coursesHistoryMap[currentIndexCourses], (coursesDraft)=>{
             coursesDraft.push(
                 {
-                    color:"#FFFFFF",
+                    color: {
+                        h: 0,
+                        s: 50,
+                        l: 100,
+                    },
                     name: "",
                     abbreviation: "",
                     professor: "",
@@ -210,6 +235,7 @@ export default class ScheduleCreator extends React.Component{
                 />
                 <CoursesManagement
                     courses={currentCourses}
+                    onCourseChangeOutHistory={(index,type,value)=>this.handleCourseChangeOutHistory(index,type,value)}
                     onCourseChange={(index,type,value)=>this.handleCourseChange(index,type,value)}
                     onAddCourse={()=>this.handleAddCourse()}
                     onRemoveCourse={(index)=>this.handleRemoveCourse(index)}

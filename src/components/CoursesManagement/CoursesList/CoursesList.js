@@ -11,6 +11,7 @@ export default class CoursesList extends React.Component{
             return <CourseRow
                 {...row}
                 key={index}
+                onCourseChangeOutHistory={(type,value)=>this.props.onCourseChangeOutHistory(index,type,value)}
                 onCourseChange={(type,value)=>this.props.onCourseChange(index,type,value)}
                 onRemoveCourse={()=>this.props.onRemoveCourse(index)}
             />

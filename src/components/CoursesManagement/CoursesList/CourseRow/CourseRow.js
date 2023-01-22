@@ -2,8 +2,25 @@ import React from "react";
 import "./CourseRow.css";
 
 export default class CourseRow extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            'color': HSLToHex(props.color.h, props.color.s, props.color.l),
+        }
+    }
     handleInput(type,event){
         this.props.onCourseChange(type,event.target.value);
+    }
+    handleColorChange(event){
+        // console.log(HexToHSL(event.target.value));
+        this.setState({
+            'color': event.target.value,
+        });
+        this.props.onCourseChangeOutHistory("color",HexToHSL(event.target.value))
+    }
+    onNewColorSelected(event){
+        console.log("COLOR:", event);
+        this.props.onCourseChange("color",HexToHSL(event.target.value))
     }
     render(){
         return(
@@ -11,11 +28,11 @@ export default class CourseRow extends React.Component{
                 <div className="course-row__color">
                     <input type="color"
                         placeholder="Color"
-                        onChange={(event)=>{
-                            console.log(HexToHSL(event.target.value));
-                            this.props.onCourseChange("color",HexToHSL(event.target.value))
-                        }}
-                        value={ HSLToHex(this.props.color.h,this.props.color.s,this.props.color.l) }
+                        onChange={(event)=>this.handleColorChange(event)}
+                        onBlur={(event)=>this.onNewColorSelected(event)}
+                        onKeyDown={(event)=>this.onNewColorSelected(event)}
+                        // onInput={(event)=>this.onNewColorSelected(event)}
+                        value={ this.state.color }
                     />
                 </div>
                 <div className="course-row__name">

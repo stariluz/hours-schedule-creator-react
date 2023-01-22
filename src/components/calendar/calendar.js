@@ -60,7 +60,7 @@ class Calendar extends React.Component{
 
             });
         }
-        console.log("DEV - hoursClass:",hoursClass);
+        // console.log("DEV - hoursClass:",hoursClass);
         hoursClass=hoursClass.map((hourClass)=>{
             return(
                 <HourClass
@@ -107,7 +107,7 @@ class Calendar extends React.Component{
             { daySpaces }
         </div>
         
-        console.log("DEV - - - - - - - - - - - -:",);
+        // console.log("DEV - - - - - - - - - - - -:",);
         return weekComponent;
     }
     render(){
