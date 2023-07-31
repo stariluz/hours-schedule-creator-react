@@ -5,7 +5,7 @@ export default class InputColorPicker extends React.Component{
     
     constructor(props){
         super(props);
-        console.log(this.props.color);
+        // console.log(this.props.color);
         this.state={
             colorPickerVisible: false,
         }
