@@ -1,12 +1,18 @@
 .calendar{
-    border: 2px solid black;
-
+    /* border: 2px solid black; */
 }
 .week{
     display: grid;
     grid-template-columns: repeat(8,5rem);
     /* justify-content: center; */
     /* align-items: center; */
+}
+.day__name{
+    font-size: 0.75rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+    line-height: 1;
 }
 .day__content{
     position: relative;
@@ -17,8 +23,20 @@
     grid-auto-rows: 2rem;
     position: relative;
     /* grid-template-rows: repeat(19, 2rem); */
-    /* justify-content: center; */
-    /* align-items: center; */
+}
+.hours__time{
+    align-items: center;
+    text-align: end;
+    font-size: 0.75rem;
+    font-weight: 400;
+    padding-right: 0.5rem;
+    margin-top: calc(0.75rem + 0.5rem );
+    position: relative;
+}
+.hour__time{
+    line-height: 1;
+    top: -50%;
+    position: relative;
 }
 
 .day__classes{

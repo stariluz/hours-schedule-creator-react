@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './App.css'
+import './app.css'
 import ScheduleCreator from './ScheduleCreator/ScheduleCreator';
 
 // enableMapSet(); // Immer

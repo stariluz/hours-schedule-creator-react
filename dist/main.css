@@ -1,0 +1,205 @@
+/*!**************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/app.css ***!
+  \**************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap);
+/*!******************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/app.css (1) ***!
+  \******************************************************************************/
+html,body,#root{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+* {
+    font-family: var(--main-font);
+}
+:root {
+    --main-font: 'Inter', sans-serif;
+    font-size: 1rem;
+
+}
+.page{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.page__content {
+    margin-top: 5vh;
+    max-width: 700px;
+    /* height: 1rem;
+    background-color: blue; */
+}
+/*!*****************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/calendar/Hour/Hour.css ***!
+  \*****************************************************************************************/
+.hour__container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.hour__space{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: none;
+    /* background-color: transparent; */
+    /* background-color: rgb(250, 250, 250); */
+    border: 2px dashed rgb(205, 205, 205);
+    border-bottom: 0;
+    border-right: 0;
+    box-sizing: border-box;
+}
+.hour__space--class{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+    border-bottom: 0;
+    border-right: 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.hour__class{
+    --hour-row-start: 1;
+    --hour-row-length: 1;
+    box-sizing: border-box;
+    position: relative;
+    border: none;
+    width: 100%;
+    grid-row-start: var(--hour-row-start);
+    grid-row-end: span var(--hour-row-length);
+    /* height: calc((100% + 2px) * var(--hour-row-length) - 2px );
+    margin-bottom: calc(100% * var(--hour-row-length) - 100% ); */
+
+    z-index: 2;
+    border-radius: 5px;
+    /* color: #ffffff; */
+    background: hsl(var(--hour-bg-hue),  var(--hour-bg-saturation), var(--hour-bg-lightness));
+    background: linear-gradient(-10deg,
+        hsl(var(--hour-bg-hue), 0%, 45%) -70%,
+        /* hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 25%, */
+        hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 10%,
+        hsl(var(--hour-bg-hue), 0%, 100%) 150%
+    );
+
+}
+/*!****************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/calendar/Calendar.css ***!
+  \****************************************************************************************/
+.calendar{
+    /* border: 2px solid black; */
+}
+.week{
+    display: grid;
+    grid-template-columns: repeat(8,5rem);
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+.day__content{
+    position: relative;
+}
+.day__hours,
+.hours__time{
+    display: grid;
+    grid-auto-rows: 2rem;
+    position: relative;
+    /* grid-template-rows: repeat(19, 2rem); */
+}
+.hours__time{
+    align-items: center;
+    text-align: end;
+    top: 6px;
+    font-size: 0.75rem!important;
+    font-weight: 700;
+}
+
+.day__classes{
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-auto-rows: 2rem;
+    grid-template-rows: repeat(18, 2rem);
+    position: absolute;
+    bottom: 0;
+}
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/CoursesManagement/CoursesList/CourseRow/CourseRow.css ***!
+  \************************************************************************************************************************/
+.course-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/FormsComponents/InputColorPicker/InputColorPicker.css ***!
+  \************************************************************************************************************************/
+.input__color__container{
+    position: relative;
+}
+.input__color__box{
+    width: 2rem;
+    height: 2rem;
+    outline: none;
+    border: 1px solid #dfdfdf;
+    background-color: white;
+    padding: 20%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input__color__color{
+    /* background: hsl(var(--color-hue),  var(--color-saturation), var(--color-lightness), var(--color-alpha)); */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.color__picker__popover{
+    top: calc(100% + 0.5rem);
+    position: absolute;
+    z-index: 10;
+}
+.color__picker__out{
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+}
+/*!*****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/CoursesManagement/CoursesList/CourseRow/coursesListAddCourseButton.css ***!
+  \*****************************************************************************************************************************************/
+.course-button__add{
+    display: flex;
+    width: 100%;
+}
+.course-button__add>*{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+/*!****************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/CoursesManagement/CoursesList/CoursesList.css ***!
+  \****************************************************************************************************************/
+.courses-list{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+/*!**********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/CoursesManagement/COursesManagement.css ***!
+  \**********************************************************************************************************/
+

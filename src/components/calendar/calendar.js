@@ -1,6 +1,6 @@
 import React from 'react';
 import { Hour, HourClass, HourSpace } from './Hour/Hour';
-import "./Calendar.css";
+import "./calendar.css";
 
 export let FIRST_HOUR=6;
 const days=['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado','Domingo'];
@@ -61,6 +61,9 @@ class Calendar extends React.Component{
             });
         }
         // console.log("DEV - hoursClass:",hoursClass);
+        if(courses){
+            console.log(courses);
+        }
         hoursClass=hoursClass.map((hourClass)=>{
             return(
                 <HourClass
@@ -101,7 +104,6 @@ class Calendar extends React.Component{
         let weekComponent=
         <div className="week">
             <div className="hours__time">
-                <div>Hora</div>
                 { hoursTime }
             </div>
             { daySpaces }

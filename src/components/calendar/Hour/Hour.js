@@ -27,7 +27,6 @@ export class HourSpace extends React.Component{
 export class HourClass extends React.Component{
     render(){
         return(
-            
             // <div className="hour__space hour__space--fill"
             //     onClick={
             //         ()=>this.props.onClick()
