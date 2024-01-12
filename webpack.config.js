@@ -8,7 +8,7 @@ module.exports = env => {
   return {
     plugins: [
       new MiniCssExtractPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
+      // new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
         template: "./src/index.html",
       }),
