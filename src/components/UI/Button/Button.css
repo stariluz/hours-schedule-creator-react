@@ -1,0 +1,36 @@
+.btn-secondary {
+    --btn-color: #CCCCCC;
+    --btn-bg-hover: #F3F3F3;
+    --btn-bg-active: #f6eef6;
+}
+.button{
+    border-radius: 4px;
+    padding: 0.25rem;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:  var(--btn-bg-hover, #CCCCCC);
+}
+.button:hover{
+    background-color: var(--btn-bg-hover, #F3F3F3);
+    border: none;
+}
+.button:active{
+    background-color: var(--btn-bg-active, #f6eef6);
+    border: none;
+}
+.button.active{
+    background-color: var(--btn-bg-active, #f6eef6);
+}
+.button-vertical{
+    position: relative;
+    height: 100%;
+    width: fit-content;
+}
+.button-horizontal{
+    position: relative;
+    width: 100%;
+    height: fit-content;
+}
