@@ -4,16 +4,17 @@ import CourseRow from "./CourseRow/CourseRow";
 import CoursesListAddCourseButton from "./CourseRow/CoursesListAddCourseButton";
 
 import "./CoursesList.css";
+import CourseCard from "./CourseCard/CourseCard";
 
 export default class CoursesList extends React.Component{
     renderRows(){
         const rows=this.props.courses.map((row,index)=>{
-            return <CourseRow
+            return <CourseCard
                 {...row}
                 key={index}
-                onCourseChangeOutHistory={(type,value)=>this.props.onCourseChangeOutHistory(index,type,value)}
-                onCourseChange={(type,value)=>this.props.onCourseChange(index,type,value)}
-                onRemoveCourse={()=>this.props.onRemoveCourse(index)}
+                onInputChange={(type,value)=>this.props.onCourseChangeOutHistory(index,type,value)}
+                onInputChangeEnds={(type,value)=>this.props.onCourseChange(index,type,value)}
+                onRemove={()=>this.props.onRemoveCourse(index)}
             />
         })
         return rows;

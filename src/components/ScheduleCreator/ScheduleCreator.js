@@ -5,6 +5,34 @@ import { produce } from 'immer';
 import CoursesManagement from "../CoursesManagement/CoursesManagement";
 
 let amountOfClasses = 5;
+const defaultCourse={
+    save: {
+        color: {
+            h: 44,
+            s: .91,
+            l: .56
+        },
+        text: {
+            h: 55,
+            s: 0,
+            l: 1
+        },
+    },
+    color: {
+        h: 44,
+        s: .91,
+        l: .56
+    },
+    text: {
+        h: 55,
+        s: 0,
+        l: 1
+    },
+    name: "Sin nombre",
+    professor: "",
+    classroom: "",
+    groupName: "",
+}
 
 export default class ScheduleCreator extends React.Component {
     constructor(props) {
@@ -24,23 +52,7 @@ export default class ScheduleCreator extends React.Component {
                 ],
                 courses: [
                     [{
-                        save: {
-                            color: {
-                                h: 44,
-                                s: .91,
-                                l: .56
-                            },
-                        },
-                        color: {
-                            h: 44,
-                            s: .91,
-                            l: .56
-                        },
-                        name: "Sin nombre",
-                        abbreviation: "S. N.",
-                        professor: "",
-                        numberOfHours: 0,
-                        hasProfessor: false,
+                        ...defaultCourse
                     }]
                 ],
             },
@@ -178,25 +190,7 @@ export default class ScheduleCreator extends React.Component {
 
         const updatedCourses = produce(coursesHistoryMap[currentIndexCourses], (coursesDraft) => {
             coursesDraft.push(
-                {
-                    save: {
-                        color: {
-                            h: 0,
-                            s: .50,
-                            l: 1,
-                        },
-                    },
-                    color: {
-                        h: 0,
-                        s: .50,
-                        l: 1,
-                    },
-                    name: "",
-                    abbreviation: "",
-                    professor: "",
-                    numberOfHours: 0,
-                    hasProfessor: false,
-                }
+                {...defaultCourse}
             );
         });
         coursesHistoryMap.push(updatedCourses);

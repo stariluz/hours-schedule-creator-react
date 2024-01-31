@@ -5,6 +5,11 @@ import InputColorBgAndText from "../../../FormsComponents/InputColorBgAndText/In
 import "./CourseCard.css";
 
 const CourseCard = (props) => {
+  const onRemove = () => {
+    if (props.onRemove) {
+      props.onRemove();
+    }
+  }
   const onInput = (type, event) => {
     if (props.onInputChange) {
       props.onInputChange(type, event.target.value);
@@ -35,7 +40,7 @@ const CourseCard = (props) => {
         </Button>
         <Button verticalButton={true}
           onClick={() => {
-            props.onRemoveCourse()
+            onRemove()
           }}
         >
           <IconTrash></IconTrash>
@@ -46,8 +51,8 @@ const CourseCard = (props) => {
           color={{
             hsl: props.color
           }}
-        // onChange={(color) => onColorChange(color)}
-        // onChangeComplete={(color) => onColorChangeEnds(color)}
+          onChange={(color) => onColorChange(color)}
+          onChangeComplete={(color) => onColorChangeEnds(color)}
         />
       </div>
       <div className="course-form">
@@ -55,32 +60,32 @@ const CourseCard = (props) => {
           type="text"
           className="form-input"
           placeholder="Nombre"
-          onChange={(event) => { handleInput("name", event) }}
+          onChange={(event) => { onInputChangeEnds("name", event) }}
           value={props.name}
         />
         <input
           type="text"
           className="form-input"
-          placeholder="Profesor"
-          onChange={(event) => { handleInput("professor", event) }}
+          placeholder="Professor"
+          onChange={(event) => { onInputChangeEnds("professor", event) }}
           value={props.professor}
         />
         <div className="form-controls-inline">
-        <input
-          type="text"
-          className="form-input"
-          placeholder="Group name"
-          onChange={(event) => { handleInput("groupName", event) }}
-          value={props.professor}
-        />
-          
-        <input
-          type="text"
-          className="form-input"
-          placeholder="Classroom"
-          onChange={(event) => { handleInput("classroom", event) }}
-          value={props.professor}
-        />
+          <input
+            type="text"
+            className="form-input"
+            placeholder="Group name"
+            onChange={(event) => { onInputChangeEnds("groupName", event) }}
+            value={props.professor}
+          />
+
+          <input
+            type="text"
+            className="form-input"
+            placeholder="Classroom"
+            onChange={(event) => { onInputChangeEnds("classroom", event) }}
+            value={props.professor}
+          />
         </div>
       </div>
     </article>
