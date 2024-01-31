@@ -8,6 +8,7 @@ html,body,#root{
 }
 * {
     font-family: var(--main-font);
+    box-sizing: border-box;
 }
 :root {
     --main-font: 'Inter', sans-serif;

@@ -65,6 +65,7 @@ const CourseCard = (props) => {
           onChange={(event) => { handleInput("professor", event) }}
           value={props.professor}
         />
+        <div className="form-controls-inline">
         <input
           type="text"
           className="form-input"
@@ -72,6 +73,15 @@ const CourseCard = (props) => {
           onChange={(event) => { handleInput("groupName", event) }}
           value={props.professor}
         />
+          
+        <input
+          type="text"
+          className="form-input"
+          placeholder="Classroom"
+          onChange={(event) => { handleInput("classroom", event) }}
+          value={props.professor}
+        />
+        </div>
       </div>
     </article>
   );

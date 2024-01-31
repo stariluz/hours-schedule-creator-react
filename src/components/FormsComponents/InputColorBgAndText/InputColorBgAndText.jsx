@@ -70,10 +70,16 @@ const InputColorBgAndText = (props) => {
             backgroundColor: style.color,
           }}
         ></div>
-
+        {/* 
         <IconTextColor className={"input__color__text " + style.text} style={{
-            color: style.text,
-          }}></IconTextColor>
+          color: style.text,
+        }}></IconTextColor> */}
+
+        <span className="input__color__text" style={{
+          '--input-color-text-color': style.text,
+        }}>
+          A
+        </span>
       </button>
       {colorPickerVisible ?
         <div className="color__picker__popover">
@@ -83,16 +89,20 @@ const InputColorBgAndText = (props) => {
           </div>
           <header className="color__picker__controls">
             <Button
+              className="btn-secondary"
               horizontalButton={true}
               onClick={() => openColorPicker(1)}
               active={colorPickerVisible == 1}>
               <IconPaintFilled></IconPaintFilled>
             </Button>
             <Button
+              className="btn-secondary"
               horizontalButton={true}
               onClick={() => openColorPicker(2)}
               active={colorPickerVisible == 2}>
-              <IconTextColor></IconTextColor>
+              <span className="input__color__text">
+                A
+              </span>
             </Button>
           </header>
           {colorPickerVisible == 1 ?
