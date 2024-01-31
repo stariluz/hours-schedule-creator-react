@@ -3,15 +3,20 @@
     --btn-bg-hover: #F3F3F3;
     --btn-bg-active: #f6eef6;
 }
+
 .button{
     border-radius: 4px;
-    padding: 0.25rem;
+    padding: 8px;
     background-color: transparent;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     color:  var(--btn-bg-hover, #CCCCCC);
+}
+.button .tabler-icon{
+    width: 1rem;
+    height: 1rem;
 }
 .button:hover{
     background-color: var(--btn-bg-hover, #F3F3F3);
