@@ -51,13 +51,13 @@ const RenderRows = (courses) => {
     }
     
     const rows=courses.map((row,index)=>{
-        return <CourseRow
-            {...row}
-            key={index}
-            onCourseChangeOutHistory={(field,value)=>onCourseChangeOutHistory(index,field,value)}
-            onCourseChange={(field,value)=>onCourseChange(index,field,value)}
-            onRemoveCourse={()=>onRemoveCourse(index)}
-        />
+        return <CourseCard
+        {...row}
+        key={index}
+        onInputChange={(type,value)=>onCourseChangeOutHistory(index,type,value)}
+        onInputChangeEnds={(type,value)=>onCourseChange(index,type,value)}
+        onRemove={()=>onRemoveCourse(index)}
+    />
     })
     return rows;
 }

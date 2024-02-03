@@ -4,6 +4,10 @@ import "./InputColorBgAndText.css";
 import { useState } from "react";
 import { IconBucket, IconPaintFilled, IconTextColor } from "@tabler/icons-react";
 import Button from "../../UI/Button/Button";
+
+const hslToCssColor = (color) => {
+  return `hsl(${color.h},  ${color.s * 100}%, ${color.l * 100}%)`;
+}
 const InputColorBgAndText = (props) => {
   const [colorPickerVisible, setColorPickerVisible] = useState(0);
   const [style, setStyle] = useState({
@@ -11,10 +15,7 @@ const InputColorBgAndText = (props) => {
     text: props.text?.hsl ? hslToCssColor(props.text.hsl) : "blue",
   });
 
-  const hslToCssColor = (color) => {
-    return `hsl(${color.h},  ${color.s * 100}%, ${color.l * 100}%)`;
-  }
-  const handleColorChange = (color) => {
+  const onColorChange = (color) => {
     if (props.onColorChange) {
       props.onColorChange(color);
     } else {
@@ -24,7 +25,7 @@ const InputColorBgAndText = (props) => {
       });
     }
   }
-  const handleColorChangeComplete = (color) => {
+  const onColorChangeComplete = (color) => {
     if (props.onColorChange) {
       props.onColorChange(color);
     } else {
@@ -70,10 +71,16 @@ const InputColorBgAndText = (props) => {
             backgroundColor: style.color,
           }}
         ></div>
-
+        {/* 
         <IconTextColor className={"input__color__text " + style.text} style={{
-            color: style.text,
-          }}></IconTextColor>
+          color: style.text,
+        }}></IconTextColor> */}
+
+        <span className="input__color__text" style={{
+          '--input-color-text-color': style.text,
+        }}>
+          A
+        </span>
       </button>
       {colorPickerVisible ?
         <div className="color__picker__popover">
@@ -83,24 +90,28 @@ const InputColorBgAndText = (props) => {
           </div>
           <header className="color__picker__controls">
             <Button
+              className="btn-secondary"
               horizontalButton={true}
               onClick={() => openColorPicker(1)}
               active={colorPickerVisible == 1}>
               <IconPaintFilled></IconPaintFilled>
             </Button>
             <Button
+              className="btn-secondary"
               horizontalButton={true}
               onClick={() => openColorPicker(2)}
               active={colorPickerVisible == 2}>
-              <IconTextColor></IconTextColor>
+              <span className="input__color__text">
+                A
+              </span>
             </Button>
           </header>
           {colorPickerVisible == 1 ?
             <SketchPicker
               className="color__picker"
               color={style.color}
-              onChange={(color) => handleColorChange(color)}
-              onChangeComplete={(color) => handleColorChangeComplete(color)}
+              onChange={(color) => onColorChange(color)}
+              onChangeComplete={(color) => onColorChangeComplete(color)}
               disableAlpha={true}
               presetColors={[]}
             />

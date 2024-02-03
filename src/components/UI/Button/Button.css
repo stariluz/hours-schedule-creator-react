@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color:  var(--btn-bg-hover, #CCCCCC);
+    color:  var(--btn-color, #CCCCCC);
 }
 .button .tabler-icon{
     width: 1rem;

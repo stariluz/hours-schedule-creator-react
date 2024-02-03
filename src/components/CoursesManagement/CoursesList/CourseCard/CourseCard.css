@@ -25,13 +25,21 @@
     flex-direction: column;
     margin-left: 0.25rem;
     gap: 0.5rem;
+    width: 16rem;
 }
 .form-input{
     border: 1px solid #ececec;
-    background-color: 1px solid #f7f7f7;
+    background: #F4F4F4;
     border-radius: 4px;
     font-size: 1rem;
     padding: 0.25rem 0.5rem;
-    width: 16rem;
-    height: 1.5rem;
+    width: 100%;
+    height: 2rem;
+}
+.form-controls-inline{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
 }
