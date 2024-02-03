@@ -1,7 +1,7 @@
 import React from 'react'; // DEV
 
 import "./Hour.css";
-import { FIRST_HOUR } from '../calendar';
+import { FIRST_HOUR } from '../Calendar';
 
 export class Hour extends React.Component{
     render(){

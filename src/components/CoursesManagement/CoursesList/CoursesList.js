@@ -4,28 +4,61 @@ import CourseRow from "./CourseRow/CourseRow";
 import CoursesListAddCourseButton from "./CourseRow/CoursesListAddCourseButton";
 
 import "./CoursesList.css";
+import { useCurrentState, useSchedule, useScheduleDispatch } from "../../ScheduleCreator/ScheduleCreator";
 
-export default class CoursesList extends React.Component{
-    renderRows(){
-        const rows=this.props.courses.map((row,index)=>{
-            return <CourseRow
-                {...row}
-                key={index}
-                onCourseChangeOutHistory={(type,value)=>this.props.onCourseChangeOutHistory(index,type,value)}
-                onCourseChange={(type,value)=>this.props.onCourseChange(index,type,value)}
-                onRemoveCourse={()=>this.props.onRemoveCourse(index)}
+const CoursesList=()=>{
+    const scheduleDispatch = useScheduleDispatch();
+    const { courses } = useCurrentState();
+    
+    const onAddCourse = () => {
+        scheduleDispatch({
+            task: 'addCourse',
+        });
+    }
+    
+    return (
+        <div className="courses-list">
+            { RenderRows(courses) }
+            <CoursesListAddCourseButton
+                onClick={()=>onAddCourse()}
             />
-        })
-        return rows;
-    }
-    render(){
-        return (
-            <div className="courses-list">
-                { this.renderRows() }
-                <CoursesListAddCourseButton
-                    onClick={()=>this.props.onAddCourse()}
-                />
-            </div>
-        );
-    }
+        </div>
+    );
 }
+const RenderRows = (courses) => {
+    const scheduleDispatch = useScheduleDispatch();
+    const onCourseChangeOutHistory = (index,field,value) => {
+        scheduleDispatch({
+            task: 'courseChangeOutHistory',
+            index: index,
+            field: field,
+            value: value,
+        });
+    }
+    const onCourseChange = (index,field,value) => {
+        scheduleDispatch({
+            task: 'courseChange',
+            index: index,
+            field: field,
+            value: value,
+        });
+    }
+    const onRemoveCourse = (index) => {
+        scheduleDispatch({
+            task: 'removeCourse',
+            index: index,
+        });
+    }
+    
+    const rows=courses.map((row,index)=>{
+        return <CourseRow
+            {...row}
+            key={index}
+            onCourseChangeOutHistory={(field,value)=>onCourseChangeOutHistory(index,field,value)}
+            onCourseChange={(field,value)=>onCourseChange(index,field,value)}
+            onRemoveCourse={()=>onRemoveCourse(index)}
+        />
+    })
+    return rows;
+}
+export default CoursesList;

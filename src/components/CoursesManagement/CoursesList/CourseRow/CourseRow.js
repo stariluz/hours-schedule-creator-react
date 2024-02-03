@@ -3,82 +3,68 @@ import "./CourseRow.css";
 import { SketchPicker, PhotoshopPicker } from "react-color";
 import InputColorPicker from "../../../FormsComponents/InputColorPicker/InputColorPicker";
 
-export default class CourseRow extends React.Component {
-  constructor(props) {
-    super(props);
+const CourseRow = (props) => {
+  const onInput = (field, event) => {
+    if (props?.onCourseChange) {
+      props.onCourseChange(field, event.target.value);
+    }
   }
-  handleInput(type, event) {
-    this.props.onCourseChange(type, event.target.value);
-  }
-  handleColorChange(color) {
+  const onColorChange = (color) => {
     // console.log("FAST:", color.hsl);
-    this.props.onCourseChangeOutHistory("color", color.hsl)
+    if (props?.onCourseChangeOutHistory) {
+      props.onCourseChangeOutHistory("color", color.hsl)
+    }
   }
-  onNewColorSelected(color) {
+  const onNewColorSelected = (color) => {
     // console.log("COLOR:", color.hsl);
-    this.props.onCourseChange("color", color.hsl)
+    if (props?.onCourseChange) {
+      props.onCourseChange("color", color.hsl)
+    }
   }
-  render() {
-    return (
-      <div className="course-row">
-        <div className="course-row__color">
-          <InputColorPicker
-            color={{
-              hsl: this.props.color
-            }}
-            onChange={(color) => this.handleColorChange(color)}
-            onChangeComplete={(color) => this.onNewColorSelected(color)}
-          />
-        </div>
-        <div className="course-row__name">
-          <input type="text"
-            placeholder="Nombre"
-            onChange={(event) => { this.handleInput("name", event) }}
-            value={this.props.name}
-          />
-        </div>
-        <div className="course-row__abbreviation">
-          <input type="text"
-            placeholder="Abrebviación"
-            onChange={(event) => { this.handleInput("abbreviation", event) }}
-            value={this.props.abbreviation}
-          />
-        </div>
-        {
-          this.props.hasProfessor === false ?
-            <div className="course-row__professor--button">
-              <button
-                onClick={() => this.props.onCourseChange("hasProfessor", true)}
-              >
-                Add professor
-              </button>
-            </div>
-            :
-            <div className="course-row__professor">
-              <input type="text"
-                placeholder="Profesor"
-                onChange={(event) => { this.handleInput("professor", event) }}
-                value={this.props.professor}
-              />
-              <button
-                onClick={() => this.props.onCourseChange("hasProfessor", false)}
-              >
-                x
-              </button>
-            </div>
-        }
-        <div className="course-row__hours">
-          N.of.H: {this.props.numberOfHours}
-        </div>
-
-        <button
-          onClick={() => {
-            this.props.onRemoveCourse()
+  return (
+    <div className="course-row">
+      <div className="course-row__color">
+        <InputColorPicker
+          color={{
+            hsl: props.color
           }}
-        >
-          x
-        </button>
+          onChange={(color) => onColorChange(color)}
+          onChangeComplete={(color) => onNewColorSelected(color)}
+        />
       </div>
-    );
-  }
+      <div className="course-row__name">
+        <input type="text"
+          placeholder="Nombre"
+          onChange={(event) => { onInput("name", event) }}
+          value={props.name}
+        />
+      </div>
+      <div className="course-row__abbreviation">
+        <input type="text"
+          placeholder="Abrebviación"
+          onChange={(event) => { onInput("abbreviation", event) }}
+          value={props.abbreviation}
+        />
+      </div>
+      <div className="course-row__professor">
+        <input type="text"
+          placeholder="Profesor"
+          onChange={(event) => { onInput("professor", event) }}
+          value={props.professor}
+        />
+      </div>
+      <div className="course-row__hours">
+        N.of.H: {props.numberOfHours}
+      </div>
+
+      <button
+        onClick={() => {
+          props.onRemoveCourse()
+        }}
+      >
+        x
+      </button>
+    </div>
+  );
 }
+export default CourseRow;
