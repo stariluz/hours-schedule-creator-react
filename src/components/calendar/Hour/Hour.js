@@ -1,5 +1,6 @@
 import React from 'react'; // DEV
 
+import "../../UI/Colors/Colors.css"
 import "./Hour.css";
 import { FIRST_HOUR } from '../Calendar';
 
@@ -32,7 +33,7 @@ export class HourClass extends React.Component{
             //         ()=>this.props.onClick()
             //     }
             // >
-                <button className="hour__space hour__class"
+                <button className="hour__space hour__class custom-color custom-color-text"
                     
                     style={{
                         "--hour-row-start": `${this.props.time.hour-FIRST_HOUR+1}`,
@@ -40,9 +41,10 @@ export class HourClass extends React.Component{
                         "--hour-bg-hue": `${this.props.content.color.h}`,
                         "--hour-bg-saturation": `${this.props.content.color.s*100}%`,
                         "--hour-bg-lightness": `${this.props.content.color.l*100}%`,
+                        "--input-color-text-color": this.props.content.text,
                     }}
                 >
-                    { this.props.content.abbreviation }
+                    { this.props.content.name }
                 </button>
             // </div>
         );

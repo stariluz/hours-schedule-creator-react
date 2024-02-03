@@ -34,7 +34,7 @@ const CourseRow = (props) => {
       </div>
       <div className="course-row__name">
         <input type="text"
-          placeholder="Nombre"
+          placeholder="Name"
           onChange={(event) => { onInput("name", event) }}
           value={props.name}
         />

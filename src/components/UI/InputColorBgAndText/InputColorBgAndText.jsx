@@ -1,59 +1,72 @@
 import React from "react";
 import { SketchPicker } from "react-color";
 import "./InputColorBgAndText.css";
+import "../Colors/Colors.css";
 import { useState } from "react";
 import { IconBucket, IconPaintFilled, IconTextColor } from "@tabler/icons-react";
-import Button from "../../UI/Button/Button";
+import Button from "../Button/Button";
 
 const hslToCssColor = (color) => {
   return `hsl(${color.h},  ${color.s * 100}%, ${color.l * 100}%)`;
 }
-const InputColorBgAndText = (props) => {
+const InputColorBgAndText = ({
+  color = {
+    h: 341,
+    s: 1,
+    l: 0.75
+  },
+  text = "#000",
+  onChange,
+  onChangeComplete,
+  onTextChange,
+  onTextChangeComplete
+}) => {
   const [colorPickerVisible, setColorPickerVisible] = useState(0);
   const [style, setStyle] = useState({
-    color: props.color?.hsl ? hslToCssColor(props.color.hsl) : "red",
-    text: props.text?.hsl ? hslToCssColor(props.text.hsl) : "blue",
+    color: color,
+    text: text,
   });
+  console.log(color, text);
 
-  const onColorChange = (color) => {
-    if (props.onColorChange) {
-      props.onColorChange(color);
-    } else {
-      setStyle({
-        ...style,
-        'color': color.hex
-      });
+  const onChangeEvent = (color) => {
+    if (onChange) {
+      onChange(color);
     }
+
+    setStyle({
+      ...style,
+      'color': color.hsl
+    });
   }
-  const onColorChangeComplete = (color) => {
-    if (props.onColorChange) {
-      props.onColorChange(color);
-    } else {
-      setStyle({
-        ...style,
-        'color': color.hex
-      });
+  const onChangeCompleteEvent = (color) => {
+    if (onChangeComplete) {
+      onChangeComplete(color);
     }
+
+    setStyle({
+      ...style,
+      'color': color.hsl
+    });
   }
-  const handleTextChange = (color) => {
-    if (props.onTextChange) {
-      props.onTextChange(color);
-    } else {
-      setStyle({
-        ...style,
-        'text': color.hex
-      });
+  const onTextChangeEvent = (color) => {
+    if (onTextChange) {
+      onTextChange(color);
     }
+
+    setStyle({
+      ...style,
+      'text': color.hex
+    });
   }
-  const handleTextChangeComplete = (color) => {
-    if (props.onTextChangeComplete) {
-      props.onTextChangeComplete(color);
-    } else {
-      setStyle({
-        ...style,
-        'text': color.hex
-      });
+  const onTextChangeCompleteEvent = (color) => {
+    if (onTextChangeComplete) {
+      onTextChangeComplete(color);
     }
+
+    setStyle({
+      ...style,
+      'text': color.hex
+    });
   }
   const openColorPicker = (index) => {
     setColorPickerVisible(index);
@@ -66,18 +79,20 @@ const InputColorBgAndText = (props) => {
       <button className="input__color__box"
         onClick={() => openColorPicker(1)}
       >
-        <div className={"input__color__color " + style.color}
+        <div className={"input__color__color custom-color"}
           style={{
-            backgroundColor: style.color,
+            "--hour-bg-hue": `${color.h}`,
+            "--hour-bg-saturation": `${color.s * 100}%`,
+            "--hour-bg-lightness": `${color.l * 100}%`,
           }}
         ></div>
         {/* 
-        <IconTextColor className={"input__color__text " + style.text} style={{
-          color: style.text,
+        <IconTextColor className={"input__color__text " + text} style={{
+          color: text,
         }}></IconTextColor> */}
 
-        <span className="input__color__text" style={{
-          '--input-color-text-color': style.text,
+        <span className="input__color__text custom-color-text" style={{
+          '--input-color-text-color': text,
         }}>
           A
         </span>
@@ -109,9 +124,9 @@ const InputColorBgAndText = (props) => {
           {colorPickerVisible == 1 ?
             <SketchPicker
               className="color__picker"
-              color={style.color}
-              onChange={(color) => onColorChange(color)}
-              onChangeComplete={(color) => onColorChangeComplete(color)}
+              color={color}
+              onChange={(color) => onChangeEvent(color)}
+              onChangeComplete={(color) => onChangeCompleteEvent(color)}
               disableAlpha={true}
               presetColors={[]}
             />
@@ -120,9 +135,9 @@ const InputColorBgAndText = (props) => {
           {colorPickerVisible == 2 ?
             <SketchPicker
               className="color__picker"
-              color={style.text}
-              onChange={(color) => handleTextChange(color)}
-              onChangeComplete={(color) => handleTextChangeComplete(color)}
+              color={text}
+              onChange={(color) => onTextChangeEvent(color)}
+              onChangeComplete={(color) => onTextChangeCompleteEvent(color)}
               disableAlpha={true}
               presetColors={[]}
             />

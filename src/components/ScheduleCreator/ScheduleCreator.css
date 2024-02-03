@@ -1,0 +1,16 @@
+.history{
+  width: 100%;
+  background-color: rgb(246, 246, 246);
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+.playground{
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+
+}
+.courses-management{
+  padding: 1rem;
+}

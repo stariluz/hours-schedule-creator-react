@@ -8,7 +8,7 @@ export default class CoursesListAddCourseButton extends React.Component{
                 <button
                     onClick={()=>this.props.onClick()}
                 >
-                    Agregar curso
+                    + Add course
                 </button>
             </div>
         );

@@ -67,10 +67,7 @@ const Calendar = () => {
 
             });
         }
-        // console.log("DEV - hoursClass:",hoursClass);
-        if (courses) {
-            console.log(courses);
-        }
+        
         hoursClass = hoursClass.map((hourClass) => {
             return (
                 <HourClass

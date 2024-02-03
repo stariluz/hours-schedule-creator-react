@@ -1,0 +1,16 @@
+.custom-color{
+  --hour-bg-hue:0;
+  --hour-bg-saturation:0;
+  --hour-bg-lightness:0.67;
+  background: hsl(var(--hour-bg-hue),  var(--hour-bg-saturation), var(--hour-bg-lightness)) !important;
+  background: linear-gradient(-10deg,
+      hsl(var(--hour-bg-hue), 0%, 45%) -70%,
+      /* hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 25%, */
+      hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 10%,
+      hsl(var(--hour-bg-hue), 0%, 100%) 150%
+  ) !important;
+}
+.custom-color-text{
+  --input-color-text-color: #000000;
+  color: var(--input-color-text-color) !important;
+}

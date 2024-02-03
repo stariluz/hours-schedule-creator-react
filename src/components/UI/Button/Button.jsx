@@ -1,7 +1,6 @@
 import React from "react";
 import './Button.css'
 const Button = ({ children, verticalButton, horizontalButton, active, onClick, className }) => {
-    console.log(active);
     const onClickEvent = (event) => {
         if (onClick) {
             onClick(event);

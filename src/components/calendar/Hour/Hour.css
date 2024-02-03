@@ -49,16 +49,8 @@
 
     z-index: 2;
     border-radius: 4px;
-    color: #ffffff;
-    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.8);
+    /* color: #ffffff; */
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.35);
     font-weight: 600;
     font-size: 0.75rem;
-    background: hsl(var(--hour-bg-hue),  var(--hour-bg-saturation), var(--hour-bg-lightness));
-    background: linear-gradient(-10deg,
-        hsl(var(--hour-bg-hue), 0%, 45%) -70%,
-        /* hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 25%, */
-        hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 10%,
-        hsl(var(--hour-bg-hue), 0%, 100%) 150%
-    );
-
 }

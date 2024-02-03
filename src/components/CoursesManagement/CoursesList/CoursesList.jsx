@@ -1,33 +1,32 @@
-import produce from "immer";
 import React from "react";
-import CourseRow from "./CourseRow/CourseRow";
 import CoursesListAddCourseButton from "./CourseRow/CoursesListAddCourseButton";
 
 import "./CoursesList.css";
 import { useCurrentState, useSchedule, useScheduleDispatch } from "../../ScheduleCreator/ScheduleCreator";
+import CourseCard from "./CourseCard/CourseCard";
 
-const CoursesList=()=>{
+const CoursesList = () => {
     const scheduleDispatch = useScheduleDispatch();
-    const { courses } = useCurrentState();
-    
+
     const onAddCourse = () => {
         scheduleDispatch({
             task: 'addCourse',
         });
     }
-    
+
     return (
         <div className="courses-list">
-            { RenderRows(courses) }
+            {RenderRows()}
             <CoursesListAddCourseButton
-                onClick={()=>onAddCourse()}
+                onClick={() => onAddCourse()}
             />
         </div>
     );
 }
-const RenderRows = (courses) => {
+const RenderRows = () => {
+    const { courses } = useCurrentState();
     const scheduleDispatch = useScheduleDispatch();
-    const onCourseChangeOutHistory = (index,field,value) => {
+    const onCourseChangeOutHistory = (index, field, value) => {
         scheduleDispatch({
             task: 'courseChangeOutHistory',
             index: index,
@@ -35,7 +34,7 @@ const RenderRows = (courses) => {
             value: value,
         });
     }
-    const onCourseChange = (index,field,value) => {
+    const onCourseChange = (index, field, value) => {
         scheduleDispatch({
             task: 'courseChange',
             index: index,
@@ -49,15 +48,15 @@ const RenderRows = (courses) => {
             index: index,
         });
     }
-    
-    const rows=courses.map((row,index)=>{
+
+    const rows = courses.map((row, index) => {
         return <CourseCard
-        {...row}
-        key={index}
-        onInputChange={(type,value)=>onCourseChangeOutHistory(index,type,value)}
-        onInputChangeEnds={(type,value)=>onCourseChange(index,type,value)}
-        onRemove={()=>onRemoveCourse(index)}
-    />
+            {...row}
+            key={index}
+            onInputChange={(field, value) => onCourseChangeOutHistory(index, field, value)}
+            onInputChangeEnds={(field, value) => onCourseChange(index, field, value)}
+            onRemove={() => onRemoveCourse(index)}
+        />
     })
     return rows;
 }

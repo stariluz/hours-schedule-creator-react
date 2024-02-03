@@ -36,7 +36,6 @@
 
 .input__color-bg-text .input__color__text {
     --input-color-text-color: var(--btn-color);
-    color: var(--input-color-text-color, var(--btn-color));
     /* background: hsl(var(--color-hue),  var(--color-saturation), var(--color-lightness), var(--color-alpha)); */
     width: fit-content;
     height: fit-content;
@@ -54,7 +53,7 @@
 
 .input__color__text::after {
     content: "";
-    background-color: var(--input-color-text-color,  var(--btn-color));;
+    background-color: var(--input-color-text-color,  var(--btn-color));
     height: 3px;
     width: 120%;
     border-radius: 0;
@@ -88,6 +87,16 @@
     border-radius: 4px 4px 0px 0px !important;
     box-shadow: none !important;
     border: none !important;
+}
+.color__picker>:first-child{
+    border-radius: 4px;
+}
+.color__picker .hue-horizontal{
+    border-radius: 2px;
+}
+.color__picker input{
+    width: 100%!important;
+    border-radius: 4px;
 }
 
 .color__picker__controls {
