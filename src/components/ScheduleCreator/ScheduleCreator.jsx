@@ -278,38 +278,30 @@ const handleRemoveCourse = (state, index) => {
 
 
 const defaultState = {
-    currentTime: 0,
-    history: [
-        {
-            change: "Start of the file",
-            currentIndexHoursMap: 0,
-            currentIndexCourses: 0,
-        }
-    ],
-    historyMap: {
-        hoursMap: [
-            Array(7).fill(Array(24).fill(0))
-        ],
-        courses: [
-            [{
-                save: {
-                    color: {
-                        h: 44,
-                        s: .91,
-                        l: .56
-                    },
-                },
-                color: {
-                    h: 44,
-                    s: .91,
-                    l: .56
-                },
-                name: "Sin nombre",
-                abbreviation: "S. N.",
-                professor: "",
-                numberOfHours: 0,
-                hasProfessor: false,
-            }]
-        ],
+    save: {
+        color: {
+            h: 44,
+            s: .91,
+            l: .56
+        },
+        text: {
+            h: 55,
+            s: 0,
+            l: 1
+        },
     },
+    color: {
+        h: 44,
+        s: .91,
+        l: .56
+    },
+    text: {
+        h: 55,
+        s: 0,
+        l: 1
+    },
+    name: "Sin nombre",
+    professor: "",
+    classroom: "",
+    groupName: "",
 }
