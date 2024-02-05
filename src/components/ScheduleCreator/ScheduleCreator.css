@@ -1,16 +1,15 @@
 .history{
   width: 100%;
-  background-color: rgb(246, 246, 246);
-  margin-bottom: 1rem;
+  background-color: #CCCCCC;
+  /* margin-bottom: 0.5rem; */
   padding: 0.5rem;
   display: flex;
   justify-content: center;
 }
 .playground{
   display: grid;
-  grid-template-columns: 1fr 2.5fr;
-
-}
-.courses-management{
+  grid-template-columns: 5fr 3fr 9fr;
+  background-color: #F4F4F4;
+  gap: 1rem;
   padding: 1rem;
 }

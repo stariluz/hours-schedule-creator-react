@@ -6,6 +6,7 @@ import { CurrentStateContext, ScheduleContext, ScheduleDispatchContext } from ".
 import { stateReducer, defaultState } from './StateReducer';
 let amountOfClasses = 5;
 import './ScheduleCreator.css';
+import CourseSelectionManager from "../CoursesManagement/CourseSelectionManager/CourseSelectionManager";
 
 const ScheduleCreator = () => {
     // const state = useContext(ScheduleContext);
@@ -35,12 +36,15 @@ const ScheduleCreator = () => {
                     </header>
                     <main className="playground">
                         <CurrentStateContext.Provider value={{ courses: currentCourses, hoursMap: currentHoursMap }}>
-                            <section className="courses-management">
-                                <CoursesManagement />
-                            </section>
-                            <section className="calendar">
-                                <Calendar />
-                            </section>
+                            {/* <section className="courses-management"> */}
+                            <CoursesManagement />
+                            {/* </section>
+                            <section className="course-selection-manager"> */}
+                            <CourseSelectionManager></CourseSelectionManager>
+                            {/* </section>
+                            <section className="calendar"> */}
+                            <Calendar />
+                            {/* </section> */}
                         </CurrentStateContext.Provider>
                     </main>
                 </ScheduleDispatchContext.Provider>

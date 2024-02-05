@@ -1,7 +1,7 @@
 import { produce } from 'immer';
+import { v4 as uuidv4 } from 'uuid';
 
 export function stateReducer(state, action) {
-  console.log(state,action);
   switch (action.task) {
       case 'previousStep': {
           return handlePreviousStep(state);
@@ -19,7 +19,6 @@ export function stateReducer(state, action) {
           return handleCourseChangeOutHistory(state, action.index, action.field, action.value);
       }
       case 'addCourse': {
-          console.log("LLEGA");
           return handleAddCourse(state);
       }
       case 'removeCourse': {
@@ -62,7 +61,6 @@ const handleClickOnHour = (state, day, hour) => {
       const hoursMapHistoryMap = stateDraft.historyMap.hoursMap.slice(0, currentIndexHoursMap + 1);
 
       const newHoursMap = produce(hoursMapHistoryMap[currentIndexHoursMap], (hoursMapDraft) => {
-          // console.log(coursesHistoryMap[currentIndexCourses].length);
           hoursMapDraft[day][hour]++;
           hoursMapDraft[day][hour] %= coursesHistoryMap[currentIndexCourses].length + 1;
       });
@@ -97,7 +95,6 @@ const handleCourseChange = (state, index, field, value) => {
   // console.log(currentTime, currentIndexCourses, coursesHistoryMap, index);
   coursesHistoryMap.push(
       produce(coursesHistoryMap[currentIndexCourses], (coursesDraft) => {
-          // console.log();
           // coursesDraft[index].save[field] = 1;
           coursesDraft[index].save[field] = coursesDraft[index][field];
           coursesDraft[index][field] = value;
@@ -112,14 +109,6 @@ const handleCourseChange = (state, index, field, value) => {
       change: "Edit course",
       currentIndexHoursMap: currentIndexHoursMap,
       currentIndexCourses: currentIndexCourses + 1,
-  });
-  console.log(state, {
-      history: history,
-      historyMap: {
-          hoursMap: hoursMapHistoryMap,
-          courses: coursesHistoryMap,
-      },
-      currentTime: currentTime + 1,
   });
   return {
       history: history,
@@ -159,7 +148,7 @@ const handleAddCourse = (state) => {
   const hoursMapHistoryMap = state.historyMap.hoursMap.slice(0, currentIndexHoursMap + 1);
 
   const updatedCourses = produce(coursesHistoryMap[currentIndexCourses], (coursesDraft) => {
-      coursesDraft.push(defaultCourse);
+      coursesDraft.push({...defaultCourse, id:uuidv4()});
   });
   coursesHistoryMap.push(updatedCourses);
 
@@ -168,7 +157,7 @@ const handleAddCourse = (state) => {
       currentIndexHoursMap: currentIndexHoursMap,
       currentIndexCourses: currentIndexCourses + 1,
   });
-  console.log("DEV - ScheduleCreator - handleAddCourse() - Previous State", state);
+//   console.log("DEV - ScheduleCreator - handleAddCourse() - Previous State", state);
   return {
       history: history,
       historyMap: {
@@ -225,7 +214,8 @@ export const defaultCourse={
   name: "",
   professor: "",
   classroom: "",
-  groupName: "",
+    groupName: "",
+  id: uuidv4(),
 }
 export const defaultState = {
   currentTime: 0,

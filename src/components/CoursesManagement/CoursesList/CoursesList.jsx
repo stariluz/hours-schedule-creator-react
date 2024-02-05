@@ -1,25 +1,16 @@
 import React from "react";
-import CoursesListAddCourseButton from "./CourseRow/CoursesListAddCourseButton";
-
 import "./CoursesList.css";
 import { useCurrentState, useSchedule, useScheduleDispatch } from "../../ScheduleCreator/ScheduleCreator";
 import CourseCard from "./CourseCard/CourseCard";
+import CoursesListControls from "./CoursesListControls/CoursesListControls";
 
 const CoursesList = () => {
-    const scheduleDispatch = useScheduleDispatch();
-
-    const onAddCourse = () => {
-        scheduleDispatch({
-            task: 'addCourse',
-        });
-    }
-
     return (
         <div className="courses-list">
-            {RenderRows()}
-            <CoursesListAddCourseButton
-                onClick={() => onAddCourse()}
-            />
+            <CoursesListControls />
+            <div className="courses-forms-container">
+                {RenderRows()}
+            </div>
         </div>
     );
 }

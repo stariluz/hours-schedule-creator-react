@@ -1,5 +1,12 @@
+.btn-primary {
+    --btn-color: #282828;
+    --btn-bg: #CCCCCC;
+    --btn-bg-hover: #dfdfdf;
+    --btn-bg-active: #f1f1f1;
+}
 .btn-secondary {
     --btn-color: #CCCCCC;
+    --btn-bg: transparent;
     --btn-bg-hover: #F3F3F3;
     --btn-bg-active: #f6eef6;
 }
@@ -7,7 +14,7 @@
 .button{
     border-radius: 4px;
     padding: 8px;
-    background-color: transparent;
+    background-color: var(--btn-bg, #fff);
     border: none;
     display: flex;
     align-items: center;

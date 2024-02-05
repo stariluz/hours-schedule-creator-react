@@ -19,6 +19,7 @@
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "terser": "^5.26.0",
+    "uuid": "^9.0.1",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },

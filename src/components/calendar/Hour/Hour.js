@@ -33,7 +33,7 @@ export class HourClass extends React.Component{
             //         ()=>this.props.onClick()
             //     }
             // >
-                <button className="hour__space hour__class custom-color custom-color-text"
+                <button className="hour__space hour__class class-box custom-color custom-color-text"
                     
                     style={{
                         "--hour-row-start": `${this.props.time.hour-FIRST_HOUR+1}`,
