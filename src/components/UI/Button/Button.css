@@ -46,3 +46,16 @@
     width: 100%;
     height: fit-content;
 }
+.button-rounded{
+    border-radius: 200px;
+    aspect-ratio: 1;
+}
+.button-icon{
+    aspect-ratio: 1;
+    width: fit-content;
+    height: auto;
+}
+.button-small{
+    height: 1rem;
+    padding: 0.25rem;
+}

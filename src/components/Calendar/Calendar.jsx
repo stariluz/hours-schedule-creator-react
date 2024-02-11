@@ -1,10 +1,11 @@
-import React from 'react';
-import { Hour, HourClass, HourSpace } from './Hour/Hour';
+import React, { useState } from 'react';
+import { Hour, ClassHour, HourSpace } from './Hour/Hour';
 import "./Calendar.css";
 import { useCurrentState, useScheduleDispatch } from '../ScheduleCreator/ScheduleCreator';
+import { IconPlus } from '@tabler/icons-react';
+import Button from '../UI/Button/Button';
 
-export let FIRST_HOUR = 6;
-const days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const daysMap = {
     0: days[0],
     1: days[1],
@@ -18,14 +19,26 @@ const daysMap = {
  * 
  */
 const Calendar = () => {
+    const [FIRST_HOUR, setFirstHour]=useState(7);
+    const [LAST_HOUR, setLastHour]=useState(20);
     const { courses, hoursMap } = useCurrentState();
     const scheduleDispatch = useScheduleDispatch();
-    const onClickOnHour = (day,hour) => {
+    const onClickOnHour = (day, hour) => {
         scheduleDispatch({
             task: 'clickOnHour',
             day: day,
             hour: hour
         })
+    }
+    const addHourAtBegin=()=>{
+        if(FIRST_HOUR>0){
+            setFirstHour(FIRST_HOUR-1);
+        }
+    }
+    const addHourAtEnd=()=>{
+        if(LAST_HOUR<24){
+            setLastHour(LAST_HOUR+1);
+        }
     }
     const renderHourSpace = (day, hour, thereIsClass) => {
         return (
@@ -36,12 +49,12 @@ const Calendar = () => {
             />
         );
     }
-    const renderHourTime = (hour) => {
+    const renderHourNamespace = (hour) => {
         const hourComponent = <Hour hour={hour} key={'hour-' + hour} />;
         return hourComponent;
     }
     const renderDay = (day) => {
-        const numberOfHours = 24 - FIRST_HOUR;
+        const numberOfHours = LAST_HOUR - FIRST_HOUR;
         const hours = Array(numberOfHours).fill(null).map((value, index) => {
             const hour = index + FIRST_HOUR;
             const thereIsClass = hoursMap[day][hour] > 0 ? true : false;
@@ -49,7 +62,7 @@ const Calendar = () => {
         });
         let length = 0;
         let hour = 0;
-        let hoursClass = [];
+        let classHours = [];
         let dayClasses = hoursMap[day];
         for (let i = 0; i < dayClasses.length; i++) {
             // console.log(dayClasses[i]);
@@ -61,31 +74,28 @@ const Calendar = () => {
                 i++;
             }
             length += i - hour;
-            hoursClass.push({
+            classHours.push({
                 "hour": hour,
                 "length": length,
-
             });
         }
-        
-        hoursClass = hoursClass.map((hourClass) => {
+
+        classHours = classHours.map((classHour) => {
             return (
-                <HourClass
-                    key={day + "_" + hourClass.hour + "_" + hourClass.length}
-                    time={hourClass}
-                    content={courses[hoursMap[day][hourClass.hour] - 1]}
+                <ClassHour
+                    key={day + "_" + classHour.hour + "_" + classHour.length}
+                    time={classHour}
+                    content={courses[hoursMap[day][classHour.hour] - 1]}
+                    FIRST_HOUR={FIRST_HOUR}
                 // onClick={()=>onClickOnHour(day,hour)}
                 />
             );
         });
         let dayComponent =
             <div className="day__column" key={"row_" + day}>
-                <div className="day__name">
-                    {days[day]}
-                </div>
                 <div className="day__content">
                     <div className="day__classes">
-                        {hoursClass}
+                        {classHours}
                     </div>
                     <div className="day__hours">
                         {hours}
@@ -94,9 +104,24 @@ const Calendar = () => {
             </div>
         return dayComponent;
     }
+    const renderWeekHeader = () => {
+        let daySpaces = Object.keys(daysMap).map((day) => {
+            return (
+                <div className="day__name">
+                    {days[day]}
+                </div>
+            )
+        });
+        return (
+            <div className='week__header'>
+                <div className="day__name"></div>
+                {daySpaces}
+            </div>
+        )
+    }
     const renderWeek = () => {
-        const hoursTime = Array(24 - FIRST_HOUR).fill(null).map((value, index) => {
-            return renderHourTime(index + FIRST_HOUR);
+        const hoursNamespaces = Array(LAST_HOUR - FIRST_HOUR).fill(null).map((value, index) => {
+            return renderHourNamespace(index + FIRST_HOUR);
         });
         let daySpaces = Object.keys(daysMap).map((day) => {
             return renderDay(day);
@@ -105,19 +130,38 @@ const Calendar = () => {
         //     return renderDayClasses(day);
         // });
 
-        let weekComponent =
-            <div className="week">
-                <div className="hours__time">
-                    {hoursTime}
-                </div>
-                {daySpaces}
-            </div>
 
         // console.log("DEV - - - - - - - - - - - -:",);
-        return weekComponent;
+        return <div className='hours__area'>
+            <div className="hours__namespace">
+                {hoursNamespaces}
+            </div>
+            <div className="week">
+                {daySpaces}
+                <div className="week__controls">
+                    {
+                        FIRST_HOUR>0?
+                        <Button
+                            className='add-hour add-hour---begin button-rounded button-icon button-small'
+                            onClick={()=>addHourAtBegin()}
+                        ><IconPlus /></Button>
+                        :null
+                    }
+                    {
+                        LAST_HOUR<24?
+                        <Button
+                            className='add-hour add-hour---end button-rounded button-icon button-small'
+                            onClick={()=>addHourAtEnd()}
+                        ><IconPlus /></Button>
+                        :null
+                    }
+                </div>
+            </div>
+        </div>;
     }
     return (
         <div className="calendar">
+            {renderWeekHeader()}
             {renderWeek()}
         </div>
     );
