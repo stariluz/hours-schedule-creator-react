@@ -15,38 +15,38 @@ const CoursesList = () => {
     );
 }
 const RenderRows = () => {
-    const { courses } = useCurrentState();
+    const { courses, coursesSort } = useCurrentState();
     const scheduleDispatch = useScheduleDispatch();
-    const onCourseChangeOutHistory = (index, field, value) => {
+    const onCourseChangeOutHistory = (courseId, field, value) => {
         scheduleDispatch({
             task: 'courseChangeOutHistory',
-            index: index,
+            courseId: courseId,
             field: field,
             value: value,
         });
     }
-    const onCourseChange = (index, field, value) => {
+    const onCourseChange = (courseId, field, value) => {
         scheduleDispatch({
             task: 'courseChange',
-            index: index,
+            courseId: courseId,
             field: field,
             value: value,
         });
     }
-    const onRemoveCourse = (index) => {
+    const onRemoveCourse = (courseId) => {
         scheduleDispatch({
             task: 'removeCourse',
-            index: index,
+            courseId: courseId,
         });
     }
 
-    const rows = courses.map((row, index) => {
+    const rows = coursesSort.map((courseId) => {
         return <CourseCard
-            {...row}
-            key={index}
-            onInputChange={(field, value) => onCourseChangeOutHistory(index, field, value)}
-            onInputChangeEnds={(field, value) => onCourseChange(index, field, value)}
-            onRemove={() => onRemoveCourse(index)}
+            {...courses[courseId]}
+            key={courseId}
+            onInputChange={(field, value) => onCourseChangeOutHistory(courseId, field, value)}
+            onInputChangeEnds={(field, value) => onCourseChange(courseId, field, value)}
+            onRemove={() => onRemoveCourse(courseId)}
         />
     })
     return rows;

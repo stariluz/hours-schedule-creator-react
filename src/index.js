@@ -11,5 +11,5 @@ const root=ReactDOM.createRoot(dom);
 root.render(<App/>);
 
 (() => {
-    console.log('webpack worked')
+    // console.log('webpack worked')
 })()

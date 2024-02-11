@@ -20,7 +20,7 @@ const CourseCard = (props) => {
       props.onInputChangeEnds(field, value);
     }
   }
-  console.log("COLOR", props.color);
+  // console.log("COLOR", props.color);
   return (
     <article className="course-card">
       <section className="course-controls">

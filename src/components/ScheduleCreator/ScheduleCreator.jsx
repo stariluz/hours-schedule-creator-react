@@ -1,5 +1,4 @@
 import React, { useContext, useReducer } from "react";
-import Calendar from "../Calendar/Calendar";
 import HistoryNavigation from "../HistoryNavigation/HistoryNavigation";
 import CoursesManagement from "../CoursesManagement/CoursesManagement";
 import { CurrentStateContext, ScheduleContext, ScheduleDispatchContext, SelectorContext, SelectorDispatchContext } from "../../contexts/Schedule.context";
@@ -8,6 +7,7 @@ let amountOfClasses = 5;
 import './ScheduleCreator.css';
 import CourseSelectionManager from "../CoursesManagement/CourseSelectionManager/CourseSelectionManager";
 import { defaultSelector, selectorReducer } from "./SelectorReducer";
+import Calendar from "../Calendar/Calendar";
 
 const ScheduleCreator = () => {
     // const state = useContext(ScheduleContext);
@@ -21,14 +21,8 @@ const ScheduleCreator = () => {
     );
 
     const currentTime = state.currentTime;
-    const current = state.history[currentTime];
-    const currentMap = state.historyMap;
+    const currentState = state.history[currentTime];
 
-    const currentIndexCourses = current.currentIndexCourses;
-    const currentCourses = currentMap.courses[currentIndexCourses];
-
-    const currentIndexHoursMap = current.currentIndexHoursMap;
-    const currentHoursMap = currentMap.hoursMap[currentIndexHoursMap];
     return (
         <div>
             <ScheduleContext.Provider value={state}>
@@ -40,12 +34,12 @@ const ScheduleCreator = () => {
                         />
                     </header>
                     <main className="playground">
-                        <CurrentStateContext.Provider value={{ courses: currentCourses, hoursMap: currentHoursMap }}>
+                        <CurrentStateContext.Provider value={currentState}>
                             <SelectorContext.Provider value={selector}>
                                 <SelectorDispatchContext.Provider value={dispatchSelector}>
                                     <CoursesManagement />
                                     <CourseSelectionManager/>
-                                    <Calendar />
+                                    <Calendar/>
                                 </SelectorDispatchContext.Provider>
                             </SelectorContext.Provider>
                         </CurrentStateContext.Provider>

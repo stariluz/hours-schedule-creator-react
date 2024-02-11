@@ -47,7 +47,7 @@ const CourseSelectionManager = () => {
 }
 
 const CourseSelectionOptions = () => {
-  const { courses } = useCurrentState();
+  const { courses, coursesSort } = useCurrentState();
   const selector = useSelector();
   const selectorDispatchContext = useSelectorDispatch();
 
@@ -57,7 +57,8 @@ const CourseSelectionOptions = () => {
       course: course
     });
   }
-  return courses?.map((course, index) => {
+  return coursesSort?.map((courseId, index) => {
+    const course=courses[courseId];
     return (
 
       <button className={`course-option class-box custom-color custom-color-text`}

@@ -26,8 +26,6 @@ const InputColorBgAndText = ({
     color: color,
     text: text,
   });
-  console.log(color, text);
-
   const onChangeEvent = (color) => {
     if (onChange) {
       onChange(color);
