@@ -1,6 +1,5 @@
 import { produce } from 'immer';
 import { v4 as uuidv4 } from 'uuid';
-import { useSelector } from './ScheduleCreator';
 
 export function stateReducer(state, action) {
   switch (action.task) {
@@ -23,7 +22,16 @@ export function stateReducer(state, action) {
       return handleAddCourse(state);
     }
     case 'removeCourse': {
-      return handleRemoveCourse(state, action.courseId);
+      return selectDefaultCourse(handleRemoveCourse(state, action.courseId));
+    }
+    case 'changeTool': {
+      return handleChangeTool(state, action);
+    }
+    case 'selectCourse': {
+      return handleSelectCourse(state, action);
+    }
+    case 'selectDefaultCourse': {
+      return selectDefaultCourse(state);
     }
     default: {
       return state;
@@ -62,6 +70,7 @@ const handleHoursMapChanges = (state, action, hoursMap) => {
     hoursMap: updatedHoursMap,
   });
   return  {
+    ...state,
     history: history,
     currentTime: currentTime+1,
   };
@@ -82,6 +91,7 @@ const handleCourseChange = (state, courseId, field, value) => {
   );
   history.push(stateUpdate);
   return {
+    ...state,
     history: history,
     currentTime: currentTime+1,
   };
@@ -95,6 +105,7 @@ const handleCourseChangeOutHistory = (state, courseId, field, value) => {
   });
   history[currentTime]=stateUpdate;
   return {
+    ...state,
     history: history,
     currentTime: currentTime,
   };
@@ -103,24 +114,29 @@ const handleCourseChangeOutHistory = (state, courseId, field, value) => {
 const handleAddCourse = (state) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
+  let newCourse;
   const stateUpdate = produce(history[currentTime], (currentState) => {
     const courseId=uuidv4();
     currentState.coursesSort.push(courseId);
-    currentState.courses[courseId]={ ...defaultCourse, id:courseId};
+    newCourse={ ...defaultCourse, id:courseId};
+    currentState.courses[courseId]=newCourse;
     currentState.change="Add course";
+
   });
   
   history.push(stateUpdate);
   return {
+    ... state, 
     history: history,
     currentTime: currentTime + 1,
+    selectedCourse: newCourse,
   };
 }
 const handleRemoveCourse = (state, courseId) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
-  const index=history[currentTime].coursesSort.getIndexOf(courseId);
-  if(!index){
+  const index=history[currentTime].coursesSort.indexOf(courseId);
+  if(index===undefined){
     return state;
   }
   const stateUpdate = produce(history[currentTime], (currentState) => {
@@ -130,9 +146,35 @@ const handleRemoveCourse = (state, courseId) => {
   });
   history.push(stateUpdate);
   return {
+    ... state, 
     history: history,
     currentTime: currentTime + 1,
   };
+}
+const handleChangeTool=(state, action)=>{
+  return {
+    ... state,
+    selectedTool: action.tool,
+  };
+}
+
+const handleSelectCourse=(state, action)=>{
+  return {
+    ... state,
+    selectedCourse: action.course,
+  };
+}
+const selectDefaultCourse = (state)=>{
+  const currentTime = state.currentTime;
+  const history = state.history.slice(0, currentTime + 1);
+  let selectedCourse=null;
+  if(history[currentTime].coursesSort.length>0){
+    selectedCourse=history[currentTime].courses[history[currentTime].coursesSort[0]];
+  }
+  return {
+    ...state,
+    selectedCourse: selectedCourse,
+  }
 }
 export const defaultCourse = {
   save: {
@@ -169,4 +211,6 @@ export const defaultState = {
       ],
     }
   ],
+  selectedTool:'brush',
+  selectedCourse: defaultCourse,
 }

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useCurrentState, useSelector, useSelectorDispatch } from "../../ScheduleCreator/ScheduleCreator";
+import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../../ScheduleCreator/ScheduleCreator";
 import '../../Calendar/Hour/Hour.css';
 import './CourseSelectionManager.css';
 import { IconBrush, IconEraser, IconPointer, IconPointerFilled } from "@tabler/icons-react";
 import Button from "../../UI/Button/Button";
 
 const CourseSelectionManager = () => {
-  const selector = useSelector();
-  const selectorDispatchContext = useSelectorDispatch();
+  const scheduleState = useScheduleState();
+  const scheduleStateDispatch = useScheduleStateDispatch();
   const onSelectTool = (tool) => {
-    selectorDispatchContext({
+    scheduleStateDispatch({
       task: "changeTool",
       tool: tool
     });
@@ -17,22 +17,22 @@ const CourseSelectionManager = () => {
   return (
     <div className="course-selection-manager">
       <div className="section-controls">
-        <Button
-          active={selector.selectedTool == 'select'}
+        {/* <Button
+          active={scheduleState.selectedTool == 'select'}
           className={'btn-secondary'}
           onClick={() => onSelectTool('select')}
         >
           <IconPointer></IconPointer>
-        </Button>
+        </Button> */}
         <Button
-          active={selector.selectedTool == 'brush'}
+          active={scheduleState.selectedTool == 'brush'}
           className={'btn-secondary'}
           onClick={() => onSelectTool('brush')}
         >
           <IconBrush></IconBrush>
         </Button>
         <Button
-          active={selector.selectedTool == 'eraser'}
+          active={scheduleState.selectedTool == 'eraser'}
           className={'btn-secondary'}
           onClick={() => onSelectTool('eraser')}
         >
@@ -48,11 +48,11 @@ const CourseSelectionManager = () => {
 
 const CourseSelectionOptions = () => {
   const { courses, coursesSort } = useCurrentState();
-  const selector = useSelector();
-  const selectorDispatchContext = useSelectorDispatch();
+  const scheduleState = useScheduleState();
+  const scheduleStateDispatch = useScheduleStateDispatch();
 
   const onSelectCourse = (course) => {
-    selectorDispatchContext({
+    scheduleStateDispatch({
       task: "selectCourse",
       course: course
     });
@@ -71,7 +71,7 @@ const CourseSelectionOptions = () => {
         key={course.id}
         onClick={() => { onSelectCourse(course) }}
       >
-        {course.id == selector.selectedCourse?.id ? <div className="active-box"></div> : null}
+        {course.id == scheduleState.selectedCourse?.id ? <div className="active-box"></div> : null}
         <span className="course-option-name">
           {course.name}
         </span>

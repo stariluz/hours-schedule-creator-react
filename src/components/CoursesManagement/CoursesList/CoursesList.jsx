@@ -1,6 +1,6 @@
 import React from "react";
 import "./CoursesList.css";
-import { useCurrentState, useSchedule, useScheduleDispatch } from "../../ScheduleCreator/ScheduleCreator";
+import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../../ScheduleCreator/ScheduleCreator";
 import CourseCard from "./CourseCard/CourseCard";
 import CoursesListControls from "./CoursesListControls/CoursesListControls";
 
@@ -16,7 +16,7 @@ const CoursesList = () => {
 }
 const RenderRows = () => {
     const { courses, coursesSort } = useCurrentState();
-    const scheduleDispatch = useScheduleDispatch();
+    const scheduleDispatch = useScheduleStateDispatch();
     const onCourseChangeOutHistory = (courseId, field, value) => {
         scheduleDispatch({
             task: 'courseChangeOutHistory',

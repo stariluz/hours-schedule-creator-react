@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Hour, ClassHour, HourSpace, HourNamespace } from './Hour/Hour';
 import "./Calendar.css";
-import { useCurrentState, useScheduleDispatch, useSelector } from '../ScheduleCreator/ScheduleCreator';
+import { useCurrentState, useScheduleState, useScheduleStateDispatch } from '../ScheduleCreator/ScheduleCreator';
 import { IconPlus } from '@tabler/icons-react';
 import Button from '../UI/Button/Button';
 import { produce } from 'immer';
@@ -26,8 +26,9 @@ const Calendar = () => {
   const [LAST_HOUR, setLastHour] = useState(20);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [currentAction, setCurrentAction] = useState(false);
-  const scheduleDispatch = useScheduleDispatch();
-  const selector = useSelector();
+  const scheduleState=useScheduleState();
+  const scheduleDispatch = useScheduleStateDispatch();
+  
   const [onMouseOverEvent, setOnMouseOverEvent] = useState(() => (event) => null);
   useEffect(() => {
     // console.log("SYNC:", hoursMap);
@@ -51,7 +52,7 @@ const Calendar = () => {
   const paintClassHour = (day, hour) => {
     setHoursMapLocal((hoursMapLocal) => {
       const newHoursMap = produce(hoursMapLocal, (hoursMapDraft) => {
-        hoursMapDraft[day][hour] = selector.selectedCourse.id;
+        hoursMapDraft[day][hour] = scheduleState.selectedCourse.id;
       });
       return newHoursMap;
     });
@@ -65,14 +66,14 @@ const Calendar = () => {
     });
   }
   const onClick = (day, hour) => {
-    if (selector.selectedTool == 'brush') {
+    if (scheduleState.selectedTool == 'brush') {
       paintClassHour(day, hour);
       scheduleDispatch({
         task: 'hoursMapChanges',
         action: 'Paint hour',
         hoursMap: hoursMap
       });
-    } else if (selector.selectedTool == 'eraser') {
+    } else if (scheduleState.selectedTool == 'eraser') {
       ereaseClassHour(day, hour);
       scheduleDispatch({
         task: 'hoursMapChanges',
@@ -82,14 +83,17 @@ const Calendar = () => {
     }
   }
   const onMouseDownEvent = (day, hour) => {
-    if (selector.selectedTool == 'brush') {
+    if (scheduleState.selectedTool == 'brush') {
+      if(scheduleState.selectedCourse == null){
+        return;
+      }
       setOnMouseOverEvent(() => (day, hour) => {
         paintClassHour(day, hour);
       });
       setCurrentAction('Paint hours');
       setIsMouseDown(true);
       paintClassHour(day, hour);
-    } else if (selector.selectedTool == 'eraser') {
+    } else if (scheduleState.selectedTool == 'eraser') {
       setOnMouseOverEvent(() => (day, hour) => {
         ereaseClassHour(day, hour);
       });

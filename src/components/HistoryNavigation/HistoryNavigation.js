@@ -1,8 +1,8 @@
 import React from "react";
-import { useSchedule, useScheduleDispatch } from "../ScheduleCreator/ScheduleCreator";
+import { useScheduleState, useScheduleStateDispatch } from "../ScheduleCreator/ScheduleCreator";
 
 const HistoryNavigation = () => {
-    const scheduleDispatch = useScheduleDispatch();
+    const scheduleDispatch = useScheduleStateDispatch();
     const onClickOnPreviousStep = () => {
         scheduleDispatch({
             task: 'previousStep',

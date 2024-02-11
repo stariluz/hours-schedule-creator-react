@@ -2,11 +2,11 @@ import React from "react";
 import "./CoursesListControls.css";
 import Button from "../../../UI/Button/Button";
 import { IconCopyPlus, IconNewSection, IconPlus } from "@tabler/icons-react";
-import { useScheduleDispatch } from "../../../ScheduleCreator/ScheduleCreator";
+import { useScheduleStateDispatch } from "../../../ScheduleCreator/ScheduleCreator";
 
 const CoursesListControls = () => {
 
-    const scheduleDispatch = useScheduleDispatch();
+    const scheduleDispatch = useScheduleStateDispatch();
 
     const onAddCourse = () => {
         scheduleDispatch({
