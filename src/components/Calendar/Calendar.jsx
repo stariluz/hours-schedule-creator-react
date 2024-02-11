@@ -19,8 +19,8 @@ const daysMap = {
  * 
  */
 const Calendar = () => {
-    const [FIRST_HOUR, setFirstHour]=useState(7);
-    const [LAST_HOUR, setLastHour]=useState(20);
+    const [FIRST_HOUR, setFirstHour] = useState(7);
+    const [LAST_HOUR, setLastHour] = useState(20);
     const { courses, hoursMap } = useCurrentState();
     const scheduleDispatch = useScheduleDispatch();
     const onClickOnHour = (day, hour) => {
@@ -30,14 +30,14 @@ const Calendar = () => {
             hour: hour
         })
     }
-    const addHourAtBegin=()=>{
-        if(FIRST_HOUR>0){
-            setFirstHour(FIRST_HOUR-1);
+    const addHourAtBegin = () => {
+        if (FIRST_HOUR > 0) {
+            setFirstHour(FIRST_HOUR - 1);
         }
     }
-    const addHourAtEnd=()=>{
-        if(LAST_HOUR<24){
-            setLastHour(LAST_HOUR+1);
+    const addHourAtEnd = () => {
+        if (LAST_HOUR < 24) {
+            setLastHour(LAST_HOUR + 1);
         }
     }
     const renderHourSpace = (day, hour, thereIsClass) => {
@@ -136,24 +136,26 @@ const Calendar = () => {
             <div className="hours__namespace">
                 {hoursNamespaces}
             </div>
-            <div className="week">
-                {daySpaces}
+            <div className="week__area">
+                <div className="week">
+                    {daySpaces}
+                </div>
                 <div className="week__controls">
                     {
-                        FIRST_HOUR>0?
-                        <Button
-                            className='add-hour add-hour---begin button-rounded button-icon button-small'
-                            onClick={()=>addHourAtBegin()}
-                        ><IconPlus /></Button>
-                        :null
+                        FIRST_HOUR > 0 ?
+                            <Button
+                                className='add-hour add-hour---begin button-rounded button-icon button-small'
+                                onClick={() => addHourAtBegin()}
+                            ><IconPlus /></Button>
+                            : null
                     }
                     {
-                        LAST_HOUR<24?
-                        <Button
-                            className='add-hour add-hour---end button-rounded button-icon button-small'
-                            onClick={()=>addHourAtEnd()}
-                        ><IconPlus /></Button>
-                        :null
+                        LAST_HOUR < 24 ?
+                            <Button
+                                className='add-hour add-hour---end button-rounded button-icon button-small'
+                                onClick={() => addHourAtEnd()}
+                            ><IconPlus /></Button>
+                            : null
                     }
                 </div>
             </div>
