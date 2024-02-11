@@ -30,11 +30,11 @@ const Calendar = () => {
   const selector = useSelector();
   const [onMouseOverEvent, setOnMouseOverEvent] = useState(() => (event) => null);
   useEffect(() => {
-    console.log("SYNC:", hoursMap);
+    // console.log("SYNC:", hoursMap);
     setHoursMapLocal(hoursMap);
   }, [hoursMap]);
   useEffect(() => {
-    console.log("CHANGED:", JSON.parse(JSON.stringify(hoursMapLocal)));
+    // console.log("CHANGED:", JSON.parse(JSON.stringify(hoursMapLocal)));
   }, [hoursMapLocal]);
   useEffect(()=>{
     if(isMouseDown){

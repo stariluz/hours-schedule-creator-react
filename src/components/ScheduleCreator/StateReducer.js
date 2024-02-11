@@ -53,7 +53,6 @@ const handleNextStep = (state) => {
   };
 }
 const handleHoursMapChanges = (state, action, hoursMap) => {
-  console.log(action);
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
   const updatedHoursMap = hoursMap;
@@ -70,28 +69,18 @@ const handleHoursMapChanges = (state, action, hoursMap) => {
 const handleCourseChange = (state, courseId, field, value) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
-  history[currentTime].courses=[]
-  const index=history[currentTime].courses.findIndex((course)=>courseId==course.id);
-  if(!index){
-    return state;
-  }
 
-  const updatedCourses = produce(history[currentTime].courses,
-    (coursesDraft) => {
-      coursesDraft[index].save[field] = coursesDraft[index][field];
-      coursesDraft[index][field] = value;
-    }
-  );
-  history[currentTime].courses = produce(history[currentTime].courses,
-    (coursesDraft) => {
-      coursesDraft[index][field] = coursesDraft[index].save[field];
-    }
-  );
-  history.push({
-    ...history[currentTime],
-    change: "Edit course",
-    courses: updatedCourses,
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    currentState.courses[courseId].save[field] = currentState.courses[courseId][field];
+    currentState.courses[courseId][field] = value;
+    currentState.change="Edit course";
   });
+  history[currentTime] = produce(history[currentTime],
+    (currentState) => {
+      currentState.courses[courseId][field] = currentState.courses[courseId].save[field];
+    }
+  );
+  history.push(stateUpdate);
   return {
     history: history,
     currentTime: currentTime+1,
@@ -100,37 +89,28 @@ const handleCourseChange = (state, courseId, field, value) => {
 const handleCourseChangeOutHistory = (state, courseId, field, value) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
-  const index=history[currentTime].courses.findIndex((course)=>courseId==course.id);
-  if(!index){
-    return state;
-  }
 
-  const updatedCourses = produce(history[currentTime].courses,
-    (coursesDraft) => {
-      coursesDraft[index][field] = value;
-    }
-  );
-  history[currentTime]={
-    ...history[currentTime],
-    courses: updatedCourses,
-  };
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    currentState.courses[courseId][field] = value;
+  });
+  history[currentTime]=stateUpdate;
   return {
     history: history,
     currentTime: currentTime,
   };
 }
+
 const handleAddCourse = (state) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
-
-  const updatedCourses = produce(history[currentTime].courses, (coursesDraft) => {
-    coursesDraft.push({ ...defaultCourse, id: uuidv4() });
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    const courseId=uuidv4();
+    currentState.coursesSort.push(courseId);
+    currentState.courses[courseId]={ ...defaultCourse, id:courseId};
+    currentState.change="Add course";
   });
-  history.push({
-    ...history[currentTime],
-    change: "Add course",
-    courses: updatedCourses,
-  });
+  
+  history.push(stateUpdate);
   return {
     history: history,
     currentTime: currentTime + 1,
@@ -139,19 +119,16 @@ const handleAddCourse = (state) => {
 const handleRemoveCourse = (state, courseId) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
-  const index=history[currentTime].courses.findIndex((course)=>courseId==course.id);
+  const index=history[currentTime].coursesSort.getIndexOf(courseId);
   if(!index){
     return state;
   }
-
-  const updatedCourses = produce(history[currentTime].courses, (coursesDraft) => {
-    coursesDraft.splice(index, 1);
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    currentState.coursesSort.splice(index,1);
+    delete currentState.courses[courseId];
+    currentState.change="Remove course";
   });
-  history.push({
-    ...history[currentTime],
-    change: "Remove course",
-    courses: updatedCourses,
-  });
+  history.push(stateUpdate);
   return {
     history: history,
     currentTime: currentTime + 1,
