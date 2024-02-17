@@ -30,11 +30,11 @@ const HistoryNavigation = () => {
             >
                 <IconArrowForwardUp/>
             </Button>
-            <Button
+            {/* <Button
                 className={'btn-traslucid'}
             >
                 <IconHistory/>
-            </Button>
+            </Button> */}
         </div>
     );
 }
