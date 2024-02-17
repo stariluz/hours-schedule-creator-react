@@ -10,6 +10,14 @@
     --btn-bg-hover: #F3F3F3;
     --btn-bg-active: #f6eef6;
 }
+.btn-traslucid {
+    --btn-color: rgb(255, 255, 255);
+    --btn-bg: #00000016;
+    --btn-bg-hover: #ffffff2d;
+    --btn-bg-active: #ffffff60;
+    --btn-color-hover: white;
+    --btn-color-active: #000000;
+}
 
 .button{
     border-radius: 4px;
@@ -27,14 +35,14 @@
 }
 .button:hover{
     background-color: var(--btn-bg-hover, #F3F3F3);
+    color:  var(--btn-color-hover, #CCCCCC);
     border: none;
 }
-.button:active{
-    background-color: var(--btn-bg-active, #f6eef6);
-    border: none;
-}
+.button:active,
 .button.active{
     background-color: var(--btn-bg-active, #f6eef6);
+    color:  var(--btn-color-active, #CCCCCC);
+    border: none;
 }
 .button-vertical{
     position: relative;

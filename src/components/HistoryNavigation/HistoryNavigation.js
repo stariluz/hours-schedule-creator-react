@@ -1,5 +1,8 @@
 import React from "react";
 import { useScheduleState, useScheduleStateDispatch } from "../ScheduleCreator/ScheduleCreator";
+import { IconArrowBackUp, IconArrowForwardUp, IconHistory } from "@tabler/icons-react";
+import Button from "../UI/Button/Button";
+import "./HistoryNavigation.css";
 
 const HistoryNavigation = () => {
     const scheduleDispatch = useScheduleStateDispatch();
@@ -14,14 +17,24 @@ const HistoryNavigation = () => {
         });
     }
     return (
-        <div className="">
-            <button
+        <div className="history-menu">
+            <Button
+                className={'btn-traslucid'}
                 onClick={() => onClickOnPreviousStep()}
-            >Previous</button>
-            <button
+            >
+                <IconArrowBackUp/>
+            </Button>
+            <Button
+                className={'btn-traslucid'}
                 onClick={() => onClickOnNextStep()}
-            >Next</button>
-            <button>See last changes</button>
+            >
+                <IconArrowForwardUp/>
+            </Button>
+            <Button
+                className={'btn-traslucid'}
+            >
+                <IconHistory/>
+            </Button>
         </div>
     );
 }
