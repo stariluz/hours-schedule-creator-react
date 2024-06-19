@@ -1,0 +1,111 @@
+.input__color-bg-text {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 1rem;
+    min-width: 1rem;
+    padding: 0;
+}
+
+.input__color-bg-text .input__color__box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 1rem;
+    outline: none;
+    border: none;
+    background: none;
+    padding: 0;
+    border-radius: 0%;
+    display: grid;
+    grid-template-columns: 4px 1fr 4px;
+    grid-template-rows: 4px 1fr 4px;
+    justify-items: center;
+    align-items: center;
+}
+
+.input__color-bg-text .input__color__color {
+    /* background: hsl(var(--color-hue),  var(--color-saturation), var(--color-lightness), var(--color-alpha)); */
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    border-radius: 4px;
+    grid-column: 1/-1;
+    grid-row: 1/-1;
+}
+
+.input__color-bg-text .input__color__text {
+    --input-color-text-color: var(--btn-color);
+    /* background: hsl(var(--color-hue),  var(--color-saturation), var(--color-lightness), var(--color-alpha)); */
+    width: fit-content;
+    height: fit-content;
+    min-height: fit-content;
+    border-radius: 0;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    position: relative;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -3px;
+}
+
+.input__color__text::after {
+    content: "";
+    background-color: var(--input-color-text-color,  var(--btn-color));
+    height: 3px;
+    width: 120%;
+    border-radius: 0;
+    display: block;
+    position: absolute;
+    top: 100%;
+}
+
+.color__picker__popover {
+    top: calc(100% + 0.5rem);
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    border: 1px solid #ececec;
+    box-shadow: 0px 0.5rem 1rem -0.5rem #ececec;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.color__picker__out {
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    z-index: -1;
+}
+
+.color__picker {
+    background-color: white !important;
+    border-radius: 4px 4px 0px 0px !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+.color__picker>:first-child{
+    border-radius: 4px;
+}
+.color__picker .hue-horizontal{
+    border-radius: 2px;
+}
+.color__picker input{
+    width: 100%!important;
+    border-radius: 4px;
+}
+
+.color__picker__controls {
+    display: flex;
+    justify-content: stretch;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+/* .color__picker__footer .button{
+    width: 100%;
+} */

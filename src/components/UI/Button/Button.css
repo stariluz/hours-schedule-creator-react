@@ -1,0 +1,69 @@
+.btn-primary {
+    --btn-color: #282828;
+    --btn-bg: #CCCCCC;
+    --btn-bg-hover: #dfdfdf;
+    --btn-bg-active: #f1f1f1;
+}
+.btn-secondary {
+    --btn-color: #CCCCCC;
+    --btn-bg: transparent;
+    --btn-bg-hover: #F3F3F3;
+    --btn-bg-active: #f6eef6;
+}
+.btn-traslucid {
+    --btn-color: rgb(255, 255, 255);
+    --btn-bg: #00000016;
+    --btn-bg-hover: #ffffff2d;
+    --btn-bg-active: #ffffff60;
+    --btn-color-hover: white;
+    --btn-color-active: #000000;
+}
+
+.button{
+    border-radius: 4px;
+    padding: 8px;
+    background-color: var(--btn-bg, #fff);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:  var(--btn-color, #CCCCCC);
+}
+.button .tabler-icon{
+    width: 1rem;
+    height: 1rem;
+}
+.button:hover{
+    background-color: var(--btn-bg-hover, #F3F3F3);
+    color:  var(--btn-color-hover, #CCCCCC);
+    border: none;
+}
+.button:active,
+.button.active{
+    background-color: var(--btn-bg-active, #f6eef6);
+    color:  var(--btn-color-active, #CCCCCC);
+    border: none;
+}
+.button-vertical{
+    position: relative;
+    height: 100%;
+    width: fit-content;
+}
+.button-horizontal{
+    position: relative;
+    width: 100%;
+    height: fit-content;
+}
+.button-rounded{
+    border-radius: 200px;
+    aspect-ratio: 1;
+}
+.button-icon{
+    aspect-ratio: 1;
+    width: fit-content;
+    height: auto;
+}
+.button-small{
+    height: 1rem;
+    padding: 0.25rem;
+}
