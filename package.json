@@ -21,7 +21,7 @@
     "@tabler/icons-react": "^3.11.0",
     "immer": "^10.0.3",
     "terser": "^5.26.0",
-    "uuid": "^9.0.1"
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
