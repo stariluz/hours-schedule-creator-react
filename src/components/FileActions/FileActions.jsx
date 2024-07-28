@@ -11,8 +11,6 @@ const FileActions = () => {
   const scheduleDispatch = useScheduleStateDispatch();
   const downloadSchedule = () => {
     const content = scheduleState.history[scheduleState.currentTime];
-    console.log(content);
-    content.change = "Download Schedule data";
 
     const data = JSON.stringify(content);
     const blob = new Blob([data], { type: "application/json" });

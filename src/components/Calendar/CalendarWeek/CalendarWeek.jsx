@@ -4,90 +4,39 @@ import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../
 import { daysNamesMap } from "../../../utils/days";
 import CalendarDay from "./CalendarDay/CalendarDay";
 
-const CalendarWeek = ({firstHour, lastHour}) => {
-  const { hoursMap: hoursMapGlobal, courses } = useCurrentState();
-  const [hoursMap, setHoursMap] = useState(Array(7).fill(Array(24).fill(null)));
-  const [currentAction, setCurrentAction] = useState(false);
-  const [isMouseDown, setIsMouseDown] = useState(false);
+const CalendarWeek = ({ firstHour, lastHour }) => {
   const scheduleState = useScheduleState();
   const scheduleDispatch = useScheduleStateDispatch();
+  const { hoursMap, courses } = useCurrentState();
   const [onMouseOverEvent, setOnMouseOverEvent] = useState(() => (event) => null);
+  
+  const handleMouseDownEvent = (day, hour) => {
+    if (
+      scheduleState.selectedTool == 'brush' &&
+      scheduleState.selectedCourse == null
+    ) return;
 
-  useEffect(() => {
-    // console.log("SYNC:", hoursMap);
-    setHoursMap(() => {
-      const newHoursMap = produce(hoursMapGlobal, hoursMapDraft => hoursMapDraft);
-      return newHoursMap;
+    setOnMouseOverEvent(() => (day, hour) => {
+      scheduleDispatch({
+        task: 'changeHourUnsave',
+        day: day,
+        hour: hour,
+      });
     });
-  }, [hoursMapGlobal]);
-  useEffect(() => {
-    if (isMouseDown) {
-      document.addEventListener('mouseup', () => { setIsMouseDown(false) }, { once: true });
-    } else {
+    scheduleDispatch({
+      task: 'changeHourUnsave',
+      day: day,
+      hour: hour,
+    });
+
+    document.addEventListener('mouseup', () => {
       setOnMouseOverEvent(() => (event) => null);
       scheduleDispatch({
-        task: 'hoursMapChanges',
-        action: currentAction,
-        hoursMap: hoursMap
+        task: 'saveHoursChanges',
       });
-    }
-  }, [isMouseDown]);
-
-  const handleMouseDownEvent = (day, hour) => {
-    if (scheduleState.selectedTool == 'brush') {
-      if (scheduleState.selectedCourse == null) {
-        return;
-      }
-      setOnMouseOverEvent(() => (day, hour) => {
-        paintClassHour(day, hour);
-      });
-      setCurrentAction('Paint hours');
-      setIsMouseDown(true);
-      paintClassHour(day, hour);
-    } else if (scheduleState.selectedTool == 'eraser') {
-      setOnMouseOverEvent(() => (day, hour) => {
-        ereaseClassHour(day, hour);
-      });
-      setCurrentAction('Erase hours');
-      setIsMouseDown(true);
-      ereaseClassHour(day, hour);
-    }
-  }
-  const handleClickEvent = (day, hour) => {
-    if (scheduleState.selectedTool == 'brush') {
-      paintClassHour(day, hour);
-      scheduleDispatch({
-        task: 'hoursMapChanges',
-        action: 'Paint hour',
-        hoursMap: hoursMap
-      });
-    } else if (scheduleState.selectedTool == 'eraser') {
-      ereaseClassHour(day, hour);
-      scheduleDispatch({
-        task: 'hoursMapChanges',
-        action: 'Paint hour',
-        hoursMap: hoursMap
-      });
-    }
+    }, { once: true });
   }
 
-  const ereaseClassHour = (day, hour) => {
-    setHoursMap((hoursMap) => {
-      const newHoursMap = produce(hoursMap, (hoursMapDraft) => {
-        hoursMapDraft[day][hour] = null;
-      });
-      return newHoursMap;
-    });
-  }
-  const paintClassHour = (day, hour) => {
-    setHoursMap((hoursMap) => {
-      const newHoursMap = produce(hoursMap, (hoursMapDraft) => {
-        hoursMapDraft[day][hour] = scheduleState.selectedCourse.id;
-      });
-      return newHoursMap;
-    });
-  }
-  
   return (
     <div className="week">
       {
@@ -97,9 +46,9 @@ const CalendarWeek = ({firstHour, lastHour}) => {
               day={day}
               firstHour={firstHour}
               lastHour={lastHour}
-              hoursMap={hoursMap}
+              hoursMap={hoursMap.unsave}
               courses={courses}
-              onClickEvent={handleClickEvent}
+              onClickEvent={()=>{}}
               onMouseDownEvent={handleMouseDownEvent}
               onMouseOverEvent={onMouseOverEvent}
               key={`daySpace-${day}`}

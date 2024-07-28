@@ -9,8 +9,14 @@ export function stateReducer(state, action) {
     case 'nextStep': {
       return handleNextStep(state);
     }
-    case 'hoursMapChanges': {
-      return handleHoursMapChanges(state, action.action, action.hoursMap);
+    case 'changeHourUnsave': {
+      return handleChangeHourUnsave(state, action.day, action.hour);
+    }
+    case 'saveHoursChanges': {
+      return handleSaveHoursChanges(state);
+    }
+    case 'changeHour': {
+      return handleChangeHour(state, action.day, action.hour);
     }
     case 'courseChange': {
       return handleCourseChange(state, action.courseId, action.field, action.value);
@@ -67,21 +73,89 @@ const handleNextStep = (state) => {
     currentTime: newTime,
   };
 }
-const handleHoursMapChanges = (state, action, hoursMap) => {
-  const currentTime = state.currentTime;
-  const history = state.history.slice(0, currentTime + 1);
-  const updatedHoursMap = hoursMap;
-  history.push({
-    ...history[currentTime],
-    change: action,
-    hoursMap: updatedHoursMap,
+
+const handleChangeHourUnsave = (state, day, hour) => {
+  if (
+    state.selectedTool == 'brush' &&
+    state.selectedCourse == null
+  ) {
+    return state
+  }
+
+  const { currentTime, history } = copyHistory(state);
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    if (state.selectedTool == 'brush') {
+      currentState.hoursMap.unsave[day][hour] = state.selectedCourse.id;
+    } else if (state.selectedTool == "eraser") {
+      currentState.hoursMap.unsave[day][hour] = null;
+    }
   });
+  history[currentTime] = stateUpdate;
+  return {
+    ...state,
+    history: history,
+    currentTime: currentTime,
+  };
+}
+
+const handleSaveHoursChanges = (state) => {
+  const { currentTime, history } = copyHistory(state);
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    currentState.hoursMap.unsave = currentState.hoursMap.save;
+  });
+  const newState = produce(history[currentTime], (currentState) => {
+    if (state.selectedTool == "brush") {
+      currentState.change = "Paint hours";
+    } else if (state.selectedTool == "eraser") {
+      currentState.change = "Erease hours";
+    }
+    currentState.hoursMap.save = currentState.hoursMap.unsave;
+  });
+
+  history[currentTime] = stateUpdate;
+  history.push(newState);
+
   return {
     ...state,
     history: history,
     currentTime: currentTime + 1,
   };
 }
+
+const handleChangeHour = (state, day, hour) => {
+  if (
+    state.selectedTool == 'brush' &&
+    state.selectedCourse == null
+  ) {
+    return state
+  }
+
+  const { currentTime, history } = copyHistory(state);
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    currentState.hoursMap.unsave = currentState.hoursMap.save;
+  });
+  const newState = produce(history[currentTime], (currentState) => {
+    if (state.selectedTool == "brush") {
+      currentState.hoursMap.unsave[day][hour] = state.selectedCourse.id;
+      currentState.hoursMap.save[day][hour] = state.selectedCourse.id;
+      currentState.change = "Paint hour";
+    } else if (state.selectedTool == "eraser") {
+      currentState.hoursMap.unsave[day][hour] = null;
+      currentState.hoursMap.save[day][hour] = null;
+      currentState.change = "Erease hour";
+    }
+  });
+  
+  history[currentTime] = stateUpdate;
+  history.push(newState);
+
+  return {
+    ...state,
+    history: history,
+    currentTime: currentTime + 1,
+  };
+}
+
 const handleCourseChange = (state, courseId, field, value) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
@@ -178,7 +252,7 @@ const selectDefaultCourse = (state) => {
   if (history[currentTime].coursesSort.length > 0) {
     selectedCourse = history[currentTime].courses[history[currentTime].coursesSort[0]];
   }
-  
+
   return {
     ...state,
     selectedCourse: selectedCourse,
@@ -187,16 +261,22 @@ const selectDefaultCourse = (state) => {
 const loadContent = (state, content) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
-  
+
   const stateUpdate = produce(content, (newState) => {
     newState.change = "Load Schedule Data";
   });
   history.push(stateUpdate);
-  
+
   return {
     ...state,
     history: history,
     currentTime: currentTime + 1,
+  };
+}
+const copyHistory = (state) => {
+  return {
+    currentTime: state.currentTime,
+    history: state.history.slice(0, state.currentTime + 1)
   };
 }
 
@@ -227,7 +307,10 @@ export const defaultState = {
   history: [
     {
       change: "Start of the file",
-      hoursMap: Array(7).fill(Array(24).fill(null)),
+      hoursMap: {
+        save: Array(7).fill(Array(24).fill(null)),
+        unsave: Array(7).fill(Array(24).fill(null)),
+      },
       courses: {
         [defaultCourse.id]: defaultCourse,
       },
