@@ -2,20 +2,15 @@
     /* border: 2px solid black; */
     background-color: white;
     border-radius: 1rem;
-    width: fit-content;
+    width: 100%;
     height: fit-content;
     padding: 1rem;
     --hour-height:48px;
     --hour-width:96px;
 }
-.week{
-    display: grid;
-    grid-template-columns: repeat(7,var(--hour-width));
-    height: fit-content;
-}
 .week__header{
     display: grid;
-    grid-template-columns: 4rem repeat(7,var(--hour-width));
+    grid-template-columns: 4rem repeat(7,1fr);
 }
 .day__name{
     font-size: 0.75rem;
@@ -24,43 +19,22 @@
     font-weight: 700;
     line-height: 1;
 }
-.day__content{
-    position: relative;
-}
 .hours__area{
     display: grid;
-    grid-template-columns: 4rem 1fr;
+    grid-template-columns: auto 1fr;
     gap: 0.25rem;
 }
-.day__hours,
+
 .hours-namespace__column{
     display: grid;
-    grid-auto-rows: var(--hour-height);
+    width: fit-content;
+    height: 100%;
+    grid-auto-rows: 1fr;
     position: relative;
     /* grid-template-rows: repeat(19, 2rem); */
 }
 
-.day__classes{
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-auto-rows: var(--hour-height);
-    grid-template-rows: repeat(18, var(--hour-height));
-    position: absolute;
-    bottom: 0;
-}
 .week__area{
     display: grid;
     grid-template-columns: 1fr 0px;
-}
-.add-hour {
-    position: relative;
-}
-.add-hour---begin{
-    top: -0.5rem;
-}
-.add-hour---end{
-    margin-top: auto;
-    bottom: -0.5rem;
 }

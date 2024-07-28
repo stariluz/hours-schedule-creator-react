@@ -1,9 +1,10 @@
 import "../../UI/Colors/Colors.css"
 import "./CalendarClassHour.css";
+import "../CalendarHourSpace/CalendarHourSpace.css";
 
 const CalendarClassHour = ({ time, content, firstHour }) => {
   return (
-    <button className="hour__space hour__class class-box custom-color custom-color-text"
+    <button className="hour__class class-box custom-color custom-color-text"
       style={{
         "--hour-row-start": `${time.hour - firstHour + 1}`,
         "--hour-row-length": `${time.length}`,

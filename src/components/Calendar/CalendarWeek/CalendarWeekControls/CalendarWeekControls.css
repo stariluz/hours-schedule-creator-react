@@ -5,3 +5,13 @@
   justify-content: space-between;
   padding-left: 1.25rem;
 }
+.add-hour {
+    position: relative;
+}
+.add-hour---begin{
+    top: -0.5rem;
+}
+.add-hour---end{
+    margin-top: auto;
+    bottom: -0.5rem;
+}

@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../../ScheduleCreator/ScheduleCreator";
 import { daysNamesMap } from "../../../utils/days";
 import CalendarDay from "./CalendarDay/CalendarDay";
-
+import "./CalendarWeek.css";
 const CalendarWeek = ({ firstHour, lastHour }) => {
   const scheduleState = useScheduleState();
   const scheduleDispatch = useScheduleStateDispatch();
