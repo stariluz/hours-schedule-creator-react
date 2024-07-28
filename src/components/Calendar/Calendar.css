@@ -32,13 +32,13 @@
     grid-template-columns: 4rem 1fr;
 }
 .day__hours,
-.hours__namespace{
+.hours-namespace__column{
     display: grid;
     grid-auto-rows: var(--hour-height);
     position: relative;
     /* grid-template-rows: repeat(19, 2rem); */
 }
-.hours__namespace{
+.hours-namespace__column{
     /* align-items: center; */
     text-align: end;
     font-size: 0.75rem;
