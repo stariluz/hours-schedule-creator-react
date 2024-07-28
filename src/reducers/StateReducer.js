@@ -145,7 +145,7 @@ const handleChangeHour = (state, day, hour) => {
       currentState.change = "Erease hour";
     }
   });
-  
+
   history[currentTime] = stateUpdate;
   history.push(newState);
 
@@ -224,6 +224,12 @@ const handleRemoveCourse = (state, courseId) => {
     currentState.coursesSort.splice(index, 1);
     delete currentState.courses[courseId];
     currentState.change = "Remove course";
+    currentState.hoursMap.save = currentState.hoursMap.save.map((day) => {
+      return day.map((hour) => {
+        return hour != courseId ? hour : null;
+      });
+    });
+    currentState.hoursMap.unsave = currentState.hoursMap.save;
   });
   history.push(stateUpdate);
   return {
