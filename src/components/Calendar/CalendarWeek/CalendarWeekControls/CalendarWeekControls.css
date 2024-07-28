@@ -4,6 +4,8 @@
   flex-direction: column;
   justify-content: space-between;
   padding-left: 1.25rem;
+  position: absolute;
+  left: 100%;
 }
 .add-hour {
     position: relative;

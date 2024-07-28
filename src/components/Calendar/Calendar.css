@@ -5,19 +5,9 @@
     width: 100%;
     height: fit-content;
     padding: 1rem;
+    padding-top: 1.85rem;
     --hour-height:48px;
     --hour-width:96px;
-}
-.week__header{
-    display: grid;
-    grid-template-columns: 4rem repeat(7,1fr);
-}
-.day__name{
-    font-size: 0.75rem;
-    text-align: center;
-    padding-bottom: 0.5rem;
-    font-weight: 700;
-    line-height: 1;
 }
 .hours__area{
     display: grid;
@@ -36,5 +26,6 @@
 
 .week__area{
     display: grid;
-    grid-template-columns: 1fr 0px;
+    grid-template-areas: 1fr/ 1fr 0px;
+    position: relative;
 }
