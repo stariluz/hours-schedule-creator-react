@@ -21,7 +21,7 @@ const CalendarDay = ({
   let length = 0;
   let hour = 0;
   let classHours = [];
-  let dayClasses = hoursMap[day];
+  const dayClasses = hoursMap[day];
   for (let i = 0; i < dayClasses.length; i++) {
     // console.log(dayClasses[i]);
     if (dayClasses[i] === null) continue;
@@ -43,7 +43,7 @@ const CalendarDay = ({
       <CalendarClassHour
         key={day + "_" + classHour.hour + "_" + classHour.length}
         time={classHour}
-        content={courses[hoursMap[day][classHour.hour]]}
+        content={courses[dayClasses[classHour.hour]]}
         firstHour={firstHour}
       />
     );
