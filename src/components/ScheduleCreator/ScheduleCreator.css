@@ -1,11 +1,4 @@
-.history{
-  width: 100%;
-  background-color: #FF578C;
-  /* margin-bottom: 0.5rem; */
-  padding: 0.5rem;
-  display: flex;
-  justify-content: center;
-}
+
 .playground{
   display: grid;
   grid-template-columns: 5fr 3fr 9fr;

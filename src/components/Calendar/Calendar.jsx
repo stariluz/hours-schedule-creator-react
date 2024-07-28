@@ -8,7 +8,7 @@ import "./Calendar.css";
 const Calendar = () => {
   const [firstHour, setFirstHour] = useState(7);
   const [lastHour, setLastHour] = useState(20);
-
+  
   return (
     <div className="calendar">
       <CalendarWeekHeader />
