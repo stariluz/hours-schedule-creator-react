@@ -22,7 +22,9 @@ export function stateReducer(state, action) {
       return handleAddCourse(state);
     }
     case 'removeCourse': {
-      return selectDefaultCourse(handleRemoveCourse(state, action.courseId));
+      return selectDefaultCourse(
+        handleRemoveCourse(state, action.courseId)
+      );
     }
     case 'changeTool': {
       return handleChangeTool(state, action);
@@ -32,6 +34,11 @@ export function stateReducer(state, action) {
     }
     case 'selectDefaultCourse': {
       return selectDefaultCourse(state);
+    }
+    case 'loadContent': {
+      return selectDefaultCourse(
+        loadContent(state, action.content)
+      );
     }
     default: {
       return state;
@@ -69,10 +76,10 @@ const handleHoursMapChanges = (state, action, hoursMap) => {
     change: action,
     hoursMap: updatedHoursMap,
   });
-  return  {
+  return {
     ...state,
     history: history,
-    currentTime: currentTime+1,
+    currentTime: currentTime + 1,
   };
 }
 const handleCourseChange = (state, courseId, field, value) => {
@@ -82,7 +89,7 @@ const handleCourseChange = (state, courseId, field, value) => {
   const stateUpdate = produce(history[currentTime], (currentState) => {
     currentState.courses[courseId].save[field] = currentState.courses[courseId][field];
     currentState.courses[courseId][field] = value;
-    currentState.change="Edit course";
+    currentState.change = "Edit course";
   });
   history[currentTime] = produce(history[currentTime],
     (currentState) => {
@@ -93,7 +100,7 @@ const handleCourseChange = (state, courseId, field, value) => {
   return {
     ...state,
     history: history,
-    currentTime: currentTime+1,
+    currentTime: currentTime + 1,
   };
 }
 const handleCourseChangeOutHistory = (state, courseId, field, value) => {
@@ -103,7 +110,7 @@ const handleCourseChangeOutHistory = (state, courseId, field, value) => {
   const stateUpdate = produce(history[currentTime], (currentState) => {
     currentState.courses[courseId][field] = value;
   });
-  history[currentTime]=stateUpdate;
+  history[currentTime] = stateUpdate;
   return {
     ...state,
     history: history,
@@ -116,17 +123,17 @@ const handleAddCourse = (state) => {
   const history = state.history.slice(0, currentTime + 1);
   let newCourse;
   const stateUpdate = produce(history[currentTime], (currentState) => {
-    const courseId=uuidv4();
+    const courseId = uuidv4();
     currentState.coursesSort.push(courseId);
-    newCourse={ ...defaultCourse, id:courseId};
-    currentState.courses[courseId]=newCourse;
-    currentState.change="Add course";
+    newCourse = { ...defaultCourse, id: courseId };
+    currentState.courses[courseId] = newCourse;
+    currentState.change = "Add course";
 
   });
-  
+
   history.push(stateUpdate);
   return {
-    ... state, 
+    ...state,
     history: history,
     currentTime: currentTime + 1,
     selectedCourse: newCourse,
@@ -135,47 +142,65 @@ const handleAddCourse = (state) => {
 const handleRemoveCourse = (state, courseId) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
-  const index=history[currentTime].coursesSort.indexOf(courseId);
-  if(index===undefined){
+  const index = history[currentTime].coursesSort.indexOf(courseId);
+  if (index === undefined) {
     return state;
   }
   const stateUpdate = produce(history[currentTime], (currentState) => {
-    currentState.coursesSort.splice(index,1);
+    currentState.coursesSort.splice(index, 1);
     delete currentState.courses[courseId];
-    currentState.change="Remove course";
+    currentState.change = "Remove course";
   });
   history.push(stateUpdate);
   return {
-    ... state, 
+    ...state,
     history: history,
     currentTime: currentTime + 1,
   };
 }
-const handleChangeTool=(state, action)=>{
+const handleChangeTool = (state, action) => {
   return {
-    ... state,
+    ...state,
     selectedTool: action.tool,
   };
 }
 
-const handleSelectCourse=(state, action)=>{
+const handleSelectCourse = (state, action) => {
   return {
-    ... state,
+    ...state,
     selectedCourse: action.course,
   };
 }
-const selectDefaultCourse = (state)=>{
+const selectDefaultCourse = (state) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
-  let selectedCourse=null;
-  if(history[currentTime].coursesSort.length>0){
-    selectedCourse=history[currentTime].courses[history[currentTime].coursesSort[0]];
+  let selectedCourse = null;
+  if (history[currentTime].coursesSort.length > 0) {
+    selectedCourse = history[currentTime].courses[history[currentTime].coursesSort[0]];
   }
+  
   return {
     ...state,
     selectedCourse: selectedCourse,
   }
 }
+const loadContent = (state, content) => {
+  const currentTime = state.currentTime;
+  const history = state.history.slice(0, currentTime + 1);
+  
+  const stateUpdate = produce(content, (newState) => {
+    newState.change = "Load Schedule Data";
+  });
+  history.push(stateUpdate);
+  
+  return {
+    ...state,
+    history: history,
+    currentTime: currentTime + 1,
+  };
+}
+
+
 export const defaultCourse = {
   save: {
     color: {
@@ -211,6 +236,6 @@ export const defaultState = {
       ],
     }
   ],
-  selectedTool:'brush',
+  selectedTool: 'brush',
   selectedCourse: defaultCourse,
 }

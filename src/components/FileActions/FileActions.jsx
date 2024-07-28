@@ -4,18 +4,21 @@ import Button from '../UI/Button/Button';
 import './FileActions.css';
 
 import { useCurrentState, useScheduleStateDispatch, useScheduleState } from "../ScheduleCreator/ScheduleCreator";
+import FileButton from '../UI/Button/FileButton';
 
 const FileActions = () => {
-  const state = useScheduleState();
+  const scheduleState = useScheduleState();
+  const scheduleDispatch = useScheduleStateDispatch();
   const downloadSchedule = () => {
-    const content=state.history[state.currentTime];
-    content.change="Download Schedule data";
-    
+    const content = scheduleState.history[scheduleState.currentTime];
+    console.log(content);
+    content.change = "Download Schedule data";
+
     const data = JSON.stringify(content);
     const blob = new Blob([data], { type: "application/json" });
     const jsonObjectUrl = URL.createObjectURL(blob);
     const $actionElement = document.createElement('a');
-    const date=`${(new Date()).toLocaleDateString()}_${(new Date()).toLocaleTimeString()}`;
+    const date = `${(new Date()).toLocaleDateString()}_${(new Date()).toLocaleTimeString()}`;
     const filename = `Schedule_${date}.json`;
     $actionElement.download = filename;
     $actionElement.style.display = 'none';
@@ -24,10 +27,20 @@ const FileActions = () => {
     $actionElement.click();
     URL.revokeObjectURL(jsonObjectUrl);
   }
-  const uploadSchedule = () => {
-    scheduleDispatch({
-      task: 'uploadFile',
-    });
+  const uploadSchedule = (file) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const jsonContent = JSON.parse(event.target.result);
+        scheduleDispatch({
+          task: 'loadContent',
+          content: jsonContent,
+        });
+      } catch (error) {
+        console.error('Error parsing JSON file:', error);
+      }
+    };
+    reader.readAsText(file);
   }
   return (
     <div className="file-actions">
@@ -37,12 +50,14 @@ const FileActions = () => {
       >
         <IconDownload />
       </Button>
-      <Button
+      <FileButton
+        type="file"
         className={'btn-traslucid'}
-        onClick={() => uploadSchedule()}
+        multiple={false}
+        onFileChange={(file) => uploadSchedule(file)}
       >
         <IconUpload />
-      </Button>
+      </FileButton>
     </div>
   );
 }

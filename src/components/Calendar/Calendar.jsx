@@ -26,9 +26,9 @@ const Calendar = () => {
   const [LAST_HOUR, setLastHour] = useState(20);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [currentAction, setCurrentAction] = useState(false);
-  const scheduleState=useScheduleState();
+  const scheduleState = useScheduleState();
   const scheduleDispatch = useScheduleStateDispatch();
-  
+  console.log(courses, hoursMap);
   const [onMouseOverEvent, setOnMouseOverEvent] = useState(() => (event) => null);
   useEffect(() => {
     // console.log("SYNC:", hoursMap);
@@ -37,10 +37,10 @@ const Calendar = () => {
   useEffect(() => {
     // console.log("CHANGED:", JSON.parse(JSON.stringify(hoursMapLocal)));
   }, [hoursMapLocal]);
-  useEffect(()=>{
-    if(isMouseDown){
-      document.addEventListener('mouseup', ()=>{setIsMouseDown(false)},{once: true });
-    }else{
+  useEffect(() => {
+    if (isMouseDown) {
+      document.addEventListener('mouseup', () => { setIsMouseDown(false) }, { once: true });
+    } else {
       setOnMouseOverEvent(() => (event) => null);
       scheduleDispatch({
         task: 'hoursMapChanges',
@@ -84,7 +84,7 @@ const Calendar = () => {
   }
   const onMouseDownEvent = (day, hour) => {
     if (scheduleState.selectedTool == 'brush') {
-      if(scheduleState.selectedCourse == null){
+      if (scheduleState.selectedCourse == null) {
         return;
       }
       setOnMouseOverEvent(() => (day, hour) => {
