@@ -1,0 +1,9 @@
+
+.hours-namespace__column{
+  /* align-items: center; */
+  text-align: end;
+  font-size: 0.75rem;
+  font-weight: 700;
+  /* margin-top: calc(0.75rem + 0.5rem ); */
+  position: relative;
+}

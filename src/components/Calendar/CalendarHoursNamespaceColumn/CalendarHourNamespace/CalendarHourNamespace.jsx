@@ -1,3 +1,4 @@
+import './CalendarHourNamespace.css';
 
 const CalendarHourNamespace = ({ hour }) => {
   let meridiem = 'am';

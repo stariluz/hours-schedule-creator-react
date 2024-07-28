@@ -1,5 +1,6 @@
 import { IconPlus } from "@tabler/icons-react";
 import Button from "../../../UI/Button/Button";
+import './CalendarWeekControls.css';
 
 const CalendarWeekControls = ({
   firstHour, setFirstHour, lastHour, setLastHour
