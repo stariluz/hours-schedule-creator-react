@@ -1,5 +1,5 @@
 import React from "react";
-import { useScheduleState, useScheduleStateDispatch } from "../ScheduleCreator/ScheduleCreator";
+import { useScheduleStateDispatch } from "../ScheduleCreator/ScheduleCreator";
 import { IconArrowBackUp, IconArrowForwardUp, IconHistory } from "@tabler/icons-react";
 import Button from "../UI/Button/Button";
 import "./HistoryNavigation.css";

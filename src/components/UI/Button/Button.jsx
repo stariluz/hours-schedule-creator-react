@@ -6,7 +6,7 @@ const Button = ({ children, verticalButton, horizontalButton, active, onClick, c
             onClick(event);
         }
     }
-    return <button className={"button " + `${verticalButton ? 'button-vertical ' : ''}` + `${horizontalButton ? 'button-horizontal ' : ''}` + `${active ? 'active ' : ''}`+`${className?className:''} `} onClick={(event) => onClickEvent(event)}>
+    return <button type="button" className={"button " + `${verticalButton ? 'button-vertical ' : ''}` + `${horizontalButton ? 'button-horizontal ' : ''}` + `${active ? 'active ' : ''}`+`${className?className:''} `} onClick={(event) => onClickEvent(event)}>
         {children}
     </button>
 }
