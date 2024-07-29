@@ -38,13 +38,4 @@
       "cs"
       "cal";
   }
-
-  .calendar .hours__area {
-    overflow-y: hidden;
-    overflow-x: scroll;
-  }
-
-  .week {
-    width: 600px;
-  }
 }

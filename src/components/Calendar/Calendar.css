@@ -36,13 +36,22 @@
 @container calendar (max-width: 420px) {
   .day__name,
   .hours-namespace__column {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
+  }
+
+  .hours__area {
+    overflow-y: hidden;
+    overflow-x: scroll;
+  }
+
+  .week {
+    width: 600px;
   }
 }
 
-@container calendar (max-width: 330px) {
+/* @container calendar (max-width: 330px) {
   .day__name,
   .hours-namespace__column {
     font-size: 0.4rem;
   }
-}
+} */
