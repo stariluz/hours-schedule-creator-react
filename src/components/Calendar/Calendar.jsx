@@ -22,13 +22,13 @@ const Calendar = () => {
             firstHour={firstHour}
             lastHour={lastHour}
           />
-          <CalendarWeekControls
-            firstHour={firstHour}
-            setFirstHour={setFirstHour}
-            lastHour={lastHour}
-            setLastHour={setLastHour}
-          />
         </div>
+        <CalendarWeekControls
+          firstHour={firstHour}
+          setFirstHour={setFirstHour}
+          lastHour={lastHour}
+          setLastHour={setLastHour}
+        />
       </div>
     </div>
   );

@@ -1,19 +1,26 @@
-.week__controls{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-left: 1.25rem;
-  position: absolute;
-  left: 100%;
+.week__controls {
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 0.25rem;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    padding-top: calc(1rem + 1rem);
+    padding-bottom: 1rem;
 }
+
 .add-hour {
     position: relative;
 }
-.add-hour---begin{
+
+.add-hour---begin {
     top: -0.5rem;
 }
-.add-hour---end{
+
+.add-hour---end {
     margin-top: auto;
     bottom: -0.5rem;
 }

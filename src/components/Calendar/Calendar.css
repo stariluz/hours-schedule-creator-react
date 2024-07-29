@@ -5,9 +5,9 @@
     width: 100%;
     height: fit-content;
     padding: 1rem;
-    padding-top: 1.85rem;
-    --hour-height:48px;
-    --hour-width:96px;
+    
+    container-type: inline-size;
+    container-name: calendar;
 }
 .hours__area{
     display: grid;
@@ -15,17 +15,34 @@
     gap: 0.25rem;
 }
 
-.hours-namespace__column{
-    display: grid;
-    width: fit-content;
-    height: 100%;
-    grid-auto-rows: 1fr;
-    position: relative;
-    /* grid-template-rows: repeat(19, 2rem); */
-}
 
+.week__container{
+    position: relative;
+}
 .week__area{
     display: grid;
     grid-template-areas: 1fr/ 1fr 0px;
     position: relative;
+}
+
+@container calendar (max-width: 475px) {
+
+  .day__name,
+  .hours-namespace__column {
+    font-size: 0.65rem;
+  }
+}
+
+@container calendar (max-width: 420px) {
+  .day__name,
+  .hours-namespace__column {
+    font-size: 0.5rem;
+  }
+}
+
+@container calendar (max-width: 330px) {
+  .day__name,
+  .hours-namespace__column {
+    font-size: 0.4rem;
+  }
 }

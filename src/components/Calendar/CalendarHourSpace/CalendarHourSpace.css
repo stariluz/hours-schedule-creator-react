@@ -12,6 +12,9 @@
   border-right: 0;
   box-sizing: border-box;
 }
+.hour__space:focus-visible{
+  outline: none;
+}
 .hour__space--class{
   position: relative;
   z-index: 2;
