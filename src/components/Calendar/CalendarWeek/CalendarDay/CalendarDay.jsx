@@ -1,11 +1,13 @@
 import CalendarClassHour from "../../CalendarClassHour/CalendarClassHour";
 import CalendarHourSpace from "../../CalendarHourSpace/CalendarHourSpace";
+import './CalendarDay.css';
+
 const CalendarDay = ({
-  onClickEvent,onMouseDownEvent, onMouseOverEvent,
+  onClickEvent, onMouseDownEvent, onMouseOverEvent,
   day, firstHour, lastHour, hoursMap, courses
 }) => {
   const numberOfHours = lastHour - firstHour;
-  const hours = Array(numberOfHours).fill(null).map((value, index) => {
+  const $hours = Array(numberOfHours).fill(null).map((value, index) => {
     const hour = index + firstHour;
     const thereIsClass = hoursMap[day][hour] != null;
     return (
@@ -18,27 +20,40 @@ const CalendarDay = ({
       />
     );
   });
-  let length = 0;
-  let hour = 0;
-  let classHours = [];
+  
   const dayClasses = hoursMap[day];
-  for (let i = 0; i < dayClasses.length; i++) {
-    // console.log(dayClasses[i]);
-    if (dayClasses[i] === null) continue;
-    // console.log("WORKS");
-    length = 1;
-    hour = i;
-    while (dayClasses[i] === dayClasses[i + 1]) {
-      i++;
-    }
-    length += i - hour;
-    classHours.push({
-      "hour": hour,
-      "length": length,
-    });
-  }
-
-  classHours = classHours.map((classHour) => {
+  
+  const dataClasses = dayClasses.reduce(
+    ({ result, previous, i }, current) => {
+      if (current == null) {
+        return {
+          result,
+          previous: null,
+          i: i+1,
+        };
+      } else if (current == previous) {
+        result[result.length - 1].length++;
+        return {
+          result,
+          previous: current,
+          i: i+1,
+        }
+      } else {
+        console.log(i);
+        result.push({
+          hour: i,
+          length: 1,
+        });
+        return {
+          result,
+          previous: current,
+          i: i+1,
+        }
+      }
+    }, { result: [], previous: null, i: 0 }
+  ).result;
+  console.log(dataClasses)
+  const classHours = dataClasses.map((classHour) => {
     return (
       <CalendarClassHour
         key={day + "_" + classHour.hour + "_" + classHour.length}
@@ -48,15 +63,14 @@ const CalendarDay = ({
       />
     );
   });
+
   return (
     <div className="day__column" key={`row-${day}`}>
-      <div className="day__content">
-        <div className="day__classes">
-          {classHours}
-        </div>
-        <div className="day__hours">
-          {hours}
-        </div>
+      <div className="day__classes" style={{'--hours-amount':lastHour-firstHour}}>
+        {classHours}
+      </div>
+      <div className="day__hours">
+        {$hours}
       </div>
     </div>
   );

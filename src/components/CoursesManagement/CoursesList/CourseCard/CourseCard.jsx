@@ -24,10 +24,10 @@ const CourseCard = (props) => {
   return (
     <article className="course-card">
       <section className="course-controls">
-        <Button verticalButton={true}>
+        <Button>
           <IconArrowsMove></IconArrowsMove>
         </Button>
-        <Button verticalButton={true}
+        <Button
           onClick={() => {
             onRemove()
           }}

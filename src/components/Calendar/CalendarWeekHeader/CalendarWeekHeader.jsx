@@ -1,5 +1,5 @@
 import { daysNames, daysNamesMap } from "../../../utils/days";
-
+import './CalendarWeekHeader.css';
 const CalendarWeekHeader = () => {
   let daySpaces = Object.keys(daysNamesMap).map((day) => {
     return (
@@ -10,7 +10,6 @@ const CalendarWeekHeader = () => {
   });
   return (
     <div className='week__header'>
-      <div className="day__name"></div>
       {daySpaces}
     </div>
   )

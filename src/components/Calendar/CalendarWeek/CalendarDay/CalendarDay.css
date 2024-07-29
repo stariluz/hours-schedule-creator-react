@@ -1,0 +1,32 @@
+
+.day__column{
+  position: relative;
+}
+
+.day__column:last-child .day__hours .hour__space{
+  border-right: 2px dashed rgb(205, 205, 205);
+}
+.day__hours .hour__space:last-child{
+  border-bottom: 2px dashed rgb(205, 205, 205);
+}
+
+.day__classes{
+    z-index: 0;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-auto-rows: 1fr;
+    grid-template-rows: repeat(var(--hours-amount), 1fr);
+    position: absolute;
+    bottom: 0;
+    left: 1px;
+    top: 1px;
+}
+.day__hours{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    /* grid-auto-rows: 1fr; */
+    position: relative;
+    grid-template-rows: repeat(var(--hours-amount), 1fr);
+}

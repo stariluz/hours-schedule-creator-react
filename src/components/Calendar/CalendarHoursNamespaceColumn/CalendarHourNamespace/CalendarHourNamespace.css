@@ -4,10 +4,3 @@
   /* top: -50%; */
   position: relative;
 }
-.hour__time:last-child {
-  line-height: 1;
-  /* top: -50%; */
-  position: absolute;
-  right: 0;
-  top: 100%;
-}

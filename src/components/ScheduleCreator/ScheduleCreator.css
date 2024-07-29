@@ -1,8 +1,41 @@
-
-.playground{
+.playground {
   display: grid;
   grid-template-columns: 5fr 3fr 9fr;
+  grid-template-areas:
+    "cl cs cal";
   background-color: #F4F4F4;
   gap: 1rem;
-  padding: 1rem;
+  padding: 1.25rem;
+}
+
+.courses-list {
+  grid-area: cl;
+}
+
+.course-selection-manager {
+  grid-area: cs;
+}
+
+.calendar {
+  grid-area: cal;
+}
+
+@media (max-width: 1024px) {
+  .playground {
+    grid-template-columns: 5fr 3fr;
+    grid-template-areas:
+      "cl cs"
+      "cal cal";
+
+  }
+}
+
+@media (max-width: 497px) {
+  .playground {
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "cl"
+      "cs"
+      "cal";
+  }
 }

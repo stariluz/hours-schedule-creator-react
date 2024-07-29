@@ -8,27 +8,27 @@ import "./Calendar.css";
 const Calendar = () => {
   const [firstHour, setFirstHour] = useState(7);
   const [lastHour, setLastHour] = useState(20);
-  
+
   return (
     <div className="calendar">
-      <CalendarWeekHeader />
       <div className='hours__area'>
         <CalendarHoursNamespaceColumn
           firstHour={firstHour}
           lastHour={lastHour}
         />
         <div className="week__area">
+          <CalendarWeekHeader />
           <CalendarWeek
             firstHour={firstHour}
             lastHour={lastHour}
           />
-          <CalendarWeekControls
-            firstHour={firstHour}
-            setFirstHour={setFirstHour}
-            lastHour={lastHour}
-            setLastHour={setLastHour}
-          />
         </div>
+        <CalendarWeekControls
+          firstHour={firstHour}
+          setFirstHour={setFirstHour}
+          lastHour={lastHour}
+          setLastHour={setLastHour}
+        />
       </div>
     </div>
   );
