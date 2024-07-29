@@ -1,0 +1,19 @@
+.week__header {
+  bottom: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+}
+
+.day__name {
+  height: 1rem;
+  padding-bottom: 0.5rem;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}

@@ -1,12 +1,12 @@
 import React, { useContext, useReducer } from "react";
-import HistoryNavigation from "../HistoryNavigation/HistoryNavigation";
 import CoursesManagement from "../CoursesManagement/CoursesManagement";
 import { CurrentStateContext, ScheduleContext, ScheduleDispatchContext, } from "../../contexts/Schedule.context";
-import { stateReducer, defaultState } from './StateReducer';
+import { stateReducer, defaultState } from '../../reducers/StateReducer';
 let amountOfClasses = 5;
 import './ScheduleCreator.css';
 import CourseSelectionManager from "../CoursesManagement/CourseSelectionManager/CourseSelectionManager";
 import Calendar from "../Calendar/Calendar";
+import Header from "../Header/Header";
 
 const ScheduleCreator = () => {
     // const state = useContext(ScheduleContext);
@@ -23,10 +23,7 @@ const ScheduleCreator = () => {
             <ScheduleContext.Provider value={state}>
                 <ScheduleDispatchContext.Provider value={dispatchState}>
                     <header className="history">
-                        <HistoryNavigation
-                            onClickOnPreviousStep={() => handlePreviousStep()}
-                            onClickOnNextStep={() => handleNextStep()}
-                        />
+                        <Header/>
                     </header>
                     <main className="playground">
                         <CurrentStateContext.Provider value={currentState}>

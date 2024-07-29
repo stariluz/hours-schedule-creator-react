@@ -3,6 +3,9 @@
   grid-template-columns: 1fr;
   gap: 1rem;
   height: fit-content;
+
+  container-type: inline-size;
+  container-name: course-selection-manager;
 }
 
 .course-options {
@@ -23,12 +26,12 @@
   border-radius: 4px;
   /* border: 1px dashed rgb(40, 40, 40); */
   box-shadow: inset -1px 1px 3px 0px #ffffff8d,
-  inset -3px 3px 3px 0px #ffffff70,
-  inset 0px -0px 1px 0px #241d079b,
-  inset 2px -2px 3px 0px #ffd7525d,
-  inset 0px 0px 0px 4px #e5ce1e,
-  inset 0px 0px 4px 4px black,
-  0px 0px 3px 0px black;
+    inset -3px 3px 3px 0px #ffffff70,
+    inset 0px -0px 1px 0px #241d079b,
+    inset 2px -2px 3px 0px #ffd7525d,
+    inset 0px 0px 0px 4px #e5ce1e,
+    inset 0px 0px 4px 4px black,
+    0px 0px 3px 0px black;
   height: calc(100cqh - 8px);
   width: calc(100cqw - 8px);
   position: absolute;
@@ -36,17 +39,18 @@
   left: 4px;
   container-type: size;
 }
-.course-option .active-box::after{
+
+.course-option .active-box::after {
   content: '';
   border-radius: 4px;
   /* border: 1px dashed rgb(40, 40, 40); */
   box-shadow: inset -1px 1px 3px 0px #ffffff8d,
-  inset -3px 3px 3px 0px #ffffff70,
-  inset 0px -0px 1px 0px #241d079b,
-  inset 2px -2px 3px 0px #ffd7525d,
-  inset 0px 0px 0px 2px #e5ce1e,
-  inset 0px 0px 4px 4px black,
-  0px 0px 3px 0px black;
+    inset -3px 3px 3px 0px #ffffff70,
+    inset 0px -0px 1px 0px #241d079b,
+    inset 2px -2px 3px 0px #ffd7525d,
+    inset 0px 0px 0px 2px #e5ce1e,
+    inset 0px 0px 4px 4px black,
+    0px 0px 3px 0px black;
   height: calc(100cqh + 16px);
   width: calc(100cqw + 16px);
   position: absolute;
@@ -62,4 +66,14 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+
+@container course-selection-manager (max-width: 200px) {
+
+  .course-options {
+    /* width: 100%; */
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 0.5rem;
+  }
 }

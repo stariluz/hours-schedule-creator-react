@@ -1,0 +1,32 @@
+.hour__container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hour__class {
+    --hour-row-start: 1;
+    --hour-row-length: 1;
+    grid-row-start: var(--hour-row-start);
+    grid-row-end: span var(--hour-row-length);
+
+    z-index: 2;
+    height: 100%;
+    aspect-ratio: 2/calc(var(--hour-row-length));
+    background: none;
+    border-bottom: 0;
+    border-right: 0;
+    box-sizing: border-box;
+}
+
+.class-box {
+    box-sizing: border-box;
+    position: relative;
+    border: none;
+    width: 100%;
+    border-radius: 4px;
+    /* color: #ffffff; */
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.35);
+    font-weight: 600;
+    font-size: 0.75rem;
+}
