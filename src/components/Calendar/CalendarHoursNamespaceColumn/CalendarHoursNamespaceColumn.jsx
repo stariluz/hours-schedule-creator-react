@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import CalendarHourNamespace from "./CalendarHourNamespace/CalendarHourNamespace";
 import './CalendarHoursNamespaceColumn.css';
 
-const CalendarHoursNamespaceColumn = ({ firstHour, lastHour, }) => {
+const CalendarHoursNamespaceColumn = ({ firstHour, lastHour, calendarRef }) => {
   const parentRef = useRef(null);
   const floatingRef = useRef(null);
 
@@ -13,16 +13,18 @@ const CalendarHoursNamespaceColumn = ({ firstHour, lastHour, }) => {
         floatingRef.current.style.height = `${parentHeight}px`;
       }
     };
+    const calendarResizeObserver = new ResizeObserver((calendar) => {
+      adjustFixedElementHeight();
+    });
+    // Adjust on window resize
+    calendarResizeObserver.observe(calendarRef.current);
 
     // Initial adjustment
     adjustFixedElementHeight();
 
-    // Adjust on window resize
-    window.addEventListener('resize', adjustFixedElementHeight);
-
     // Cleanup on component unmount
     return () => {
-      window.removeEventListener('resize', adjustFixedElementHeight);
+      calendarResizeObserver.disconnect();
     };
   }, []);
 
