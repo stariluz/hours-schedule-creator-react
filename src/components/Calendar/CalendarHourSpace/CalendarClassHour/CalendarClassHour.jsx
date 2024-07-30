@@ -1,6 +1,6 @@
-import "../../UI/Colors/Colors.css"
+import "../../../UI/Colors/Colors.css"
 import "./CalendarClassHour.css";
-import "../CalendarHourSpace/CalendarHourSpace.css";
+import "../CalendarHourSpace.css";
 
 const CalendarClassHour = ({ time, content, firstHour }) => {
   return (

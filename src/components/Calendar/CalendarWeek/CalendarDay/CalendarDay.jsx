@@ -1,4 +1,4 @@
-import CalendarClassHour from "../../CalendarClassHour/CalendarClassHour";
+import CalendarClassHour from "../../CalendarHourSpace/CalendarClassHour/CalendarClassHour";
 import CalendarHourSpace from "../../CalendarHourSpace/CalendarHourSpace";
 import './CalendarDay.css';
 

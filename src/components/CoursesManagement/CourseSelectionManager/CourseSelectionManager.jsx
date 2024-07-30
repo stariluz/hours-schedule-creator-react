@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../../ScheduleCreator/ScheduleCreator";
-import '../../Calendar/CalendarClassHour/CalendarClassHour.css';
+import '../../Calendar/CalendarHourSpace/CalendarClassHour/CalendarClassHour.css';
 import './CourseSelectionManager.css';
 import { IconBrush, IconEraser, IconPointer, IconPointerFilled } from "@tabler/icons-react";
 import Button from "../../UI/Button/Button";
