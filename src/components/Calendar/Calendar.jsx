@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CalendarWeek from "./CalendarWeek/CalendarWeek";
 import CalendarWeekHeader from "./CalendarWeekHeader/CalendarWeekHeader";
 import CalendarWeekControls from "./CalendarWeek/CalendarWeekControls/CalendarWeekControls";
@@ -8,13 +8,15 @@ import "./Calendar.css";
 const Calendar = () => {
   const [firstHour, setFirstHour] = useState(7);
   const [lastHour, setLastHour] = useState(20);
+  const calendarRef = useRef(null);
 
   return (
-    <div className="calendar">
+    <div className="calendar" ref={calendarRef}>
       <div className='hours__area'>
         <CalendarHoursNamespaceColumn
           firstHour={firstHour}
           lastHour={lastHour}
+          calendarRef={calendarRef}
         />
         <div className="week__area">
           <CalendarWeekHeader />
