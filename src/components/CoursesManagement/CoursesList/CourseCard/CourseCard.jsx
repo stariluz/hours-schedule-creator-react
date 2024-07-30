@@ -66,7 +66,7 @@ const CourseCard = (props) => {
             className="form-input"
             placeholder="Group name"
             onChange={(event) => { onInputChangeEnds("groupName", event.target.value) }}
-            value={props.professor}
+            value={props.groupName}
           />
 
           <input
@@ -74,7 +74,7 @@ const CourseCard = (props) => {
             className="form-input"
             placeholder="Classroom"
             onChange={(event) => { onInputChangeEnds("classroom", event.target.value) }}
-            value={props.professor}
+            value={props.classroom}
           />
         </div>
       </div>
