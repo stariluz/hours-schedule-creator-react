@@ -19,8 +19,6 @@
     grid-template-rows: repeat(var(--hours-amount), 1fr);
     position: absolute;
     bottom: 0;
-    left: 1px;
-    top: 1px;
 }
 .day__hours{
     display: grid;
