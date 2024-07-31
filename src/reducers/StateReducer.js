@@ -1,4 +1,4 @@
-import { produce } from 'immer';
+import { current, produce } from 'immer';
 import { v4 as uuidv4 } from 'uuid';
 
 export function stateReducer(state, action) {
@@ -45,6 +45,12 @@ export function stateReducer(state, action) {
       return selectDefaultCourse(
         loadContent(state, action.content)
       );
+    }
+    case 'addHourAtBegin': {
+      return handleAddHourAtBegin(state);
+    }
+    case 'addHourAtEnd': {
+      return handleAddHourAtEnd(state);
     }
     default: {
       return state;
@@ -192,6 +198,52 @@ const handleCourseChangeOutHistory = (state, courseId, field, value) => {
   };
 }
 
+const handleAddHourAtBegin = (state) => {
+  const currentTime = state.currentTime;
+  const history = state.history.slice(0, currentTime + 1);
+
+  if (state.history[currentTime].hours[0].begin <= 0) {
+    return;
+  }
+
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    currentState.hours[0].begin--;
+
+    currentState.change = "Add hour at begin";
+
+  });
+
+  history.push(stateUpdate);
+  return {
+    ...state,
+    history: history,
+    currentTime: currentTime + 1,
+  };
+}
+
+const handleAddHourAtEnd = (state) => {
+  const currentTime = state.currentTime;
+  const history = state.history.slice(0, currentTime + 1);
+
+  const lastIndex = state.history[currentTime].hours.length-1;
+  if (state.history[currentTime].hours[lastIndex].end >= 24) {
+    return;
+  }
+
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    currentState.hours[lastIndex].end++;
+
+    currentState.change = "Add hour at end";
+
+  });
+
+  history.push(stateUpdate);
+  return {
+    ...state,
+    history: history,
+    currentTime: currentTime + 1,
+  };
+}
 const handleAddCourse = (state) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
@@ -323,6 +375,7 @@ export const defaultState = {
       coursesSort: [
         defaultCourse.id,
       ],
+      hours: Array(1).fill({ begin: 7, end: 20 }),
     }
   ],
   selectedTool: 'brush',

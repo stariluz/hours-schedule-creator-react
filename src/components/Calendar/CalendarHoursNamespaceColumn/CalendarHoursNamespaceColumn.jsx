@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
 import CalendarHourNamespace from "./CalendarHourNamespace/CalendarHourNamespace";
 import './CalendarHoursNamespaceColumn.css';
+import { useCurrentState } from "../../ScheduleCreator/ScheduleCreator";
 
-const CalendarHoursNamespaceColumn = ({ firstHour, lastHour, calendarRef }) => {
+const CalendarHoursNamespaceColumn = ({ calendarRef }) => {
   const parentRef = useRef(null);
   const floatingRef = useRef(null);
+  const { hours } = useCurrentState();
 
   useEffect(() => {
     const adjustFixedElementHeight = () => {
@@ -28,8 +30,8 @@ const CalendarHoursNamespaceColumn = ({ firstHour, lastHour, calendarRef }) => {
     };
   }, []);
 
-  const $hoursNamespaces = Array(lastHour - firstHour).fill(null).map((value, index) => {
-    const hour = index + firstHour;
+  const $hoursNamespaces = Array(hours[0].end - hours[0].begin).fill(null).map((value, index) => {
+    const hour = index + hours[0].begin;
     return (
       <CalendarHourNamespace
         hour={hour}
