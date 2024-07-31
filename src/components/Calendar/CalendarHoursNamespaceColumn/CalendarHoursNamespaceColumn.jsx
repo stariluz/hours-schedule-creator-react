@@ -30,7 +30,7 @@ const CalendarHoursNamespaceColumn = ({ calendarRef }) => {
     };
   }, []);
 
-  const $hoursNamespaces = Array(hours[0].end - hours[0].begin).fill(null).map((value, index) => {
+  const $hoursNamespaces = Array(hours[0].end + 1 - hours[0].begin).fill(null).map((value, index) => {
     const hour = index + hours[0].begin;
     return (
       <CalendarHourNamespace

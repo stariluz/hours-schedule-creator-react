@@ -8,7 +8,8 @@ const CalendarDay = ({
   day,
 }) => {
   const { hoursMap: { unsave: hoursMap }, courses, hours } = useCurrentState();
-  const numberOfHours = hours[0].end - hours[0].begin;
+  const numberOfHours = hours[0].end + 1 - hours[0].begin;
+  
   const $hours = Array(numberOfHours).fill(null).map((value, index) => {
     const hour = index + hours[0].begin;
     const thereIsClass = hoursMap[day][hour] != null;
@@ -41,7 +42,6 @@ const CalendarDay = ({
           i: i + 1,
         }
       } else {
-        console.log(i);
         result.push({
           hour: i,
           length: 1,
@@ -54,7 +54,7 @@ const CalendarDay = ({
       }
     }, { result: [], previous: null, i: 0 }
   ).result;
-  console.log(dataClasses)
+
   const classHours = dataClasses.map((classHour) => {
     return (
       <CalendarClassHour
@@ -68,7 +68,7 @@ const CalendarDay = ({
 
   return (
     <div className="day__column" key={`row-${day}`}>
-      <div className="day__classes" style={{ '--hours-amount': hours[0].end - hours[0].begin }}>
+      <div className="day__classes" style={{ '--hours-amount': numberOfHours }}>
         {classHours}
       </div>
       <div className="day__hours">

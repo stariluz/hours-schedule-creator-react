@@ -225,7 +225,7 @@ const handleAddHourAtEnd = (state) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
 
-  const lastIndex = state.history[currentTime].hours.length-1;
+  const lastIndex = state.history[currentTime].hours.length - 1;
   if (state.history[currentTime].hours[lastIndex].end >= 24) {
     return;
   }
@@ -321,6 +321,11 @@ const loadContent = (state, content) => {
   const history = state.history.slice(0, currentTime + 1);
 
   const stateUpdate = produce(content, (newState) => {
+    const { hoursMap, hours, courses, coursesSort } = repareScheduleMementoObject(newState);
+    newState.hoursMap = hoursMap;
+    newState.hours = hours;
+    newState.courses = courses;
+    newState.coursesSort = coursesSort;
     newState.change = "Load Schedule Data";
   });
   history.push(stateUpdate);
@@ -335,6 +340,55 @@ const copyHistory = (state) => {
   return {
     currentTime: state.currentTime,
     history: state.history.slice(0, state.currentTime + 1)
+  };
+}
+const repareScheduleMementoObject = (memento) => {
+
+  if (!('hoursMap' in memento)) {
+    memento['hoursMap'] = defaultState.history[0].hoursMap;
+  }
+  if (!('coursesSort' in memento)) {
+    memento['coursesSort'] = defaultState.history[0].coursesSort;
+  }
+  if (!('courses' in memento)) {
+    memento['courses'] = defaultState.history[0].courses;
+  }
+  if (!('hours' in memento)) {
+    memento = {
+      ...memento,
+      hours: [
+        findMementoHoursLimits(memento)
+      ]
+    };
+  }
+  return { ...memento };
+}
+
+const findMementoHoursLimits = (memento) => {
+  let minHour = 24, maxHour = 0;
+  for (let i = 0; i < memento.hoursMap.save.length; i++) {
+    for (let j = 0; j < minHour; j++) {
+      memento.hoursMap.save[i][j]
+      if (memento.hoursMap.save[i][j] != null) {
+        if (j < minHour) {
+          minHour = j;
+        }
+        break;
+      }
+    }
+    for (let j = memento.hoursMap.save[i].length - 1; j >= maxHour; j--) {
+      if (memento.hoursMap.save[i][j] != null) {
+        if (j > maxHour) {
+          maxHour = j;
+        }
+        break;
+      }
+    }
+  }
+
+  return {
+    begin: minHour,
+    end: maxHour
   };
 }
 
@@ -375,7 +429,7 @@ export const defaultState = {
       coursesSort: [
         defaultCourse.id,
       ],
-      hours: Array(1).fill({ begin: 7, end: 20 }),
+      hours: Array(1).fill({ begin: 7, end: 19 }),
     }
   ],
   selectedTool: 'brush',
