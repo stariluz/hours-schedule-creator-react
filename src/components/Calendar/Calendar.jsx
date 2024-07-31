@@ -6,31 +6,19 @@ import CalendarHoursNamespaceColumn from "./CalendarHoursNamespaceColumn/Calenda
 import "./Calendar.css";
 
 const Calendar = () => {
-  const [firstHour, setFirstHour] = useState(7);
-  const [lastHour, setLastHour] = useState(20);
   const calendarRef = useRef(null);
 
   return (
     <div className="calendar" ref={calendarRef}>
       <div className='hours__area'>
         <CalendarHoursNamespaceColumn
-          firstHour={firstHour}
-          lastHour={lastHour}
           calendarRef={calendarRef}
         />
         <div className="week__area">
           <CalendarWeekHeader />
-          <CalendarWeek
-            firstHour={firstHour}
-            lastHour={lastHour}
-          />
+          <CalendarWeek/>
         </div>
-        <CalendarWeekControls
-          firstHour={firstHour}
-          setFirstHour={setFirstHour}
-          lastHour={lastHour}
-          setLastHour={setLastHour}
-        />
+        <CalendarWeekControls/>
       </div>
     </div>
   );

@@ -4,10 +4,9 @@ import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../
 import { daysNamesMap } from "../../../utils/days";
 import CalendarDay from "./CalendarDay/CalendarDay";
 import "./CalendarWeek.css";
-const CalendarWeek = ({ firstHour, lastHour }) => {
+const CalendarWeek = ({}) => {
   const scheduleState = useScheduleState();
   const scheduleDispatch = useScheduleStateDispatch();
-  const { hoursMap, courses } = useCurrentState();
   const [onMouseOverEvent, setOnMouseOverEvent] = useState(() => (event) => null);
   
   const handleMouseDownEvent = (day, hour) => {
@@ -44,10 +43,6 @@ const CalendarWeek = ({ firstHour, lastHour }) => {
           return (
             <CalendarDay
               day={day}
-              firstHour={firstHour}
-              lastHour={lastHour}
-              hoursMap={hoursMap.unsave}
-              courses={courses}
               onClickEvent={()=>{}}
               onMouseDownEvent={handleMouseDownEvent}
               onMouseOverEvent={onMouseOverEvent}
