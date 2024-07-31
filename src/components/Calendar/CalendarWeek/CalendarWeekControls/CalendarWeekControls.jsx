@@ -1,24 +1,22 @@
 import { IconPlus } from "@tabler/icons-react";
 import Button from "../../../UI/Button/Button";
 import './CalendarWeekControls.css';
+import { useCurrentState, useScheduleStateDispatch } from "../../../ScheduleCreator/ScheduleCreator";
 
-const CalendarWeekControls = ({
-  firstHour, setFirstHour, lastHour, setLastHour
-}) => {
+const CalendarWeekControls = () => {
+  const scheduleDispatch = useScheduleStateDispatch();
+  const { hours } = useCurrentState();
+
   const addHourAtBegin = () => {
-    if (firstHour > 0) {
-      setFirstHour(firstHour - 1);
-    }
+    scheduleDispatch({ task: 'addHourAtBegin' });
   }
   const addHourAtEnd = () => {
-    if (lastHour < 24) {
-      setLastHour(lastHour + 1);
-    }
+    scheduleDispatch({ task: 'addHourAtEnd' });
   }
   return (
     <div className="week__controls">
       {
-        firstHour > 0 ?
+        hours[0].begin > 0 ?
           <Button
             className='add-hour add-hour---begin button-rounded button-icon button-small'
             onClick={() => addHourAtBegin()}
@@ -28,7 +26,7 @@ const CalendarWeekControls = ({
           : null
       }
       {
-        lastHour < 24 ?
+        hours[0].end < 24 ?
           <Button
             className='add-hour add-hour---end button-rounded button-icon button-small'
             onClick={() => addHourAtEnd()}
