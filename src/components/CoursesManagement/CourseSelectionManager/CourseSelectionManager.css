@@ -10,14 +10,9 @@
 
 .course-options {
   display: grid;
-  grid-template-columns: 50% 50%;
-  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 3cqi;
   width: 100%;
-}
-
-.course-option {
-  container-type: size;
-  padding: 0;
 }
 
 .course-option .active-box {
@@ -84,18 +79,18 @@
 
 @container course-selection-manager (max-width: 360px) {
   .course-options {
-    grid-template-columns: repeat(3, calc(100% / 3));
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @container course-selection-manager (max-width: 280px) {
   .course-options {
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @container course-selection-manager (max-width: 140px) {
   .course-options {
-    grid-template-columns: 100%;
+    grid-template-columns: 1fr;
   }
 }
