@@ -3,7 +3,8 @@
     grid-template-areas:
         "CC CCI CF"
         "CC CCI CF";
-    justify-content: center;
+    grid-template-columns: auto auto 1fr;
+    justify-content: start;
     align-items: stretch;
     gap: 0.25rem;
     padding: 0.5rem;
