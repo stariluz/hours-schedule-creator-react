@@ -4,6 +4,8 @@ import '../../Calendar/CalendarHourSpace/CalendarClassHour/CalendarClassHour.css
 import './CourseSelectionManager.css';
 import { IconBrush, IconEraser, IconPointer, IconPointerFilled } from "@tabler/icons-react";
 import Button from "../../UI/Button/Button";
+import FlowType from "../../common/FlowType/FlowType";
+import CalendarClass from "../../Calendar/CalendarClass/CalendarClass";
 
 const CourseSelectionManager = () => {
   const scheduleState = useScheduleState();
@@ -58,25 +60,18 @@ const CourseSelectionOptions = () => {
     });
   }
   return coursesSort?.map((courseId, index) => {
-    const course=courses[courseId];
+    const course = courses[courseId];
     return (
-
-      <button className={`course-option class-box custom-color custom-color-text`}
-        style={{
-          "--hour-bg-hue": `${course.color.h}`,
-          "--hour-bg-saturation": `${course.color.s * 100}%`,
-          "--hour-bg-lightness": `${course.color.l * 100}%`,
-          "--input-color-text-color": course.text,
-        }}
+      <CalendarClass
         key={course.id}
+        course={course}
+        className="course-option"
         onClick={() => { onSelectCourse(course) }}
       >
         {course.id == scheduleState.selectedCourse?.id ? <div className="active-box"></div> : null}
-        <span className="course-option-name">
-          {course.name}
-        </span>
-      </button>)
-  })
+      </CalendarClass>
+    );
+  });
 }
 
 
