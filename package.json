@@ -19,7 +19,7 @@
     "react-color": "^2.19.3",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.53.1",
-    "react-router-dom": "^6.27.0",
+    "react-router-dom": "^7.0.2",
     "terser": "^5.26.0",
     "uuid": "^11.0.3"
   },
