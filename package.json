@@ -15,16 +15,16 @@
   "dependencies": {
     "@tabler/icons-react": "^3.19.0",
     "immer": "^10.0.3",
-    "react": "^18.2.0",
+    "react": "^19.0.0",
     "react-color": "^2.19.3",
-    "react-dom": "^18.2.0",
+    "react-dom": "^19.0.0",
     "react-hook-form": "^7.53.1",
     "react-router-dom": "^6.27.0",
     "terser": "^5.26.0",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.66",
+    "@types/react": "^19.0.1",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^9.13.0",
