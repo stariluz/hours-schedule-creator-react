@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tabler/icons-react": "^3.19.0",
+    "@tabler/icons-react": "^3.26.0",
     "immer": "^10.0.3",
     "react": "^19.0.0",
     "react-color": "^2.19.3",
