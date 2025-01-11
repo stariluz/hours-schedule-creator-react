@@ -9,8 +9,12 @@
     "build": "vite build && cp dist/index.html dist/404.html",
     "start": "vite preview"
   },
+  "engines" : { 
+    "npm" : ">=10.8.2 <11.0.0",
+    "node" : ">=20.18.1 <23.0.0"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Adora Stariluz",
   "license": "ISC",
   "dependencies": {
     "@tabler/icons-react": "^3.26.0",

@@ -4,21 +4,27 @@ import CalendarWeekHeader from "./CalendarWeekHeader/CalendarWeekHeader";
 import CalendarWeekControls from "./CalendarWeek/CalendarWeekControls/CalendarWeekControls";
 import CalendarHoursNamespaceColumn from "./CalendarHoursNamespaceColumn/CalendarHoursNamespaceColumn";
 import "./Calendar.css";
+import CalendarHoursNamespaceColumnPlaceholder from "./CalendarHoursNamespaceColumn/CalendarHoursNamespaceColumnPlaceholder";
 
 const Calendar = () => {
   const calendarRef = useRef(null);
 
   return (
     <div className="calendar" ref={calendarRef}>
-      <div className='hours__area'>
+      <div className='calendar__grid calendar__grid--fixed'>
         <CalendarHoursNamespaceColumn
+          calendarRef={calendarRef}
+        />
+      </div>
+      <div className='calendar__grid'>
+        <CalendarHoursNamespaceColumnPlaceholder
           calendarRef={calendarRef}
         />
         <div className="week__area">
           <CalendarWeekHeader />
-          <CalendarWeek/>
+          <CalendarWeek />
         </div>
-        <CalendarWeekControls/>
+        <CalendarWeekControls />
       </div>
     </div>
   );
