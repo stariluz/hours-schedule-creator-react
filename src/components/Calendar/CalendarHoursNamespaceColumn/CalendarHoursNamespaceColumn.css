@@ -14,8 +14,11 @@
   z-index: 10px;
 }
 .hours-namespace__column--floating{
-  position: fixed;
+  position: absolute;
+  /* display: none; */
+  z-index: 5;
+  padding: inherit;
   width: min-content;
-  background: white;
+  background: none;
   color: black;
 }
