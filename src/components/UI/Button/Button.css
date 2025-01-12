@@ -1,8 +1,10 @@
 .btn-primary {
-    --btn-color: #282828;
-    --btn-bg: #CCCCCC;
-    --btn-bg-hover: #dfdfdf;
-    --btn-bg-active: #f1f1f1;
+    --btn-color: #CCCCCC;
+    --btn-bg: white;
+    --btn-bg-hover: #CCCCCC;
+    --btn-color-hover: white;
+    --btn-bg-active: #CCCCCC;
+    --btn-color-active: black;
 }
 .btn-secondary {
     --btn-color: #CCCCCC;
@@ -65,5 +67,6 @@
 }
 .button-small{
     height: 1rem;
-    padding: 0.25rem;
+    width: 1rem;
+    padding: 0.15rem;
 }
