@@ -12,12 +12,12 @@ const Calendar = () => {
   return (
     <div className="calendar" ref={calendarRef}>
       <div className='calendar__grid calendar__grid--fixed'>
+        <CalendarWeekControls />
         <CalendarHoursNamespaceColumn
           calendarRef={calendarRef}
         />
       </div>
       <div className='calendar__grid'>
-        <CalendarWeekControls />
         <CalendarHoursNamespaceColumnPlaceholder
           calendarRef={calendarRef}
         />

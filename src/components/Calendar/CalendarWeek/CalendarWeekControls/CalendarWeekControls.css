@@ -6,20 +6,37 @@
     justify-content: space-between;
     /* padding-left: 1.25rem; */
     position: absolute;
-    left: -2.25rem;
+    left: -1.25rem;
     top: 0;
     padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
-.add-hour {
+.hour-control-btn {
     position: relative;
 }
 
-.add-hour---begin {
-    top: -0.5rem;
-}
+.hour-control---begin {
+    position: relative;
+    top: 0rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}   
 
-.add-hour---end {
+.hour-control--end {
+    position: relative;
     margin-top: auto;
-    bottom: -0.5rem;
+    bottom: 0rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.add-btn {
+    --btn-bg-hover: #98d79f;
+    --btn-color-hover: white;
+}
+.remove-btn {
+    --btn-bg-hover: #ff677c;
+    --btn-color-hover: white;
 }
