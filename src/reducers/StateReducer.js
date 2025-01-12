@@ -52,6 +52,12 @@ export function stateReducer(state, action) {
     case 'addHourAtEnd': {
       return handleAddHourAtEnd(state);
     }
+    case 'removeHourAtBegin': {
+      return handleRemoveHourAtBegin(state);
+    }
+    case 'removeHourAtEnd': {
+      return handleRemoveHourAtEnd(state);
+    }
     default: {
       return state;
     }
@@ -244,6 +250,55 @@ const handleAddHourAtEnd = (state) => {
     currentTime: currentTime + 1,
   };
 }
+
+
+const handleRemoveHourAtBegin = (state) => {
+  const currentTime = state.currentTime;
+  const history = state.history.slice(0, currentTime + 1);
+
+  if (state.history[currentTime].hours[0].begin >= state.history[currentTime].hours[0].end) {
+    return;
+  }
+
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    currentState.hours[0].begin++;
+
+    currentState.change = "Remove hour at begin";
+
+  });
+
+  history.push(stateUpdate);
+  return {
+    ...state,
+    history: history,
+    currentTime: currentTime + 1,
+  };
+}
+
+const handleRemoveHourAtEnd = (state) => {
+  const currentTime = state.currentTime;
+  const history = state.history.slice(0, currentTime + 1);
+
+  const lastIndex = state.history[currentTime].hours.length - 1;
+  if (state.history[currentTime].hours[lastIndex].end <= state.history[currentTime].hours[lastIndex].begin) {
+    return;
+  }
+
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    currentState.hours[lastIndex].end--;
+
+    currentState.change = "Remove hour at end";
+
+  });
+
+  history.push(stateUpdate);
+  return {
+    ...state,
+    history: history,
+    currentTime: currentTime + 1,
+  };
+}
+
 const handleAddCourse = (state) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);

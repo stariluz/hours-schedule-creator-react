@@ -27,6 +27,11 @@
     grid-area: CC;
 }
 
+.remove-btn {
+    --btn-bg-hover: #ff677c;
+    --btn-color-hover: white;
+}
+
 .course-color-input {
     width: 2rem;
     grid-area: CCI;

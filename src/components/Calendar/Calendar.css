@@ -54,6 +54,9 @@
     overflow-y: hidden;
     overflow-x: scroll;
   }
+  .calendar__grid--fixed {
+    overflow: unset;
+  }
 
   .week {
     width: 600px;

@@ -31,6 +31,7 @@ const CourseCard = (props) => {
           onClick={() => {
             onRemove()
           }}
+          className="remove-btn"
         >
           <IconTrash></IconTrash>
         </Button>
