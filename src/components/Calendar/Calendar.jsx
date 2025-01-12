@@ -17,6 +17,7 @@ const Calendar = () => {
         />
       </div>
       <div className='calendar__grid'>
+        <CalendarWeekControls />
         <CalendarHoursNamespaceColumnPlaceholder
           calendarRef={calendarRef}
         />
@@ -24,7 +25,6 @@ const Calendar = () => {
           <CalendarWeekHeader />
           <CalendarWeek />
         </div>
-        <CalendarWeekControls />
       </div>
     </div>
   );

@@ -1,3 +1,9 @@
+.app__container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: max-content;
+}
+
 .playground {
   display: grid;
   grid-template-columns: 5fr 2fr 8fr;
@@ -18,6 +24,7 @@
 
 .calendar {
   grid-area: cal;
+  margin-left: 1rem;
 }
 
 /* @media (min-width: 3800px) {
@@ -30,6 +37,7 @@
     grid-template-columns: 8fr 4fr 14fr;
   }
 }
+
 @media (max-width: 1024px) {
   .playground {
     grid-template-columns: 6fr 2fr;
