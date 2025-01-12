@@ -3,7 +3,7 @@ import CalendarHourNamespace from "./CalendarHourNamespace/CalendarHourNamespace
 import './CalendarHoursNamespaceColumn.css';
 import { useCurrentState } from "../../ScheduleCreator/ScheduleCreator";
 
-const CalendarHoursNamespaceColumn = ({ calendarRef }) => {
+const CalendarHoursNamespaceColumnPlaceholder = ({ calendarRef }) => {
   const parentRef = useRef(null);
   const floatingRef = useRef(null);
   const { hours } = useCurrentState();
@@ -41,11 +41,11 @@ const CalendarHoursNamespaceColumn = ({ calendarRef }) => {
   });
   return (
     <>
-      <div className="hours-namespace__column hours-namespace__column--floating" ref={floatingRef}>
+      <div className="hours-namespace__column" ref={parentRef}>
         <div className='day__name'></div>
         {$hoursNamespaces}
       </div>
     </>
   );
 }
-export default CalendarHoursNamespaceColumn;
+export default CalendarHoursNamespaceColumnPlaceholder;

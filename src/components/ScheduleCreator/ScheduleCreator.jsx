@@ -19,7 +19,7 @@ const ScheduleCreator = () => {
     const currentState = state.history[currentTime];
 
     return (
-        <div>
+        <div className="app__container">
             <ScheduleContext.Provider value={state}>
                 <ScheduleDispatchContext.Provider value={dispatchState}>
                     <header className="history">

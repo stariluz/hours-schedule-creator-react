@@ -2,17 +2,28 @@
     /* border: 2px solid black; */
     background-color: white;
     border-radius: 1rem;
-    width: 100%;
+    width: calc(100% - 1rem);
     height: fit-content;
     padding: 1rem;
     
     container-type: inline-size;
     container-name: calendar;
+    position: relative;
 }
-.hours__area{
+.calendar__grid{
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 0.25rem;
+    position: relative;
+}
+
+.calendar__grid--fixed{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: inherit;
+  top: 0;
+  left: 0;
 }
 
 
@@ -39,9 +50,12 @@
     font-size: 0.6rem;
   }
 
-  .hours__area {
+  .calendar__grid {
     overflow-y: hidden;
     overflow-x: scroll;
+  }
+  .calendar__grid--fixed {
+    overflow: unset;
   }
 
   .week {
