@@ -32,7 +32,8 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        'src': fileURLToPath(new URL('./src', import.meta.url))
+        'src': fileURLToPath(new URL('./src', import.meta.url)),
+        '@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',
       },
     },
     base: process.env.NODE_ENV === 'production'
