@@ -1,6 +1,9 @@
 import { current, produce } from 'immer';
 import { v4 as uuidv4 } from 'uuid';
 
+import defaultState from '../models/defaultState';
+import defaultCourse from '../models/defaultCourse';
+
 export function stateReducer(state, action) {
   switch (action.task) {
     case 'previousStep': {
@@ -397,6 +400,7 @@ const copyHistory = (state) => {
     history: state.history.slice(0, state.currentTime + 1)
   };
 }
+
 const repareScheduleMementoObject = (memento) => {
 
   if (!('hoursMap' in memento)) {
@@ -447,46 +451,3 @@ const findMementoHoursLimits = (memento) => {
   };
 }
 
-
-export const defaultCourse = {
-  save: {
-    color: {
-      h: 341,
-      s: 1,
-      l: 0.67
-    },
-    text: "#fff",
-  },
-  color: {
-    h: 341,
-    s: 1,
-    l: 0.67
-  },
-  text: "#fff",
-  name: "",
-  professor: "",
-  classroom: "",
-  groupName: "",
-  id: uuidv4(),
-}
-export const defaultState = {
-  currentTime: 0,
-  history: [
-    {
-      change: "Start of the file",
-      hoursMap: {
-        save: Array(7).fill(Array(24).fill(null)),
-        unsave: Array(7).fill(Array(24).fill(null)),
-      },
-      courses: {
-        [defaultCourse.id]: defaultCourse,
-      },
-      coursesSort: [
-        defaultCourse.id,
-      ],
-      hours: Array(1).fill({ begin: 7, end: 19 }),
-    }
-  ],
-  selectedTool: 'brush',
-  selectedCourse: defaultCourse,
-}
