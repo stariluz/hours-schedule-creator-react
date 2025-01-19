@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import CalendarHourNamespace from "./CalendarHourNamespace/CalendarHourNamespace";
 import './CalendarHoursNamespaceColumn.css';
-import { useCurrentState } from "../../ScheduleCreator/ScheduleCreator";
+import { useCurrentState, useScheduleRef } from "../../ScheduleCreator/ScheduleCreator";
 
-const CalendarHoursNamespaceColumnPlaceholder = ({ calendarRef }) => {
+const CalendarHoursNamespaceColumnPlaceholder = () => {
+  const scheduleRef = useScheduleRef();
   const parentRef = useRef(null);
   const floatingRef = useRef(null);
   const { hours } = useCurrentState();
@@ -18,8 +19,11 @@ const CalendarHoursNamespaceColumnPlaceholder = ({ calendarRef }) => {
     const calendarResizeObserver = new ResizeObserver((calendar) => {
       adjustFixedElementHeight();
     });
-    // Adjust on window resize
-    calendarResizeObserver.observe(calendarRef.current);
+
+    if(scheduleRef){
+      // Adjust on window resize
+      calendarResizeObserver.observe(scheduleRef.current);
+    }
 
     // Initial adjustment
     adjustFixedElementHeight();
