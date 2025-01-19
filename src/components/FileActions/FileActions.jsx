@@ -55,7 +55,13 @@ const FileActions = () => {
   const downloadScheduleAsImage = async () => {
     var canvas = null;
 
-    canvas=await html2canvas(scheduleRef.current);
+    canvas=await html2canvas(scheduleRef.current,{onclone:(document)=>{
+      document.querySelector(".calendar").style.width="1080px";
+      document.querySelectorAll(".class-box .content").forEach((hourClas)=>{
+        hourClas.style.fontSize="13px";
+      });
+      console.log(document.querySelectorAll(".class-box .content"))
+    }});
 
     var imgData =
       canvas.toDataURL("image/png");
