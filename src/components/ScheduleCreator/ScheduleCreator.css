@@ -6,9 +6,11 @@
 
 .playground {
   display: grid;
-  grid-template-columns: 5fr 2fr 8fr;
+  grid-template-columns: 6fr 6fr;
+  grid-template-rows: auto 100%;
   grid-template-areas:
-    "cl cs cal";
+    "cl cs"
+    "cl cal";
   background-color: #F4F4F4;
   gap: 1rem;
   padding: 1.25rem;
@@ -34,22 +36,14 @@
 } */
 @media (max-width: 1289px) {
   .playground {
-    grid-template-columns: 8fr 4fr 14fr;
+    grid-template-columns: 5fr 7fr;
   }
 }
 
-@media (max-width: 1024px) {
-  .playground {
-    grid-template-columns: 6fr 2fr;
-    grid-template-areas:
-      "cl cs"
-      "cal cal";
-  }
-}
-
-@media (max-width: 497px) {
+@media (max-width: 856px) {
   .playground {
     grid-template-columns: 100%;
+    grid-template-rows: auto;
     grid-template-areas:
       "cl"
       "cs"

@@ -35,8 +35,10 @@
 .add-btn {
     --btn-bg-hover: #98d79f;
     --btn-color-hover: white;
+    --btn-bg-active: #98d79f;
 }
 .remove-btn {
     --btn-bg-hover: #ff677c;
     --btn-color-hover: white;
+    --btn-bg-active: #ff677c;
 }

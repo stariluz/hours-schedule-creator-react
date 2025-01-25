@@ -28,14 +28,14 @@ const CourseSelectionManager = () => {
         </Button> */}
         <Button
           active={scheduleState.selectedTool == 'brush'}
-          className={'btn-secondary'}
+          className={'btn-primary'}
           onClick={() => onSelectTool('brush')}
         >
           <IconBrush></IconBrush>
         </Button>
         <Button
           active={scheduleState.selectedTool == 'eraser'}
-          className={'btn-secondary'}
+          className={'btn-primary'}
           onClick={() => onSelectTool('eraser')}
         >
           <IconEraser></IconEraser>

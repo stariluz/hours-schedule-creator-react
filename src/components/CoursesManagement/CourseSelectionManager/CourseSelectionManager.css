@@ -10,8 +10,8 @@
 
 .course-options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3cqi;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
   width: 100%;
 }
 
@@ -70,9 +70,27 @@
   -webkit-box-orient: vertical;
 }
 
-@media (max-width: 497px) {
-
+@media (max-width: 1289px) {
   .course-options {
+    gap: 0.5rem;
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+@media (max-width: 1024px) {
+  .course-options {
+    gap: 0.5rem;
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+@media (max-width: 656px) {
+  .course-options {
+    /* gap: 0.25rem; */
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+@media (max-width: 522px) {
+  .course-options {
+    gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
   }
 }

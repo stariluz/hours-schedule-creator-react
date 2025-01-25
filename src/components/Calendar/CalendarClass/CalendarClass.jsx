@@ -9,7 +9,7 @@ const CalendarClass = ({
   course,
 }) => {
   const $class = useRef(null);
-  const $classroom = useRef(null);
+  const $classrooms = useRef(null);
 
   return (
     <button className={`${className} class-box custom-color custom-color-text`}
@@ -24,11 +24,11 @@ const CalendarClass = ({
       onClick={() => { onClick() }}
     >
       {children}
-      <span className="classroom" ref={$classroom}>
-        <FlowType elementRef={$classroom} options={{
+      <span className="classroom" ref={$classrooms}>
+        <FlowType elementRef={$classrooms} options={{
           maxFont: 24, fontRatio: 8
         }}>
-        {course.classroom}
+          {course.classrooms}
         </FlowType>
       </span>
       <span className="content" ref={$class}>

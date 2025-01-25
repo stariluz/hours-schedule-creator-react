@@ -17,7 +17,7 @@ const defaultCourse = {
   text: "#fff",
   name: "",
   professor: "",
-  classroom: "",
+  classrooms: [""],
   groupName: "",
   id: uuidv4(),
 }

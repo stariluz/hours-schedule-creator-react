@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../../../UI/Button/Button";
-import { IconArrowsMove, IconTrash } from "@tabler/icons-react";
+import { IconArrowsMove, IconTrash, IconPlus, IconSelect, IconSelector } from "@tabler/icons-react";
 import InputColorBgAndText from "../../../UI/InputColorBgAndText/InputColorBgAndText";
 import "./CourseCard.css";
 
@@ -40,10 +40,10 @@ const CourseCard = (props) => {
         <InputColorBgAndText
           color={props.color}
           text={props.text}
-          onChange={(color) => onInputChange("color",color.hsl)}
-          onChangeComplete={(color) => onInputChangeEnds("color",color.hsl)}
-          onTextChange={(color) => onInputChange("text",color.hex)}
-          onTextChangeComplete={(color) => onInputChangeEnds("text",color.hex)}
+          onChange={(color) => onInputChange("color", color.hsl)}
+          onChangeComplete={(color) => onInputChangeEnds("color", color.hsl)}
+          onTextChange={(color) => onInputChange("text", color.hex)}
+          onTextChangeComplete={(color) => onInputChangeEnds("text", color.hex)}
         />
       </div>
       <div className="course-form">
@@ -70,13 +70,25 @@ const CourseCard = (props) => {
             value={props.groupName}
           />
 
-          <input
-            type="text"
-            className="form-input"
-            placeholder="Classroom"
-            onChange={(event) => { onInputChangeEnds("classroom", event.target.value) }}
-            value={props.classroom}
-          />
+          <div className="form-controls-group">
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Classroom"
+              onChange={(event) => { onInputChangeEnds("classrooms", event.target.value) }}
+              value={props.classrooms}
+            />
+            <Button
+              className={"btn-secondary"}
+            >
+              <IconSelector></IconSelector>
+            </Button>
+            <Button
+              className={"btn-secondary"}
+            >
+              <IconPlus></IconPlus>
+            </Button>
+          </div>
         </div>
       </div>
     </article>

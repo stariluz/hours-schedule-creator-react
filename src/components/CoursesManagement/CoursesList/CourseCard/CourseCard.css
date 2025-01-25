@@ -59,11 +59,27 @@
 }
 
 .form-controls-inline {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.form-controls-group {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0rem;
     width: 100%;
+}
+
+.form-controls-group>*:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-controls-group>*:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 @media (max-width: 400px) {

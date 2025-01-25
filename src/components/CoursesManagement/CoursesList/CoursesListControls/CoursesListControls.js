@@ -16,7 +16,7 @@ const CoursesListControls = () => {
     return (
         <div className="section-controls">
             <Button
-                className='btn-secondary'
+                className='btn-primary'
                 onClick={() => onAddCourse()}
             >
                 <IconCopyPlus></IconCopyPlus>

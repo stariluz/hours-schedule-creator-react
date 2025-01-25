@@ -26,7 +26,7 @@ const CalendarWeekControls = () => {
         {
           hours[0].begin > 0 ?
             <Button
-              className='hour-control-btn add-btn button btn-primary button-rounded button-icon button-small'
+              className='hour-control-btn add-btn button btn-secondary button-rounded button-icon button-small'
               onClick={() => addHourAtBegin()}
             >
               <IconPlus />
@@ -34,9 +34,9 @@ const CalendarWeekControls = () => {
             : null
         }
         {
-          hours[0].begin > 0 ?
+          hours[0].begin < hours[0].end ?
             <Button
-              className='hour-control-btn remove-btn button btn-primary button-rounded button-icon button-small'
+              className='hour-control-btn remove-btn button btn-secondary button-rounded button-icon button-small'
               onClick={() => removeHourAtBegin()}
             >
               <IconMinus />
@@ -46,9 +46,9 @@ const CalendarWeekControls = () => {
       </div>
       <div className="hour-control--end">
         {
-          hours[0].end < 24 ?
+          hours[0].end > hours[0].begin ?
             <Button
-              className='hour-control-btn remove-btn button btn-primary button-rounded button-icon button-small'
+              className='hour-control-btn remove-btn button btn-secondary button-rounded button-icon button-small'
               onClick={() => removeHourAtEnd()}
             >
               <IconMinus />
@@ -58,7 +58,7 @@ const CalendarWeekControls = () => {
         {
           hours[0].end < 24 ?
             <Button
-              className='hour-control add-btn button btn-primary button-rounded button-icon button-small'
+              className='hour-control add-btn button btn-secondary button-rounded button-icon button-small'
               onClick={() => addHourAtEnd()}
             >
               <IconPlus />

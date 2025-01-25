@@ -1,12 +1,32 @@
-.courses-list{
+.courses-list {
     height: fit-content;
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
     /* margin-top: 1rem; */
 }
-.courses-forms-container{
+
+.courses-forms-container {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
+}
+
+@media (max-width: 1289px) {
+    .courses-forms-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 856px) {
+    .courses-forms-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 656px) {
+
+    .courses-forms-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
