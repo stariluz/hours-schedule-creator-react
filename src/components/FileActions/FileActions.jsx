@@ -58,7 +58,10 @@ const FileActions = () => {
     canvas=await html2canvas(scheduleRef.current,{onclone:(document)=>{
       document.querySelector(".calendar").style.width="1080px";
       document.querySelectorAll(".class-box .content").forEach((hourClas)=>{
-        hourClas.style.fontSize="13px";
+        hourClas.style.fontSize="14px";
+      });
+      document.querySelectorAll(".class-box .classroom").forEach((hourClas)=>{
+        hourClas.style.fontSize="14px";
       });
       console.log(document.querySelectorAll(".class-box .content"))
     }});

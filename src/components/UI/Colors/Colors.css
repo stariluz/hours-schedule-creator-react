@@ -4,16 +4,16 @@
   --hour-bg-lightness: 0.67;
   background: hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) !important;
 
-  background: -moz-linear-gradient(-10deg, hsl(var(--hour-bg-hue), 80%, 50%) 0%,
+  /* background: -moz-linear-gradient(-10deg, hsl(var(--hour-bg-hue), 80%, 50%) 0%,
       hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 12%,
       hsl(var(--hour-bg-hue), 90%, 82%) 100%);
   background: -webkit-linear-gradient(-10deg, hsl(var(--hour-bg-hue), 80%, 50%) 0%,
       hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 12%,
-      hsl(var(--hour-bg-hue), 90%, 82%) 100%);
+      hsl(var(--hour-bg-hue), 90%, 82%) 100%); */
   background: linear-gradient(-10deg,
-      hsl(var(--hour-bg-hue), calc(var(--hour-bg-saturation) * 0.9), calc(var(--hour-bg-lightness) * 0.95)) 0%,
+      hsl(var(--hour-bg-hue), calc(var(--hour-bg-saturation) * 0.9), calc(var(--hour-bg-lightness) * 0.9)) 0%,
       hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)) 20%,
-      hsl(var(--hour-bg-hue), calc(var(--hour-bg-saturation) * 0.9), calc(var(--hour-bg-lightness) * 1.6)) 100%) !important;
+      hsl(var(--hour-bg-hue), calc(var(--hour-bg-saturation) * 0.9), calc((var(--hour-bg-lightness) * 1.1) + 20%)) 100%) !important;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=hsl(var(--hour-bg-hue), var(--hour-bg-saturation), var(--hour-bg-lightness)), endColorstr=hsl(var(--hour-bg-hue), 0%, 100%), GradientType=1);
 }
 
