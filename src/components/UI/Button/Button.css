@@ -30,6 +30,7 @@
     align-items: center;
     justify-content: center;
     color:  var(--btn-color, #CCCCCC);
+    cursor: pointer;
 }
 .button .tabler-icon{
     width: 1rem;
