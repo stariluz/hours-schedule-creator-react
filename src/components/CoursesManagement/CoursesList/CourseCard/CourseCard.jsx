@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Button from "../../../UI/Button/Button";
-import { IconArrowsMove, IconTrash } from "@tabler/icons-react";
 import InputColorBgAndText from "../../../UI/InputColorBgAndText/InputColorBgAndText";
+import { IconArrowsMove, IconTrash } from "@tabler/icons-react";
 import "./CourseCard.css";
+import {
+  useSortable
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 const CourseCard = (props) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id: props.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   const onRemove = () => {
     if (props.onRemove) {
       props.onRemove();
@@ -20,13 +37,13 @@ const CourseCard = (props) => {
       props.onInputChangeEnds(field, value);
     }
   }
-  // console.log("COLOR", props.color);
+
   return (
-    <article className="course-card">
+    <article className="course-card" ref={setNodeRef} style={style}>
       <section className="course-controls">
-        <Button>
+        <div {...attributes} {...listeners} className='button button-drag'>
           <IconArrowsMove></IconArrowsMove>
-        </Button>
+        </div>
         <Button
           onClick={() => {
             onRemove()
@@ -40,10 +57,10 @@ const CourseCard = (props) => {
         <InputColorBgAndText
           color={props.color}
           text={props.text}
-          onChange={(color) => onInputChange("color",color.hsl)}
-          onChangeComplete={(color) => onInputChangeEnds("color",color.hsl)}
-          onTextChange={(color) => onInputChange("text",color.hex)}
-          onTextChangeComplete={(color) => onInputChangeEnds("text",color.hex)}
+          onChange={(color) => onInputChange("color", color.hsl)}
+          onChangeComplete={(color) => onInputChangeEnds("color", color.hsl)}
+          onTextChange={(color) => onInputChange("text", color.hex)}
+          onTextChangeComplete={(color) => onInputChangeEnds("text", color.hex)}
         />
       </div>
       <div className="course-form">
