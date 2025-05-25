@@ -2,6 +2,7 @@ import defaultCourse from './defaultCourse';
 
 const  defaultState = {
   currentTime: 0,
+  title: '',
   history: [
     {
       change: "Start of the file",
