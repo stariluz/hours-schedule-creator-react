@@ -20,13 +20,18 @@ const FileActions = () => {
 
 
   const downloadSchedule = () => {
-    const content = scheduleState.history[scheduleState.currentTime];
-
-    const data = JSON.stringify(content);
+    const currentState = scheduleState.history[scheduleState.currentTime];
+    const contentToSave={
+      ...currentState,
+      title: scheduleState.title?.trim()
+    };
+    const data = JSON.stringify(contentToSave);
     const blob = new Blob([data], { type: "application/json" });
     const jsonObjectUrl = URL.createObjectURL(blob);
     const date = `${(new Date()).toLocaleDateString()}_${(new Date()).toLocaleTimeString()}`;
-    const filename = `Schedule_${date}.json`;
+    const filename = scheduleState.title?.trim()
+      ? `${scheduleState.title.replace(/[^a-z0-9]/gi, '_')}.json`
+      : `Schedule_${date}.json`;
     const $actionElement = document.createElement('a');
     $actionElement.download = filename;
     $actionElement.style.display = 'none';
@@ -55,13 +60,28 @@ const FileActions = () => {
   const downloadScheduleAsImage = async () => {
     var canvas = null;
 
-    canvas=await html2canvas(scheduleRef.current,{onclone:(document)=>{
-      document.querySelector(".calendar").style.width="1080px";
-      document.querySelectorAll(".class-box .content").forEach((hourClas)=>{
-        hourClas.style.fontSize="13px";
-      });
-      console.log(document.querySelectorAll(".class-box .content"))
-    }});
+    canvas = await html2canvas(scheduleRef.current, {
+      onclone: (document) => {
+
+        if (scheduleState.title?.trim()) {
+          const titleElement = document.querySelector(".calendar-title");
+          if (titleElement) {
+            titleElement.textContent = scheduleState.title;
+          }
+        }
+
+        document.querySelector(".calendar-container").style.width = "1080px";
+        document.querySelectorAll(".class-box .content").forEach((hourClas) => {
+          hourClas.style.fontSize = "14px";
+        });
+        document.querySelectorAll(".class-box .classroom").forEach((hourClas) => {
+          hourClas.style.fontSize = "14px";
+        });
+
+        // console.log(document.querySelectorAll(".class-box .content"))
+        console.log(document);
+      }
+    });
 
     var imgData =
       canvas.toDataURL("image/png");
@@ -72,7 +92,9 @@ const FileActions = () => {
       /^data:image\/png/, "data:application/octet-stream");
 
     const date = `${(new Date()).toLocaleDateString()}_${(new Date()).toLocaleTimeString()}`;
-    const filename = `Schedule_${date}.png`;
+    const filename = scheduleState.title?.trim()
+      ? `${scheduleState.title.replace(/[^a-z0-9]/gi, '_')}.png` // nombre basado en título
+      : `Schedule_${date}.png`;
 
     const $actionElement = document.createElement('a');
     $actionElement.download = filename;
@@ -82,6 +104,7 @@ const FileActions = () => {
     $actionElement.click();
     URL.revokeObjectURL(canvasData);
   }
+
   return (
     <div className="file-actions">
       <Button

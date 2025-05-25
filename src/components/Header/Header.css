@@ -1,8 +1,29 @@
-.header{
+.header {
   width: 100%;
   background-color: #FF578C;
   /* margin-bottom: 0.5rem; */
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
+}
+
+.title {
+  width: 30rem;
+}
+
+.header .form-input {
+  border: 1px solid #FF578C;
+  background: #eb5182;
+  color: white;
+  font-size: large;
+  font-weight: 600;
+  text-align: center;
+}
+.header .form-input:active,
+.header .form-input:focus{
+    background: #ee628e;
+    outline: none;
+}
+.header .form-input::placeholder{
+  color: #e7e7e7;
 }

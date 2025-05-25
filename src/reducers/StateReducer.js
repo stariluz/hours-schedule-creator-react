@@ -6,6 +6,9 @@ import defaultCourse from '../models/defaultCourse';
 
 export function stateReducer(state, action) {
   switch (action.task) {
+    case 'setTitle': {
+      return handleSetTitle(state, action.value);
+    }
     case 'previousStep': {
       return handlePreviousStep(state);
     }
@@ -66,6 +69,17 @@ export function stateReducer(state, action) {
     }
   }
 }
+
+const handleSetTitle = (state, value) => {
+  if (value === null || typeof value != 'string') {
+    return state;
+  }
+  const stateUpdate = produce(state, (_state) => {
+    _state.title = value;
+  });
+  return stateUpdate;
+}
+
 const handlePreviousStep = (state) => {
   let newTime = state.currentTime - 1;
   if (newTime < 0) {
@@ -377,9 +391,10 @@ const selectDefaultCourse = (state) => {
 const loadContent = (state, content) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
-
+  const title=content.title;
   const stateUpdate = produce(content, (newState) => {
-    const { hoursMap, hours, courses, coursesSort } = repareScheduleMementoObject(newState);
+    const { title, hoursMap, hours, courses, coursesSort } = repareScheduleMementoObject(newState);
+    delete newState.title;
     newState.hoursMap = hoursMap;
     newState.hours = hours;
     newState.courses = courses;
@@ -388,8 +403,10 @@ const loadContent = (state, content) => {
   });
   history.push(stateUpdate);
 
+  console.log(title);
   return {
     ...state,
+    title: title,
     history: history,
     currentTime: currentTime + 1,
   };
