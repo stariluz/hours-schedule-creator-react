@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import CalendarHourNamespace from "./CalendarHourNamespace/CalendarHourNamespace";
 import './CalendarHoursNamespaceColumn.css';
-import { useCurrentState, useScheduleRef } from "../../ScheduleCreator/ScheduleCreator";
+import { useCurrentState } from "../../../contexts/ScheduleContext";
+import { useScheduleRef } from "../../../contexts/scheduleRefContext";
 
 const CalendarHoursNamespaceColumnPlaceholder = () => {
   const scheduleRef = useScheduleRef();

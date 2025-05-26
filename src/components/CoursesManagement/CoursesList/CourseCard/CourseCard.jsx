@@ -7,8 +7,10 @@ import {
   useSortable
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { useLang } from "../../../../contexts/LangContext";
 
 const CourseCard = (props) => {
+  const { currentTranslation } = useLang();
   const {
     attributes,
     listeners,
@@ -67,14 +69,16 @@ const CourseCard = (props) => {
         <input
           type="text"
           className="form-input"
-          placeholder="Name"
+          id="name"
+          placeholder={currentTranslation.placeholders.name}
           onChange={(event) => { onInputChangeEnds("name", event.target.value) }}
           value={props.name}
         />
         <input
           type="text"
           className="form-input"
-          placeholder="Professor"
+          id="professor"
+          placeholder={currentTranslation.placeholders.professor}
           onChange={(event) => { onInputChangeEnds("professor", event.target.value) }}
           value={props.professor}
         />
@@ -82,7 +86,8 @@ const CourseCard = (props) => {
           <input
             type="text"
             className="form-input"
-            placeholder="Group name"
+            id="groupName"
+            placeholder={currentTranslation.placeholders.groupName}
             onChange={(event) => { onInputChangeEnds("groupName", event.target.value) }}
             value={props.groupName}
           />
@@ -90,7 +95,8 @@ const CourseCard = (props) => {
           <input
             type="text"
             className="form-input"
-            placeholder="Classroom"
+            id="classroom"
+            placeholder={currentTranslation.placeholders.classroom}
             onChange={(event) => { onInputChangeEnds("classroom", event.target.value) }}
             value={props.classroom}
           />

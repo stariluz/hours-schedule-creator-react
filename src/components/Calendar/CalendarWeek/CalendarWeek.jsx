@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { produce } from "immer";
-import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../../ScheduleCreator/ScheduleCreator";
+import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../../../contexts/ScheduleContext";
 import { daysNamesMap } from "../../../utils/days";
 import CalendarDay from "./CalendarDay/CalendarDay";
 import "./CalendarWeek.css";

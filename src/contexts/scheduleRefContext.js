@@ -1,4 +1,15 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
-export const ScheduleRefContext = createContext(null);
-export const ScheduleRefDispatchContext = createContext(null);
+const ScheduleRefContext = createContext(null);
+const ScheduleRefDispatchContext = createContext(null);
+
+export const useScheduleRef = () => {
+  return useContext(ScheduleRefContext);
+}
+export const useScheduleRefDispatch = () => {
+  return useContext(ScheduleRefDispatchContext);
+}
+export {
+  ScheduleRefContext,
+  ScheduleRefDispatchContext
+}

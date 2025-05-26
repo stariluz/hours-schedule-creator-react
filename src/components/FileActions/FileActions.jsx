@@ -4,14 +4,13 @@ import Button from '../UI/Button/Button';
 import './FileActions.css';
 
 import {
-  useCurrentState,
   useScheduleStateDispatch,
   useScheduleState,
-  useScheduleRef,
-  useScheduleRefDispatch
-} from "../ScheduleCreator/ScheduleCreator";
+} from "../../contexts/ScheduleContext";
+import { useScheduleRef } from "../../contexts/scheduleRefContext";
 import FileButton from '../UI/Button/FileButton';
 import html2canvas from 'html2canvas';
+import LanguageSwitcher from '../common/LanguageSwitcher/LanguageSwitcher';
 
 const FileActions = () => {
   const scheduleState = useScheduleState();
@@ -107,6 +106,7 @@ const FileActions = () => {
 
   return (
     <div className="file-actions">
+      <LanguageSwitcher></LanguageSwitcher>
       <Button
         className={'btn-traslucid'}
         onClick={() => downloadScheduleAsImage()}

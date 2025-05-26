@@ -5,7 +5,7 @@ import CalendarWeekControls from "./CalendarWeek/CalendarWeekControls/CalendarWe
 import CalendarHoursNamespaceColumn from "./CalendarHoursNamespaceColumn/CalendarHoursNamespaceColumn";
 import "./Calendar.css";
 import CalendarHoursNamespaceColumnPlaceholder from "./CalendarHoursNamespaceColumn/CalendarHoursNamespaceColumnPlaceholder";
-import { useScheduleRefDispatch, useScheduleState } from "../ScheduleCreator/ScheduleCreator";
+import { useScheduleRefDispatch } from "../../contexts/scheduleRefContext";
 
 const Calendar = () => {
   const calendarRef = useRef(null);

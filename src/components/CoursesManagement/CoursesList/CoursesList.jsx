@@ -1,6 +1,6 @@
 import React from "react";
 import "./CoursesList.css";
-import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../../ScheduleCreator/ScheduleCreator";
+import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../../../contexts/ScheduleContext";
 import CourseCard from "./CourseCard/CourseCard";
 import CoursesListControls from "./CoursesListControls/CoursesListControls";
 
