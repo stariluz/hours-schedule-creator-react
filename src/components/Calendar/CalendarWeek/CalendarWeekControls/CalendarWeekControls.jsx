@@ -1,7 +1,7 @@
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 import Button from "../../../UI/Button/Button";
 import './CalendarWeekControls.css';
-import { useCurrentState, useScheduleStateDispatch } from "../../../ScheduleCreator/ScheduleCreator";
+import { useCurrentState, useScheduleStateDispatch } from "../../../../contexts/ScheduleContext";
 
 const CalendarWeekControls = () => {
   const scheduleDispatch = useScheduleStateDispatch();

@@ -1,0 +1,12 @@
+.select{
+  background-color: #e94f80;
+}
+.select-option{
+  background-color: #ff75a0;
+}
+
+.select-option:focus,
+.select-option:active,
+.select-option:hover{
+  background-color: #e94f80;
+}
