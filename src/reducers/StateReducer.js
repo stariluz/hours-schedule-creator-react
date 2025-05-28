@@ -38,6 +38,9 @@ export function stateReducer(state, action) {
         handleRemoveCourse(state, action.courseId)
       );
     }
+    case 'reorderCourses': {
+      return handleReorderCourses(state, action.newOrder)
+    }
     case 'changeTool': {
       return handleChangeTool(state, action);
     }
@@ -49,7 +52,7 @@ export function stateReducer(state, action) {
     }
     case 'loadContent': {
       return selectDefaultCourse(
-        loadContent(state, action.content)
+        handleLoadContent(state, action.content)
       );
     }
     case 'addHourAtBegin': {
@@ -362,6 +365,24 @@ const handleRemoveCourse = (state, courseId) => {
     currentTime: currentTime + 1,
   };
 }
+const handleReorderCourses = (state, newOrder) => {
+  const currentTime = state.currentTime;
+  const history = state.history.slice(0, currentTime + 1);
+
+  const stateUpdate = produce(history[currentTime], (currentState) => {
+    currentState.coursesSort=[
+      ...newOrder,
+    ];
+    currentState.change = "Reorder courses";
+  });
+  
+  history.push(stateUpdate);
+  return {
+    ...state,
+    history: history,
+    currentTime: currentTime + 1,
+  };
+}
 const handleChangeTool = (state, action) => {
   return {
     ...state,
@@ -388,10 +409,10 @@ const selectDefaultCourse = (state) => {
     selectedCourse: selectedCourse,
   }
 }
-const loadContent = (state, content) => {
+const handleLoadContent = (state, content) => {
   const currentTime = state.currentTime;
   const history = state.history.slice(0, currentTime + 1);
-  const title=content.title;
+  const title = content.title;
   const stateUpdate = produce(content, (newState) => {
     const { title, hoursMap, hours, courses, coursesSort } = repareScheduleMementoObject(newState);
     delete newState.title;

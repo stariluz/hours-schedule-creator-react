@@ -1,6 +1,6 @@
 import React, { useContext, useReducer } from "react";
 import CoursesManagement from "../CoursesManagement/CoursesManagement";
-import { CurrentStateContext, ScheduleContext, ScheduleDispatchContext, } from "../../contexts/Schedule.context";
+import { CurrentStateContext, ScheduleContext, ScheduleDispatchContext, } from "../../contexts/ScheduleContext";
 import { stateReducer } from '../../reducers/StateReducer';
 import defaultState from '../../models/defaultState';
 let amountOfClasses = 5;
@@ -11,6 +11,7 @@ import Header from "../Header/Header";
 import { ScheduleRefContext, ScheduleRefDispatchContext } from "../../contexts/scheduleRefContext";
 import { scheduleRefReducer } from "../../reducers/ScheduleRefReducer";
 import defaultScheduleRef from "../../models/defaultScheduleRef";
+import { LangProvider } from "../../contexts/LangContext";
 
 const ScheduleCreator = () => {
     // const state = useContext(ScheduleContext);
@@ -18,7 +19,7 @@ const ScheduleCreator = () => {
         stateReducer,
         defaultState
     );
-    
+
     const [scheduleRef, dispatchScheduleRef] = useReducer(
         scheduleRefReducer,
         defaultScheduleRef
@@ -29,44 +30,29 @@ const ScheduleCreator = () => {
 
     return (
         <div className="app__container">
-            <ScheduleContext.Provider value={state}>
-                <ScheduleDispatchContext.Provider value={dispatchState}>
 
-                    <ScheduleRefContext.Provider value={scheduleRef}>
-                        <ScheduleRefDispatchContext.Provider value={dispatchScheduleRef}>
-                            <header className="history">
-                                <Header />
-                            </header>
-                            <main className="playground">
-                                <CurrentStateContext.Provider value={currentState}>
-                                    <CoursesManagement />
-                                    <CourseSelectionManager />
-                                    <Calendar />
-                                </CurrentStateContext.Provider>
-                            </main>
-
-                        </ScheduleRefDispatchContext.Provider>
-                    </ScheduleRefContext.Provider>
-                </ScheduleDispatchContext.Provider>
-            </ScheduleContext.Provider>
+            <LangProvider>
+                <ScheduleContext.Provider value={state}>
+                    <ScheduleDispatchContext.Provider value={dispatchState}>
+                        <ScheduleRefContext.Provider value={scheduleRef}>
+                            <ScheduleRefDispatchContext.Provider value={dispatchScheduleRef}>
+                                <header className="history">
+                                    <Header />
+                                </header>
+                                <main className="playground">
+                                    <CurrentStateContext.Provider value={currentState}>
+                                        <CoursesManagement />
+                                        <CourseSelectionManager />
+                                        <Calendar />
+                                    </CurrentStateContext.Provider>
+                                </main>
+                            </ScheduleRefDispatchContext.Provider>
+                        </ScheduleRefContext.Provider>
+                    </ScheduleDispatchContext.Provider>
+                </ScheduleContext.Provider>
+            </LangProvider>
         </div>
     );
-}
-
-export const useCurrentState = () => {
-    return useContext(CurrentStateContext);
-}
-export const useScheduleState = () => {
-    return useContext(ScheduleContext);
-}
-export const useScheduleStateDispatch = () => {
-    return useContext(ScheduleDispatchContext);
-}
-export const useScheduleRef = () => {
-    return useContext(ScheduleRefContext);
-}
-export const useScheduleRefDispatch = () => {
-    return useContext(ScheduleRefDispatchContext);
 }
 
 export default ScheduleCreator;

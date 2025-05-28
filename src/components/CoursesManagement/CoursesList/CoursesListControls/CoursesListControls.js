@@ -2,7 +2,7 @@ import React from "react";
 import "./CoursesListControls.css";
 import Button from "../../../UI/Button/Button";
 import { IconCopyPlus, IconNewSection, IconPlus } from "@tabler/icons-react";
-import { useScheduleStateDispatch } from "../../../ScheduleCreator/ScheduleCreator";
+import { useScheduleStateDispatch } from "../../../../contexts/ScheduleContext";
 
 const CoursesListControls = () => {
 

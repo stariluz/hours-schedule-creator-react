@@ -1,38 +1,52 @@
-Minification:
+# Creador de horarios escolares personalizados
+Puedes hacer uso de está aplicación en el enlace público de GitHub Pages de éste mismo repositorio [https://stariluz.github.io/hours-schedule-creator-react/](https://stariluz.github.io/hours-schedule-creator-react/).
+
+Sin embargo, si deseas hacer uso de esta aplicación de manera local para lo cual no necesitas internet, puedes hacerlo siguiendo esta guía.
+
+## Prerequisitos
+- Tener instalada alguna versión de [node.js](https://nodejs.org/es) 22. De preferencia instala la LTS o cualquier subversión a partir de la 22.13.
+- Este tutorial se realiza sobre una terminal tipo shell y no bash como la consola nativa de windows. Si algún comando no funciona, puedes investigarlo en internet, o instalar una terminal tipo shell como [git bash](https://git-scm.com/downloads) que viene incluída al descargar git.
+
+## Descarga e instalación
+Puedes descargar este repositorio utilizando git, o por el contrario, descargar el .zip del repositorio desde este [enlace](https://github.com/stariluz/hours-schedule-creator-react/archive/refs/heads/development.zip).
+
+Descomprime el archivo y abre una terminal que apunte a la carpeta donde se descomprimió este archivo. Por ejemplo en mi caso debo ejecutar:
+
+```sh
+cd ~/Documents/Code/hours-schedule-creator-react
 ```
-npx terser -c -m -o filename.min.js -- filename.js
+
+A partir de aqui requieres node. En el directorio actual ejecutarás el comando 
+
+```sh
+npm install
 ```
 
-Run JSX Prepocessor:
+El cual procederá a instalar todos los paquetes de npm de los que la aplicación hace uso.
+
+Con ello ya completaste la instalación. Queda compilar el proyecto y ejecutar.
+
+## Compilar y ejecutar
+
+Para compilar la aplicación haz uso del comando:
+
+```sh
+npm run build
 ```
-npx babel --watch src --out-dir ./dev --presets react-app/prod
+
+Este generará los archivos compilados de la aplicación, con los cuales podremos ejecutarla.
+
+Y por consiguiente ejecuta la aplicación con el comando:
+
+```sh
+npm start
 ```
 
-# Learning:
+El cual generará un servidor local con la aplicación corriendo. 
+Usualmente el puerto será el 4173 pero puede variar.
+Con este puerto la url de la aplicación es [http://localhost:4173/](http://localhost:4173/).
 
-### Convention for name components
-(information from [React components naming convention ⚛️](ttps://medium.com/@wittydeveloper/react-components-naming-convention-%EF%B8%8F-b50303551505), [Charly Poly](https://medium.com/@wittydeveloper).)
+Listo, ¡ya puedes empezar a crear tus horarios!
 
-    [Domain]|[Page/Context]|ComponentName|[Type]
-
-- Domain: <i>Which product owns this component?</i>
-- Page/context: The product page where is expected to be. If the component appears only inside another component, the context is the parent component's name.
-
-    <i>What is the parent component?
-
-    Which product subpart/page this component belongs ?</i>
-- ComponentName: <i>What does this component do?</i>
-- Type: 5 types identified of components.
-    <i>
-    
-    - View: only render data (no API calls or internal actions).
-
-    - Button: display an actionable.
-
-    - Connect: legacy connect components.
-
-    - Forms components: Input, Upload ...
-    
-    - HoC components: add component to the wrapped component and the HoC takes the original name.
-    </i>
-
+## ¿Dudas?
+Escribeme a im.stariluz@gmail.com, soy Adora González, con mucho gusto te atenderé.

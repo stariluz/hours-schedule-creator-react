@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../../ScheduleCreator/ScheduleCreator";
+import { useCurrentState, useScheduleState, useScheduleStateDispatch } from "../../../contexts/ScheduleContext";
 import '../../Calendar/CalendarHourSpace/CalendarClassHour/CalendarClassHour.css';
 import './CourseSelectionManager.css';
 import { IconBrush, IconEraser, IconPointer, IconPointerFilled } from "@tabler/icons-react";

@@ -1,4 +1,4 @@
-import { useCurrentState } from "../../../ScheduleCreator/ScheduleCreator";
+import { useCurrentState } from "../../../../contexts/ScheduleContext";
 import CalendarClassHour from "../../CalendarHourSpace/CalendarClassHour/CalendarClassHour";
 import CalendarHourSpace from "../../CalendarHourSpace/CalendarHourSpace";
 import './CalendarDay.css';
