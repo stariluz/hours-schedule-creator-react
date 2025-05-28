@@ -5,10 +5,13 @@
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .title {
   width: 30rem;
+  max-width: 100%;
 }
 
 .header .form-input {
@@ -26,4 +29,20 @@
 }
 .header .form-input::placeholder{
   color: #e7e7e7;
+}
+
+
+/* Media query para pantallas medianas/chicas */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: flex;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .title {
+    order: -1; /* Mover el título al principio visualmente */
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
 }
